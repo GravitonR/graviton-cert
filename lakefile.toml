@@ -1,0 +1,11 @@
+name = "graviton-cert"
+version = "0.1.0"
+defaultTargets = ["GravitonCert", "graviton-cert"]
+
+[[lean_lib]]
+name = "GravitonCert"
+
+[[lean_exe]]
+name = "graviton-cert"
+root = "Main"
+supportInterpreter = true
