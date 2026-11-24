@@ -19,7 +19,7 @@ Most formalization efforts either build general textbook libraries (like `Mathli
 3. **Explicit Non-Claims (`does_not_establish`)** — what the proof formally does *not* prove.
 4. **Open Empirical Gates** — unmeasured biological, physical, or theoretical obligations that mathematics alone cannot close.
 
-## Included Certified Studies (v0.2 — 24/24 Kernel-Verified Claims)
+## Included Certified Studies (v0.3 — 27/27 Kernel-Verified Claims)
 
 All active research lines on `gravitonresearch.org` are formally verified with zero external dependencies beyond Lean 4's core kernel (`0 sorryAx`, `0 custom axioms`, zero floating-point proofs):
 
@@ -28,6 +28,7 @@ All active research lines on `gravitonresearch.org` are formally verified with z
 | **`TimelessGravity`** (7 claims) | Quantum Gravity / Linearized GR | Universal pure-gauge Riemann vanishing (`R^(1)_{abcd} = 0`, all 256 components); formal tensor-divergence exclusion; Eq. 9 & Eq. 22 repairs; exact radial Laplacian `∇²(e^{sr}/r) = s² e^{sr}/r`; executable `GeometricMatterAcceptanceGate`. |
 | **`PageWootters`** (5 claims) | Quantum Foundations / Relational Time | Universal constraint annihilation `𝒞|Ψ_n⟩ = 0` for all `n ≥ 1`; exact conditional phase-state recovery; universal qutrit noise-model discrimination `(2/9)(V²-1)² cos 2θ` (`18/625 = 0.0288` at `V = 0.8`); exact interaction residual `‖𝒞_λ|Ψ_3⟩‖² = λ²/3`. |
 | **`SpinChemistry`** (5 claims) | Quantum Biology / Kinetics | Exact steady-state & SI-unit accounting; opposite-shift antisymmetry; **Universal Pathway Exclusion Theorem** (`|Δŷ| ≤ G_max F_max B_Φ / k_min < δ_y`); 4 typed open wet-lab `EmpiricalGate`s. |
+| **`CircadianTiming`** (3 claims) | Circadian Psychophysics / Timing Reliability | Scale-invariance of timing reliability `CV²` (`t_i ↦ c·t_i` leaves `CV²` invariant); universal Kuramoto order parameter bounds `0 ≤ R_φ² ≤ 1` via 2D Cauchy–Schwarz; statistical identifiability of `κ > 0` vs. null `κ = 0`; paired with the live **ChronoScope** instrument (`/lab/chronoscope/`). |
 | **`ObservationWindow`** (7 claims, 0 open gates) | Quantum Many-Body Dynamics | Exact 4-qubit Majorana Clifford algebra (64 pairs); spectator conservation across all 35 quartic terms; exact 4-block 2×2 Clifford reduction of `H₀ + λP₁₂₃₅`; exact RMS ratio `α² = 9583/9983`; **zero-floating-point rational-interval proof** of the window sign reversal between `[12,24]` and `[36,48]` (`propext` only). |
 
 ## Quickstart
