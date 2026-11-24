@@ -296,13 +296,89 @@ theorem log_cv_misalignment_separation
   rw [hdiff]
   exact Rat.mul_pos hk (by grind)
 
+/-! ### Cognitive Precision Schedule 3-Tier Classifier (`graviton-cognitive-state/v1`) -/
+
+/-- Actionable cognitive reliability tiers exported by ChronoScope's scheduler and API. -/
+inductive PrecisionTier where
+  | peak
+  | moderate
+  | lowReliability
+  deriving DecidableEq, Repr
+
+/-- Deterministic 3-tier classifier on predicted `log CV_timing` scores (`τPeak < τLow`). -/
+def classifyTier (τPeak τLow score : Rat) : PrecisionTier :=
+  if score ≤ τPeak then .peak
+  else if score ≤ τLow then .moderate
+  else .lowReliability
+
+/--
+**Theorem 4 (Cognitive Schedule Tier Soundness & Misalignment Monotonicity):**
+For any strictly ordered thresholds `τPeak < τLow`:
+1. Every `peak` slot has strictly lower predicted `log CV` (higher precision) than
+   every `moderate` slot and every `lowReliability` slot.
+2. Every `moderate` slot has strictly lower predicted `log CV` than every `lowReliability` slot.
+3. Adding any positive misalignment shift `δ > 0` (`δ = κ(1 - R_φ)`) can never
+   promote a `lowReliability` slot into a sharper tier or promote a `moderate` slot
+   into `peak`.
+-/
+theorem tier_classifier_soundness (τPeak τLow s1 s2 δ : Rat) (hτ : τPeak < τLow) :
+    (classifyTier τPeak τLow s1 = .peak → classifyTier τPeak τLow s2 = .moderate → s1 < s2) ∧
+    (classifyTier τPeak τLow s1 = .moderate → classifyTier τPeak τLow s2 = .lowReliability → s1 < s2) ∧
+    (classifyTier τPeak τLow s1 = .peak → classifyTier τPeak τLow s2 = .lowReliability → s1 < s2) ∧
+    (0 < δ → classifyTier τPeak τLow s1 = .lowReliability → classifyTier τPeak τLow (s1 + δ) = .lowReliability) ∧
+    (0 < δ → classifyTier τPeak τLow s1 = .moderate → classifyTier τPeak τLow (s1 + δ) ≠ .peak) := by
+  unfold classifyTier
+  refine ⟨?_, ?_, ?_, ?_, ?_⟩
+  · intro h1 h2
+    split at h1 <;> split at h2 <;> try contradiction
+    · split at h2 <;> try contradiction
+      grind
+    · split at h1 <;> contradiction
+  · intro h1 h2
+    split at h1
+    · contradiction
+    · split at h1
+      · split at h2
+        · contradiction
+        · split at h2
+          · contradiction
+          · grind
+      · contradiction
+  · intro h1 h2
+    split at h1
+    · split at h2
+      · contradiction
+      · split at h2
+        · contradiction
+        · grind
+    · split at h1 <;> contradiction
+  · intro hδ h1
+    split at h1
+    · contradiction
+    · split at h1
+      · contradiction
+      · split
+        · grind
+        · split
+          · grind
+          · rfl
+  · intro hδ h1
+    split at h1
+    · contradiction
+    · split at h1
+      · split
+        · grind
+        · intro heq
+          split at heq <;> contradiction
+      · contradiction
+
 /-- Certificate metadata linking these Lean 4 theorems to `gravitonresearch.org`. -/
 def studyCertificate : StudyCertificate := {
   studyId := "circadian-gating-temporal-integration"
   title := "Circadian Gating of Temporal Integration & ChronoScope Instrument"
   url := "https://gravitonresearch.org/writing/circadian-gating-of-temporal-integration/"
   domain := "Circadian Psychophysics / Timing Reliability"
-  scopeStatement := "Universal mathematical foundations of Graviton's Circadian Gating model: scale-invariance of timing reliability (CV²), universal Kuramoto alignment bounds (0 ≤ R_φ² ≤ 1), and statistical separation of the κ > 0 misalignment prediction from κ = 0 null. Contains NO empirical human study claims."
+  scopeStatement := "Universal mathematical foundations of Graviton's Circadian Gating model and Cognitive Precision Scheduler: scale-invariance of timing reliability (CV²), universal Kuramoto alignment bounds (0 ≤ R_φ² ≤ 1), statistical separation of κ > 0 misalignment from κ = 0 null, and strict order-soundness of the 3-tier cognitive schedule classifier. Contains NO empirical human study claims."
   assumptions := [
     { id := "CT-A1_positive_mean"
       kind := "mathematical"
@@ -342,6 +418,15 @@ def studyCertificate : StudyCertificate := {
       doesNotEstablish := [
         "Mathematical identifiability of κ does not confirm κ > 0 in humans; controlled circadian/psychophysics data remain required.",
         "Does not establish any quantum-mechanical or objective-reduction mechanism for conscious experience."
+      ] },
+    { id := "CT-04"
+      title := "Cognitive Schedule 3-Tier Classifier Soundness & Misalignment Monotonicity"
+      leanDecl := ``tier_classifier_soundness
+      claimKind := "theorem"
+      summary := "Proves that ChronoScope's Peak / Moderate / Low-Reliability scheduler strictly preserves predicted log-CV ordering (s_peak < s_moderate < s_low) and that positive misalignment shifts δ > 0 can never promote a window to a sharper tier."
+      assumptionIds := ["CT-A3_linear_log_cv"]
+      doesNotEstablish := [
+        "Order-soundness of the schedule classifier does not establish that predicted CV curves substitute for medical sleep evaluation or clinical diagnosis."
       ] }
   ]
   openGates := [
