@@ -1,6 +1,8 @@
 import GravitonCert.Core.Boundary
 import GravitonCert.Core.Inspect
+import GravitonCert.Core.Interval
 import GravitonCert.Studies.TimelessGravity
+import GravitonCert.Studies.PageWootters
 import GravitonCert.Studies.SpinChemistry
 import GravitonCert.Studies.ObservationWindow
 
@@ -9,6 +11,7 @@ namespace GravitonCert
 /-- Master registry of all certified Graviton Research Foundation studies. -/
 def allStudies : List StudyCertificate := [
   Studies.TimelessGravity.studyCertificate,
+  Studies.PageWootters.studyCertificate,
   Studies.SpinChemistry.studyCertificate,
   Studies.ObservationWindow.studyCertificate
 ]

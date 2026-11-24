@@ -176,6 +176,59 @@ theorem pure_gauge_rejected_by_gate (A : SmoothCovectorJet) :
   rintro ⟨a, b, c, d, hne⟩
   exact hne (pure_gauge_riemann_vanishes A a b c d)
 
+/-! ### Symbolic Radial Exponential Differential Algebra (`∇²(e^{sr}/r) = s² e^{sr}/r`) -/
+
+/--
+Formal linear combination of terms `c · e^{s r} · s^sp · r^rp` for `r > 0`,
+represented as a coefficient map `(sp : Nat) × (rp : Int) → Rat` (upgrading
+`verify-constraint-checks.py`'s radial identity check into Lean 4's kernel).
+-/
+abbrev ExpPoly := Nat → Int → Rat
+
+/-- The basis function `f(r) = e^{s r} · r⁻¹`. -/
+def expOverR : ExpPoly := fun sp rp =>
+  if sp = 0 ∧ rp = -1 then 1 else 0
+
+/-- Formal radial derivative `d/dr (e^{sr} s^a r^b) = e^{sr} (s^{a+1} r^b + b s^a r^{b-1})`. -/
+def dDr (p : ExpPoly) : ExpPoly := fun sp rp =>
+  (match sp with | 0 => 0 | sp' + 1 => p sp' rp) + (rp + 1) * p sp (rp + 1)
+
+/-- Multiplication by `2 / r` shifts the `r`-exponent down by 1 (so `(2/r) * p` at `rp` reads `rp + 1`). -/
+def mulTwoOverR (p : ExpPoly) : ExpPoly := fun sp rp =>
+  2 * p sp (rp + 1)
+
+/-- Spherical radial Laplacian `∇²f = d²f/dr² + (2/r) df/dr` for `r > 0`. -/
+def radialLaplacian (p : ExpPoly) : ExpPoly := fun sp rp =>
+  dDr (dDr p) sp rp + mulTwoOverR (dDr p) sp rp
+
+/-- Expected output `s² · e^{s r} · r⁻¹`. -/
+def sSqExpOverR : ExpPoly := fun sp rp =>
+  if sp = 2 ∧ rp = -1 then 1 else 0
+
+/--
+**Theorem 7 (Exact Radial Exponential Laplacian Identity):**
+For all `s` and `r > 0`, `(d²/dr² + (2/r) d/dr) (e^{sr} / r) = s² (e^{sr} / r)`,
+proved identically across every monomial `(sp, rp) : Nat × Int`.
+-/
+theorem radial_laplacian_exp_over_r :
+    ∀ (sp : Nat) (rp : Int), radialLaplacian expOverR sp rp = sSqExpOverR sp rp := by
+  intro sp rp
+  unfold radialLaplacian dDr mulTwoOverR expOverR sSqExpOverR
+  match sp with
+  | 0 =>
+    by_cases h3 : rp = -3
+    · subst h3; grind
+    · grind
+  | 1 =>
+    by_cases h2 : rp = -2
+    · subst h2; grind
+    · grind
+  | 2 =>
+    by_cases h1 : rp = -1
+    · subst h1; grind
+    · grind
+  | sp' + 3 => grind
+
 /-- Certificate metadata linking these Lean 4 theorems to `gravitonresearch.org`. -/
 def studyCertificate : StudyCertificate := {
   studyId := "timeless-gravity-constraints"
@@ -248,6 +301,15 @@ def studyCertificate : StudyCertificate := {
       assumptionIds := ["A1_minkowski_linearized", "A2_smooth_commuting_derivs"]
       doesNotEstablish := [
         "Passing linearized non-triviality alone is necessary, not sufficient, for nonlinear UV/ghost stability."
+      ] },
+    { id := "TG-07"
+      title := "Exact Radial Laplacian Identity ∇²(e^{sr}/r) = s² e^{sr}/r"
+      leanDecl := ``radial_laplacian_exp_over_r
+      claimKind := "theorem"
+      summary := "Proves (d²/dr² + (2/r) d/dr)(e^{sr}/r) = s² e^{sr}/r identically across all (s^a r^b) monomials in the symbolic differential algebra."
+      assumptionIds := ["A1_minkowski_linearized"]
+      doesNotEstablish := [
+        "Scalar radial homogeneous solutions do not solve the full linearized tensor system."
       ] }
   ]
   openGates := [

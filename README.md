@@ -19,15 +19,16 @@ Most formalization efforts either build general textbook libraries (like `Mathli
 3. **Explicit Non-Claims (`does_not_establish`)** — what the proof formally does *not* prove.
 4. **Open Empirical Gates** — unmeasured biological, physical, or theoretical obligations that mathematics alone cannot close.
 
-## Included Certified Studies (v0.1)
+## Included Certified Studies (v0.2 — 24/24 Kernel-Verified Claims)
 
-All three active research lines on `gravitonresearch.org` are formally verified with zero external dependencies beyond Lean 4's core kernel:
+All active research lines on `gravitonresearch.org` are formally verified with zero external dependencies beyond Lean 4's core kernel (`0 sorryAx`, `0 custom axioms`, zero floating-point proofs):
 
 | Study | Domain | Key Machine-Checked Results |
 | :--- | :--- | :--- |
-| **`TimelessGravity`** | Quantum Gravity / Linearized GR | Universal pure-gauge Riemann vanishing (`R^(1)_{abcd} = 0` for *all* smooth covectors & all 256 components); formal tensor-divergence exclusion (`∂^μ ℰ_{μν} = 0 ∧ ∂^μ h_{μν} = 0 ∧ μ² ≠ 0 → ∂_ν h = 0`); Eq. 9 & Eq. 22 algebraic repairs; executable `GeometricMatterAcceptanceGate`. |
-| **`SpinChemistry`** | Quantum Biology / Kinetics | Exact steady-state & SI-unit accounting; opposite-shift antisymmetry; **Universal Pathway Exclusion Theorem** (`|Δŷ| ≤ G_max F_max B_Φ / k_min < δ_y`); 4 typed open wet-lab `EmpiricalGate`s. |
-| **`ObservationWindow`** | Quantum Many-Body Dynamics | Exact 4-qubit Jordan–Wigner Majorana Clifford algebra (all 64 pairs); **Exact Spectator Conservation** (`[P_{abcd}, ψ₈] = 0` across all 35 quartic terms / 180 Hamiltonians); commuting controls `P_{1267}, P_{4567}`; non-commutativity of `P_{1235}`; formal window-reversal refutation theorem. |
+| **`TimelessGravity`** (7 claims) | Quantum Gravity / Linearized GR | Universal pure-gauge Riemann vanishing (`R^(1)_{abcd} = 0`, all 256 components); formal tensor-divergence exclusion; Eq. 9 & Eq. 22 repairs; exact radial Laplacian `∇²(e^{sr}/r) = s² e^{sr}/r`; executable `GeometricMatterAcceptanceGate`. |
+| **`PageWootters`** (5 claims) | Quantum Foundations / Relational Time | Universal constraint annihilation `𝒞|Ψ_n⟩ = 0` for all `n ≥ 1`; exact conditional phase-state recovery; universal qutrit noise-model discrimination `(2/9)(V²-1)² cos 2θ` (`18/625 = 0.0288` at `V = 0.8`); exact interaction residual `‖𝒞_λ|Ψ_3⟩‖² = λ²/3`. |
+| **`SpinChemistry`** (5 claims) | Quantum Biology / Kinetics | Exact steady-state & SI-unit accounting; opposite-shift antisymmetry; **Universal Pathway Exclusion Theorem** (`|Δŷ| ≤ G_max F_max B_Φ / k_min < δ_y`); 4 typed open wet-lab `EmpiricalGate`s. |
+| **`ObservationWindow`** (7 claims, 0 open gates) | Quantum Many-Body Dynamics | Exact 4-qubit Majorana Clifford algebra (64 pairs); spectator conservation across all 35 quartic terms; exact 4-block 2×2 Clifford reduction of `H₀ + λP₁₂₃₅`; exact RMS ratio `α² = 9583/9983`; **zero-floating-point rational-interval proof** of the window sign reversal between `[12,24]` and `[36,48]` (`propext` only). |
 
 ## Quickstart
 
