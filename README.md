@@ -23,12 +23,13 @@ Most formalization efforts either build general textbook libraries (like `Mathli
 3. **Explicit Non-Claims (`does_not_establish`)** — what the proof formally does *not* prove.
 4. **Open Empirical Gates** — unmeasured biological, physical, or theoretical obligations that mathematics alone cannot close.
 
-## Included Certified Studies (v0.4.1 — 50/50 Kernel-Verified Claims across 7 Studies)
+## Included Certified Studies (v0.5.0 — 60/60 Kernel-Verified Claims across 8 Studies)
 
 All active research lines on `gravitonresearch.org` are formally verified with zero external dependencies beyond Lean 4's core kernel (`0 sorryAx`, `0 custom axioms`, zero floating-point proofs):
 
 | Study | Domain | Key Machine-Checked Results |
 | :--- | :--- | :--- |
+| **`PostQuantumHQC`** (10 claims) | Post-Quantum Crypto (NIST HQC 2025) | Exact `𝔽₂[X]/⟨Xⁿ-1⟩` quasi-cyclic ring laws (`HQC-01`); exact HQC decryption noise cancellation & Hamming-weight ceiling (`HQC-02`–`04`); official NIST HQC-128/192/256 MDS geometry & padding slack (`5, 11, 37` bits, `HQC-05`); formal `CVE-2025-48946` implicit-rejection collision & full-ciphertext binding fix (`HQC-06`); broken XOR combiner vs. X-Wing `MAL-BIND` & anti-downgrade (`HQC-07`–`08`); Anti-KyberSlash branchless `cmov` & division-free ML-KEM Barrett reduction (`q=3329, m=20158`, catching unsigned `20159` underflow, `HQC-09`); executable `PQCImplementationAcceptanceGate` (`HQC-10`). Paired with CLI auditor [`tools/pqc-audit.py`](tools/pqc-audit.py). |
 | **`TimelessGravity`** (12 claims) | Quantum Gravity / Linearized GR | Pure-gauge Riemann vanishing (`R^(1)_{abcd} = 0`, all 256 components); contracted 4D Bianchi identity (`∂^μ G^(1)_{μν} = 0`); ADM Fierz–Pauli uniqueness (`c₂ = 1`); de Sitter Higuchi ghost bound (`μ² ≥ 2Λ/3`); unified quadratic ghost filter; exact partially massless scalar gauge invariance iff `μ² = 2Λ/3`. |
 | **`GeometricMatter`** (11 claims) | Warped 5D Gravity & Gauge Emergence | Constructive emergence of `U(1)` Maxwell curvature & field equations (`2 R̂^(1)_{5ν} = -∂^μ F_{μν} = 0`); `5 = 2+2+1` ghost-free split; relativistic rest mass & auto Fierz–Pauli; warped exponential hierarchy (`GM-07`); Goldberger–Wise stabilization & Yukawa fifth-force screening (`GM-08`); full KK-tower Higuchi survival (`GM-09`); non-Abelian `SU(2)` Yang–Mills algebra (`GM-10`); relational clock–mass duality (`GM-11`). Paired with arXiv LaTeX preprint [`paper/main.tex`](paper/main.tex). |
 | **`PageWootters`** (6 claims) | Quantum Foundations / Relational Time | Universal constraint annihilation `𝒞|Ψ_n⟩ = 0` (`n ≥ 1`); exact conditional phase-state recovery; qutrit noise discrimination `(2/9)(V²-1)² cos 2θ`; universal clock-bandwidth backreaction law `‖𝒞_λ|Ψ_{m+1}⟩‖² = λ² m(m-1)(m²+1)/30` (`PW-06`). |
