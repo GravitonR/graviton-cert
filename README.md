@@ -4,7 +4,8 @@
 
 **Boundary-Explicit Science in Lean 4** — an open-source framework and kernel-verified research ledger from the [Graviton Research Foundation](https://gravitonresearch.org).
 
-- **Permanent Zenodo DOI (`v0.4.1`):** https://doi.org/10.5281/zenodo.24570906 (all versions: https://doi.org/10.5281/zenodo.24570905)
+- **Preprint PDF DOI (Zenodo):** https://doi.org/10.5281/zenodo.24571255 (all versions: https://doi.org/10.5281/zenodo.24571254)
+- **Software Archive DOI (`v0.4.1`):** https://doi.org/10.5281/zenodo.24570906 (all versions: https://doi.org/10.5281/zenodo.24570905)
 - **Live Kernel Audit Ledger:** https://gravitonresearch.org/#kernel-audit
 - **Repository:** https://github.com/GravitonR/graviton-cert
 - **License:** MIT
