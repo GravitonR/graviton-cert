@@ -1,0 +1,358 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{gate}[theorem]{Open Gate}
+
+\newcommand{\dd}{\partial}
+\newcommand{\Rhat}{\widehat{R}}
+\newcommand{\ghat}{\widehat{g}}
+\newcommand{\Ccal}{\widehat{\mathcal{C}}}
+\newcommand{\code}[1]{\texttt{\small #1}}
+
+\title{\textbf{Machine-Checked Obstructions and Constructive Geometric Matter Emergence in Warped 5D Relational Gravity}}
+
+\author{
+  Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \code{v0.4.0}).}
+}
+
+\date{November 26, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Proposals that matter fields and relativistic mass emerge purely from spacetime geometry frequently stall at linearized gauge redundancies, Boulware--Deser scalar ghosts, de Sitter Higuchi instabilities, or unscreened fifth forces. Here we present a complete, machine-checked Lean~4 formalization (zero \code{sorryAx}, zero custom axioms, checked strictly against the core Lean~4 kernel without external dependencies) of both the four-dimensional linearized obstructions and the minimal warped five-dimensional constructive resolution. Across 29 kernel-verified theorems (\code{TG-01}--\code{TG-12}, \code{PW-01}--\code{PW-06}, \code{GM-01}--\code{GM-11}) within the 50-theorem \code{graviton-cert} archive, we establish: (i)~the exact vanishing of all 256 linearized 4D Riemann components for pure-gauge perturbations, the contracted linearized 4D Bianchi identity, ADM uniqueness of Fierz--Pauli tuning ($c_2=1$), the de Sitter Higuchi ghost wall ($\mu^2 \ge \frac{2}{3}\Lambda$), and exact partially massless scalar gauge invariance at $\mu^2 = \frac{2}{3}\Lambda$; (ii)~constructive emergence from 5D vacuum Einstein--Hilbert gravity of antisymmetric $U(1)$ Maxwell curvature ($2\Rhat^{(1)}_{5bcd} = \dd_b F_{cd}$), source-free 4D Maxwell equations ($2\Rhat^{(1)}_{5\nu} = -\dd^\mu F_{\mu\nu} = 0$), a ghost-free $5 = 2+2+1$ mode split with positive Einstein-frame radion kinetic energy ($K_{\mathrm{rad}} = +\tfrac{3}{2}$), and automatic Fierz--Pauli tuning across the massive Kaluza--Klein spin-2 tower; (iii)~warped exponential mass hierarchy compression with finite 4D Planck scale, Goldberger--Wise radion stabilization ($m_\phi^2 = \frac{4}{3}\kappa > 0$) with explicit Yukawa fifth-force screening below any experimental ceiling $\eta_{\max}$, and universal de Sitter Higuchi survival across all $n \ge 1$ KK modes whenever $\mu_1^2 \ge \frac{2}{3}\Lambda$; and (iv)~non-Abelian $SU(2)$ Yang--Mills Lie-algebra curvature invariance from $S^3$ fiber isometries together with an exact relational clock--mass backreaction duality unifying 5D internal momentum with a universal $n$-level Page--Wootters residual law $\|\Ccal_\lambda |\Psi_{m+1}\rangle\|^2 = \lambda^2 m(m-1)(m^2+1)/30$. We conclude by mapping experimental falsifiability windows against E\"ot-Wash torsion-balance and MICROSCOPE equivalence-principle bounds and explicitly quarantining the remaining open theoretical obligations: 4D chiral fermions and nonperturbative UV completion.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+%======================================================================
+\section{Introduction and Epistemic Verification Architecture}
+%======================================================================
+
+The ambition to derive non-gravitational matter, gauge interactions, and rest mass directly from pure spacetime geometry dates back a century to Kaluza~\cite{Kaluza1921} and Klein~\cite{Klein1926}, and intersects modern questions about timeless canonical gravity~\cite{PageWootters1983} and massive spin-2 stability~\cite{FierzPauli1939,BoulwareDeser1972,Higuchi1987,deRham2011}. Yet speculative geometric-matter proposals often suffer from two recurring failure modes: (1)~hidden linearized inconsistencies—such as interpreting a pure-gauge 4D metric perturbation as physical matter or violating the contracted Bianchi divergence constraint—and (2)~unstated boundaries between what a linearized algebraic model actually establishes versus what remains unproved (nonlinear UV completion, fifth-force screening, or chiral Standard Model fermions).
+
+To enforce a strict separation between proved mathematical structure and open physical obligations, the Graviton Research Foundation developed \code{graviton-cert}, an open-source Lean~4 verification harness that inspects every theorem directly through \code{Lean.collectAxioms}, certifies zero \code{sorryAx} and zero custom axioms, and pairs every theorem with explicit \code{assumptions}, \code{doesNotEstablish} boundaries, and machine-readable \code{openGates}.
+
+In this paper we present the unified mathematical core of the \emph{Timeless Gravity \& Geometric Origin of Matter} program (release \code{v0.4.0}, 29 theorems out of 50 total theorems across seven certified studies). Rather than leaving the 4D audit as a purely negative no-go result, we formulate a formal \code{GeometricMatterAcceptanceGate} in Lean~4—requiring simultaneously (a)~strictly non-vanishing gauge-invariant curvature, (b)~consistent vacuum field equations, and (c)~at least one propagating ghost-free degree of freedom—prove that 4D pure-gauge perturbations fail this gate identically, and construct the warped 5D relational gravity sector that passes it while quantifying its exact experimental and theoretical frontiers.
+
+%======================================================================
+\section{Four-Dimensional Linearized Obstructions and Ghost Walls (\code{TG-01}--\code{TG-12})}
+\label{sec:4d-obstructions}
+%======================================================================
+
+Let $\eta_{\mu\nu} = \mathrm{diag}(-1,1,1,1)$ denote the 4D Minkowski metric and $h_{\mu\nu}$ a $C^3$-smooth symmetric perturbation with commuting partial derivatives.
+
+\begin{theorem}[Pure-Gauge Curvature Vanishing \& Acceptance-Gate Rejection; \code{TG-01}, \code{TG-06}]
+\label{thm:tg01}
+If $h_{\mu\nu} = \dd_\mu A_\nu + \dd_\nu A_\mu$ for any smooth vector potential $A_\mu$, then every component of the linearized 4D Riemann tensor vanishes identically:
+\begin{equation}
+  2 R^{(1)}_{abcd}[h]
+  = \dd_b\dd_c h_{ad} - \dd_a\dd_c h_{bd} - \dd_b\dd_d h_{ac} + \dd_a\dd_d h_{bc}
+  = 0 \qquad \forall\, a,b,c,d \in \{0,1,2,3\}.
+\end{equation}
+Consequently, no pure-gauge 4D perturbation can inhabit \code{GeometricMatterAcceptanceGate}.
+\end{theorem}
+
+\begin{theorem}[4D Contracted Linearized Bianchi Identity; \code{TG-08}]
+\label{thm:tg08}
+For every smooth symmetric perturbation $h_{\mu\nu}$ on 4D Minkowski spacetime, the linearized Einstein tensor $G^{(1)}_{\mu\nu}[h]$ satisfies
+\begin{equation}
+  \dd^\mu G^{(1)}_{\mu\nu}[h] = 0 \qquad \forall\, \nu \in \{0,1,2,3\}.
+\end{equation}
+Combined with a conserved effective mass-like source $\dd^\mu \mathcal{E}_{\mu\nu} = 0$ and transverse gauge $\dd^\mu h_{\mu\nu} = 0$ (\code{TG-02}), any nonzero mass parameter $\mu^2 \neq 0$ forces constant trace $\dd_\nu h = 0$.
+\end{theorem}
+
+Breaking 4D diffeomorphism invariance by adding a generic quadratic mass term $\mathcal{L}_{\mathrm{mass}} = -\tfrac{1}{4}\mu^2 (h_{\mu\nu}h^{\mu\nu} - c_2 h^2)$ immediately runs into two ghost walls, both verified symbolically in Lean~4:
+
+\begin{theorem}[ADM Fierz--Pauli Uniqueness, Higuchi Bound, and Partially Massless Symmetry; \code{TG-09}--\code{TG-12}]
+\label{thm:tg09-12}
+Under the exact 3+1 ADM split $h_{00} = n$, $h_{0i} = N_i$, $h_{ij} = \gamma_{ij}$ with spatial trace $\gamma = \delta^{ij}\gamma_{ij}$:
+\begin{enumerate}
+  \item \textbf{Fierz--Pauli uniqueness (\code{TG-09}):} The coefficient of $n^2$ in $h_{\mu\nu}h^{\mu\nu} - c_2 h^2$ is identically $1 - c_2$. Hence the lapse $n$ remains a Lagrange multiplier enforcing the Hamiltonian constraint (eliminating the 6th Boulware--Deser scalar ghost) if and only if $c_2 = 1$.
+  \item \textbf{de Sitter Higuchi wall (\code{TG-10}, \code{TG-11}):} On a 4D de Sitter background with $\Lambda > 0$, the helicity-0 kinetic normalization is $K_0(\mu^2,\Lambda) = a \equiv \tfrac{3}{2}\mu^2 - \Lambda$. A massive quadratic spin-2 deformation ($\mu^2 > 0$) passes the unified ghost filter if and only if
+  \begin{equation}
+    c_2 = 1 \quad \wedge \quad \mu^2 \ge \frac{2}{3}\Lambda.
+  \end{equation}
+  The strip $0 < \mu^2 < \tfrac{2}{3}\Lambda$ contains a negative-norm Higuchi ghost.
+  \item \textbf{Partially massless scalar gauge invariance (\code{TG-12}):} Under the scalar gauge transformation $\delta h_{\mu\nu} = (\nabla_\mu\nabla_\nu + \tfrac{\Lambda}{3}g_{\mu\nu})\xi$ on 4D de Sitter, the linearized Fierz--Pauli operator varies as $\tfrac{a}{3} D_{\mu\nu}$, vanishing identically for nontrivial $D_{\mu\nu}$ if and only if $\mu^2 = \tfrac{2}{3}\Lambda$ ($a = 0$), which removes the helicity-0 mode and leaves 4 propagating degrees of freedom~\cite{DeserNepomechie1983}.
+\end{enumerate}
+\end{theorem}
+
+Companion algebraic theorems (\code{TG-03}--\code{TG-05}, \code{TG-07}) certify exact trace-equation repairs—including the corrected cosmological particular solution $h_p = 4\Lambda/a$ for $a \neq 0$, the exact $a=0$ radial solution $-\tfrac{2}{3}\Lambda r^2$, and the radial Laplacian identity $\nabla^2(e^{sr}/r) = s^2 e^{sr}/r$.
+
+%======================================================================
+\section{Constructive 5D Vacuum Emergence of Maxwell Matter (\code{GM-01}--\code{GM-06})}
+\label{sec:5d-emergence}
+%======================================================================
+
+Theorem~\ref{thm:tg01} shows that pure 4D gradient perturbations cannot generate physical curvature. Lifting pure vacuum Einstein--Hilbert gravity by one dimension,
+\begin{equation}
+  S_5 = \frac{1}{16\pi G_5}\int d^5x\,\sqrt{-\ghat}\,\Rhat,
+\end{equation}
+with \emph{zero} matter Lagrangian added by hand, resolves every linearized 4D obstruction simultaneously. Parameterizing the linearized 5D metric around $M_4 \times S^1$ in the zero-mode sector ($\dd_5 = 0$) with off-diagonal graviphoton block $h_{5\mu} = A_\mu$ yields:
+
+\begin{theorem}[Emergent Maxwell Curvature, $U(1)$ Symmetry, and Field Equations; \code{GM-01}--\code{GM-03}]
+\label{thm:gm01-03}
+Let $F_{cd} = \dd_c A_d - \dd_d A_c$ denote the antisymmetric field strength of $h_{5\mu} = A_\mu$. Then:
+\begin{enumerate}
+  \item \textbf{Curvature identity (\code{GM-01}):} For all $b,c,d \in \{0,1,2,3\}$,
+  \begin{equation}
+    2 \Rhat^{(1)}_{5 b c d} = \dd_b F_{cd}.
+  \end{equation}
+  \item \textbf{Geometric $U(1)$ gauge invariance (\code{GM-02}):} Under a 5D coordinate diffeomorphism $x^5 \mapsto x^5 + \Lambda(x)$, which shifts $A_\mu \mapsto A_\mu + \dd_\mu\Lambda$, both $F_{cd}$ and every mixed Riemann component $2\Rhat^{(1)}_{5bcd}$ remain identically invariant.
+  \item \textbf{Vacuum Maxwell equations from 5D vacuum Ricci (\code{GM-03}):} For all $\nu \in \{0,1,2,3\}$,
+  \begin{equation}
+    2 \Rhat^{(1)}_{5\nu} = -\dd^\mu F_{\mu\nu},
+  \end{equation}
+  so the 5D vacuum Einstein equation $\Rhat^{(1)}_{5\nu} = 0$ is identically equivalent to the source-free 4D Maxwell equations $\dd^\mu F_{\mu\nu} = 0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Ghost-Free $5 = 2+2+1$ Mode Split and Einstein-Frame Positivity; \code{GM-04}]
+\label{thm:gm04}
+The propagating helicity count of a massless graviton in $D$ spacetime dimensions is $D(D-3)/2$, giving exactly $5 = 2 + 2 + 1$ massless 4D modes (graviton + photon + radion) at $D = 5$. Under the 4D Weyl rescaling $g_{\mu\nu} = \phi^{-p} g^E_{\mu\nu}$, the radion kinetic coefficient is $K_{\mathrm{rad}}(p) = \tfrac{3}{2}p^2$. At the unique Einstein-frame weight $p = 1$ (canceling the $\phi R$ non-minimal coupling), $K_{\mathrm{rad}}(1) = +\tfrac{3}{2} > 0$, proving ghost-freedom of the radion kinetic term.
+\end{theorem}
+
+\begin{theorem}[Relational Rest Mass, Automatic Fierz--Pauli Tuning, and Constructive Witness; \code{GM-05}, \code{GM-06}]
+\label{thm:gm05-06}
+For a compact or periodic 5th dimension of radius $R_5 > 0$, quantized 5th momentum $p_5 = n / R_5$ ($n \in \mathbb{N}$) converts 5D null dispersion $E^2 = \mathbf{p}^2 + p_5^2$ into 4D massive dispersion
+\begin{equation}
+  E^2 - \mathbf{p}^2 = m_n^2, \qquad m_n = \frac{n}{R_5}.
+\end{equation}
+Each massive Kaluza--Klein spin-2 level ($n \ge 1$) inherits the 5D Einstein--Hilbert tensor structure with automatic Fierz--Pauli tuning $c_2 = 1$, passing the quadratic ghost filter of Theorem~\ref{thm:tg09-12} on flat space ($\Lambda = 0$) with $5$ healthy polarizations and zero Boulware--Deser ghost. Moreover, an explicit null plane wave $A_1(x^0,x^3)$ with amplitude $\mathrm{amp} \neq 0$ and wavevector $k \neq 0$ satisfies $\Rhat^{(1)}_{5\nu} = 0$ identically while generating non-vanishing curvature $2\Rhat^{(1)}_{5001} = -\mathrm{amp}\cdot k^2 \neq 0$, constructing an explicit witness \code{fiveDMaxwellAcceptanceWitness} inside \code{GeometricMatterAcceptanceGate}.
+\end{theorem}
+
+%======================================================================
+\section{Warped Hierarchies, Radion Stabilization, and de Sitter Survival (\code{GM-07}--\code{GM-09})}
+\label{sec:warped-stabilization}
+%======================================================================
+
+Flat $M_4 \times S^1$ reduction leaves three acute physical problems: (1)~linear mass spacing $m_n = n/R_5$ cannot naturally generate large hierarchies between particle masses and the Planck scale; (2)~a massless radion couples to matter with Brans--Dicke / equivalence-principle strength $\alpha_{\mathrm{EP}} = \tfrac{1}{3}$, decisively excluded by satellite tests; and (3)~on a cosmological de Sitter slice ($\Lambda > 0$), massive spin-2 modes risk falling into the Higuchi ghost strip $0 < \mu_n^2 < \tfrac{2}{3}\Lambda$. Theorems~\code{GM-07}--\code{GM-09} prove the exact structural resolution of all three.
+
+\begin{theorem}[Warped 5D Exponential Mass Hierarchy and Finite 4D Planck Scale; \code{GM-07}]
+\label{thm:gm07}
+Consider a Randall--Sundrum-type warped 5D slice~\cite{RandallSundrum1999} with bulk scale $M_5^3 > 0$, AdS curvature $k > 0$, bare mass $m_0 > 0$, and warp factor $w = e^{-kL} \in (0,1)$. Define $M_{\mathrm{Pl}}^2(w) = (M_5^3/k)(1 - w^2)$ and IR-brane physical mass $m_{\mathrm{phys}}(w) = w\,m_0$. Then:
+\begin{enumerate}
+  \item $0 < M_{\mathrm{Pl}}^2(w) < M_5^3/k$ remains strictly positive and finite even as $w \to 0^+$;
+  \item The physical-to-Planck squared mass ratio factorizes identically as
+  \begin{equation}
+    \frac{m_{\mathrm{phys}}^2(w)}{M_{\mathrm{Pl}}^2(w)}
+    = \left(\frac{k\,m_0^2}{M_5^3}\right) \frac{w^2}{1 - w^2};
+  \end{equation}
+  \item For any $0 < w_1 < w_2 < 1$, $m_{\mathrm{phys}}^2(w_1)/M_{\mathrm{Pl}}^2(w_1) < m_{\mathrm{phys}}^2(w_2)/M_{\mathrm{Pl}}^2(w_2)$, strictly compressing physical masses relative to $M_{\mathrm{Pl}}$ using $\mathcal{O}(1)$ bulk parameters.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Goldberger--Wise Radion Stabilization and Yukawa Screening; \code{GM-08}]
+\label{thm:gm08}
+Introduce a Goldberger--Wise-type effective radion potential~\cite{GoldbergerWise1999} $V(z) = \kappa(z - z_0)^2$ with stiffness $\kappa > 0$. Using the exact Einstein-frame kinetic normalization $K_{\mathrm{rad}} = \tfrac{3}{2}$ from Theorem~\ref{thm:gm04}:
+\begin{enumerate}
+  \item $z = z_0$ is a global minimum ($V(z_0) = 0 \le V(z)$) with strictly positive canonical radion mass-squared
+  \begin{equation}
+    m_\phi^2 = \frac{V''(z_0)}{K_{\mathrm{rad}}} = \frac{2\kappa}{3/2} = \frac{4}{3}\kappa > 0.
+  \end{equation}
+  \item Using the conservative rational Yukawa envelope $\alpha_{\mathrm{eff}}(x) = \tfrac{1}{3}e^{-x} \le \frac{1/3}{1 + x + x^2/2}$ for $x = m_\phi r \ge 0$, for \emph{any} experimental upper ceiling $\eta_{\max} > 0$, choosing $m_\phi r \ge 1/\eta_{\max}$ strictly forces
+  \begin{equation}
+    \frac{1/3}{1 + x + x^2/2} < \eta_{\max}.
+  \end{equation}
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[Full KK-Tower de Sitter Higuchi Survival; \code{GM-09}]
+\label{thm:gm09}
+Let $\Lambda > 0$ and let the massive KK spin-2 tower have squared masses $\mu_n^2 = n^2 \mu_1^2$ ($n \ge 1$) with automatic Fierz--Pauli tuning $c_2 = 1$ (Theorem~\ref{thm:gm05-06}). Then:
+\begin{enumerate}
+  \item If the lowest massive KK level obeys the Higuchi bound $\mu_1^2 \ge \tfrac{2}{3}\Lambda$, then \emph{every} higher level $n \ge 1$ satisfies $K_0(n^2 \mu_1^2, \Lambda) \ge K_0(\mu_1^2, \Lambda) \ge 0$ and passes Graviton's quadratic ghost filter (\code{TG-11}) identically.
+  \item Conversely, if $0 < \mu_1^2 < \tfrac{2}{3}\Lambda$, the $n = 1$ level enters the Higuchi ghost regime and fails the ghost filter.
+\end{enumerate}
+\end{theorem}
+
+Theorem~\ref{thm:gm09} yields a direct cosmological consistency ceiling on the compactification scale: in an expanding universe with $\Lambda \sim 10^{-52}\,\mathrm{m}^{-2}$, stability of the entire massive KK spin-2 tower requires $\mu_1 \ge \sqrt{2\Lambda/3} \sim 10^{-33}\,\mathrm{eV}$, which is comfortably satisfied for every sub-millimeter scale ($m_1 \gtrsim 5\,\mathrm{meV}$ at $R_5 \le 40\,\mu\mathrm{m}$).
+
+%======================================================================
+\section{Non-Abelian $SU(2)$ Isometries and Relational Clock--Mass Duality (\code{GM-10}, \code{GM-11}, \code{PW-01}--\code{PW-06})}
+\label{sec:su2-and-clocks}
+%======================================================================
+
+Pure 5D gravity on an $S^1$ fiber generates only an Abelian $U(1)$ gauge sector. Passing from $S^1$ to a non-Abelian Killing fiber such as $S^3 \cong SU(2)$ replaces the Abelian field strength with the non-Abelian Yang--Mills curvature
+\begin{equation}
+  F^a_{\mu\nu} = \dd_\mu A^a_\nu - \dd_\nu A^a_\mu + g \sum_{b,c=1}^3 \varepsilon^{abc} A^b_\mu A^c_\nu,
+\end{equation}
+whose infinitesimal adjoint gauge variation is $\delta_\theta F^a = g \sum_{b,c} \varepsilon^{abc} \theta^b F^c$.
+
+\begin{theorem}[Non-Abelian $SU(2)$ Curvature Algebra and Gauge-Invariant Yang--Mills Density; \code{GM-10}]
+\label{thm:gm10}
+For the $SU(2)$ Killing structure constants $\varepsilon^{abc}$ ($a,b,c \in \{0,1,2\}$):
+\begin{enumerate}
+  \item The Lie-algebra Jacobi identity $\sum_d (\varepsilon^{abd}\varepsilon^{dce} + \varepsilon^{bcd}\varepsilon^{dae} + \varepsilon^{cad}\varepsilon^{dbe}) = 0$ holds identically across all $3^4 = 81$ index tuples;
+  \item The full nonlinear Yang--Mills field strength is identically antisymmetric: $F^a_{\mu\nu} = -F^a_{\nu\mu}$;
+  \item The first-order $SU(2)$ gauge variation of the Yang--Mills Lagrangian density vanishes identically for all couplings $g$, parameters $\theta^b$, and field configurations $F^c$:
+  \begin{equation}
+    \delta_\theta \!\left(\sum_{a=1}^3 (F^a)^2\right) = 2 \sum_{a=1}^3 F^a\, (\delta_\theta F^a) = 0.
+  \end{equation}
+\end{enumerate}
+\end{theorem}
+
+Finally, to connect internal geometric momentum directly to the timeless relational dynamics of Page and Wootters~\cite{PageWootters1983}, we formalize an $n$-level uniform clock--system model ($n = m+1$, $H_C = H_S = \mathrm{diag}(0,1,\dots,m)$). Theorems~\code{PW-01}--\code{PW-05} verify universal constraint annihilation $(H_C\otimes I + I\otimes H_S - mI)|\Psi_{m+1}\rangle = 0$, exact conditional phase evolution, and qutrit noise-model discrimination ($p_G - p_B = \tfrac{2}{9}(V^2-1)^2\cos 2\theta$). Adding an interaction term $-\lambda H_C \otimes H_S$ to the timeless constraint yields an exact closed-form backreaction law:
+
+\begin{theorem}[Universal Clock-Bandwidth Backreaction and Relational Clock--Mass Duality; \code{PW-06}, \code{GM-11}]
+\label{thm:gm11}
+For every discrete relational clock/fiber bandwidth $n = m + 1 \ge 1$, coupling $\lambda$, and compact scale $R_5 > 0$:
+\begin{equation}
+  \bigl\|\Ccal_\lambda |\Psi_{m+1}\rangle\bigr\|^2
+  = \frac{1}{m+1}\sum_{j=0}^{m} \bigl(\lambda j(m-j)\bigr)^2
+  = \frac{\lambda^2\, m(m-1)(m^2+1)}{30}.
+\end{equation}
+In particular, whenever $\lambda \neq 0$ and $m \ge 2$: (i)~the squared constraint residual is strictly positive and scales asymptotically as $\mathcal{O}(\lambda^2 m^4)$ (norm $\mathcal{O}(|\lambda| m^2)$), and (ii)~the maximum internal rest-mass eigenvalue $m_{\max} = m/R_5$ satisfies $m_{\max}^2 > 0$. Thus increasing internal fiber bandwidth simultaneously sharpens geometric mass/time resolution and amplifies clock--matter constraint backreaction.
+\end{theorem}
+
+%======================================================================
+\section{Experimental Falsifiability Windows}
+\label{sec:experiments}
+%======================================================================
+
+The warped, stabilized 5D relational sector makes concrete, quantitative contact with precision gravitational experiments:
+
+\begin{enumerate}
+  \item \textbf{Sub-millimeter inverse-square tests (E\"ot-Wash):} Unwarped or lightly warped KK graviton exchange modifies the Newtonian potential as $V(r) = -\frac{GM}{r}(1 + \alpha_{\mathrm{KK}} e^{-r/R_5})$, with $\alpha_{\mathrm{KK}} = 2$ for a single $S^1$ circle. Modern torsion-balance constraints~\cite{Lee2020EotWash} exclude $\mathcal{O}(1)$ Yukawa deviations above $R_5 \approx 40\,\mu\mathrm{m}$, forcing $m_1 = \hbar c/R_5 \gtrsim 5\,\mathrm{meV}$.
+  \item \textbf{Weak equivalence principle tests (MICROSCOPE):} An unstabilized 5D radion induces a composition-dependent fifth force at $\alpha_{\mathrm{EP}} = 1/3$, which is ruled out by fourteen orders of magnitude by MICROSCOPE's bound $|\eta| < 10^{-15}$~\cite{MICROSCOPE2022}. Theorem~\ref{thm:gm08} proves explicitly how Goldberger--Wise stabilization ($m_\phi^2 = \frac{4}{3}\kappa > 0$) suppresses $\alpha_{\mathrm{eff}}(m_\phi r)$ strictly below any experimental ceiling $\eta_{\max}$, pushing any observable radion signature into the short-range ($r \lesssim m_\phi^{-1}$) laboratory frontier.
+  \item \textbf{Cosmological stability and quantum-gravity interferometry:} Theorem~\ref{thm:gm09} sets the infrared floor $\mu_1 \ge \sqrt{2\Lambda/3}$ across the entire KK tower, while relational clock--matter backreaction (Theorem~\ref{thm:gm11}) motivates precision phase-noise and spacetime-fluctuation benchmarks (e.g.\ interferometric searches such as GQuEST), subject to careful separation of geometric vs.\ apparatus noise channels.
+\end{enumerate}
+
+%======================================================================
+\section{Explicit Epistemic Boundaries and Open Gates}
+\label{sec:open-gates}
+%======================================================================
+
+In keeping with Graviton's epistemic standard, passing \code{GeometricMatterAcceptanceGate} for $U(1)$/$SU(2)$ bosonic gauge fields and massive spin-2 towers is a necessary structural milestone, not a complete theory of Standard Model matter. Four open gates remain explicitly recorded in \code{epistemic-manifest.json}:
+
+\begin{gate}[\code{GM-GATE-01}: Backreacted Nonlinear Radion Stabilization vs.\ Data]
+Theorem~\ref{thm:gm08} analyzes the effective quadratic radion potential $V(z) = \kappa(z-z_0)^2$. A full nonlinear backreacted 5D bulk-scalar metric solution must be matched directly against E\"ot-Wash ($<40\,\mu\mathrm{m}$) and MICROSCOPE ($<10^{-15}$) datasets.
+\end{gate}
+
+\begin{gate}[\code{GM-GATE-02}: 4D Chiral Fermions and Full Standard Model Embedding]
+By Witten's theorem~\cite{Witten1981}, embedding $SU(3)\times SU(2)\times U(1)$ as isometries of a compact internal manifold requires $D \ge 11$, and the Atiyah--Hirzebruch obstruction forbids chiral 4D spinors from smooth pure-gravity compactifications without fluxes, orbifold singularities, or non-trivial spinor-bundle topology.
+\end{gate}
+
+\begin{gate}[\code{GM-GATE-03} \& \code{TG-GATE-01}: Nonperturbative UV Completion and Nonlinear Stability]
+Higher-dimensional Einstein--Hilbert gravity is perturbatively nonrenormalizable, and quadratic Fierz--Pauli/Higuchi stability does not establish full nonlinear strong-field hyperbolicity. Closing the Timeless Gravity program requires embedding the warped geometric-matter sector inside a UV-complete nonperturbative framework (e.g.\ null-cone algebraic quantization, asymptotic safety, or holography).
+\end{gate}
+
+%======================================================================
+\section{Formal Verification Audit and Reproducibility}
+\label{sec:verification}
+%======================================================================
+
+Every theorem in Sections~\ref{sec:4d-obstructions}--\ref{sec:su2-and-clocks} is machine-checked in Lean~4 (\code{v4.36.0}) using pure core Lean~4 with zero external library dependencies, zero \code{sorryAx}, and zero custom axioms (relying solely on Lean's standard logical foundations \code{propext}, \code{Classical.choice}, and \code{Quot.sound}). Independent reproduction takes under 30 seconds:
+\begin{verbatim}
+git clone https://github.com/GravitonR/graviton-cert.git
+cd graviton-cert && git checkout v0.4.0
+lake build && lake exe graviton-cert
+\end{verbatim}
+Running \code{lake exe graviton-cert} inspects every theorem declaration via \code{Lean.collectAxioms}, regenerates \code{epistemic-manifest.json} and \code{VERIFICATION.md}, and exits with code~0 only if all 50 theorems across all 7 certified studies pass with zero forbidden axioms. Table~\ref{tab:theorems} indexes the 29 theorems proved in this paper.
+
+\begin{table}[t]
+\centering
+\scriptsize
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{ID} & \textbf{Lean~4 Declaration (\code{GravitonCert.Studies.*})} & \textbf{Result Established} \\
+\midrule
+\code{TG-01} & \code{TimelessGravity.pure\_gauge\_riemann\_zero} & All 256 components of $R^{(1)}_{abcd}[\dd_\mu A_\nu+\dd_\nu A_\mu]=0$ \\
+\code{TG-02} & \code{TimelessGravity.transverse\_and\_conserved\_forces\_constant\_trace} & $\dd^\mu\mathcal{E}_{\mu\nu}=0,\ \dd^\mu h_{\mu\nu}=0,\ \mu^2\neq 0 \Rightarrow \dd_\nu h = 0$ \\
+\code{TG-03} & \code{TimelessGravity.cosmological\_trace\_inconsistency\_when\_a\_zero} & No constant trace solution when $a=0,\ \Lambda\neq 0$ \\
+\code{TG-04} & \code{TimelessGravity.eq9\_factor\_of\_half} & Exact factor-of-$1/2$ scalar trace repair \\
+\code{TG-05} & \code{TimelessGravity.eq22\_corrected\_particular\_zero\_residual} & Particular solution $h_p = 4\Lambda/a$ ($a\neq 0$) has zero residual \\
+\code{TG-06} & \code{TimelessGravity.pure\_gauge\_rejected\_by\_gate} & Pure-gauge 4D perturbations fail acceptance gate \\
+\code{TG-07} & \code{TimelessGravity.radial\_laplacian\_exp\_over\_r} & Symbolic identity $\nabla^2(e^{sr}/r) = s^2 e^{sr}/r$ \\
+\code{TG-08} & \code{TimelessGravity.linearized\_einstein\_divergence\_free} & Contracted 4D linearized Bianchi $\dd^\mu G^{(1)}_{\mu\nu}=0$ \\
+\code{TG-09} & \code{TimelessGravity.fierz\_pauli\_unique\_ghost\_free\_tuning} & ADM lapse constraint preserved iff $c_2 = 1$ \\
+\code{TG-10} & \code{TimelessGravity.de\_sitter\_higuchi\_bound\_and\_partially\_massless\_point} & $K_0 = \tfrac{3}{2}\mu^2-\Lambda$; Higuchi ghost strip $0<\mu^2<\tfrac{2}{3}\Lambda$ \\
+\code{TG-11} & \code{TimelessGravity.quadratic\_ghost\_filter\_iff} & Ghost-free massive spin-2 iff $c_2=1 \wedge \mu^2 \ge \tfrac{2}{3}\Lambda$ \\
+\code{TG-12} & \code{TimelessGravity.partially\_massless\_scalar\_gauge\_invariance} & Scalar gauge invariance on dS$_4$ iff $\mu^2 = \tfrac{2}{3}\Lambda$ \\
+\midrule
+\code{PW-01} & \code{PageWootters.history\_annihilated\_by\_constraint} & Universal PW constraint annihilation for all $n\ge 1$ \\
+\code{PW-02} & \code{PageWootters.conditional\_phase\_exponent\_shift} & Exact conditional phase-state recovery for all $n,\theta$ \\
+\code{PW-03} & \code{PageWootters.qutrit\_matched\_visibility\_discrimination} & Qutrit noise gap $p_G - p_B = \tfrac{2}{9}(V^2-1)^2\cos 2\theta$ \\
+\code{PW-04} & \code{PageWootters.qutrit\_gap\_at\_V\_0\_8\_exact} & Exact rational benchmark gap $18/625 = 0.0288$ \\
+\code{PW-05} & \code{PageWootters.interaction\_constraint\_residual\_sq} & Qutrit interaction residual $\|\Ccal_\lambda|\Psi_3\rangle\|^2 = \lambda^2/3$ \\
+\code{PW-06} & \code{PageWootters.interaction\_constraint\_residual\_sq\_universal} & Universal law $\|\Ccal_\lambda|\Psi_{m+1}\rangle\|^2 = \lambda^2 m(m-1)(m^2+1)/30$ \\
+\midrule
+\code{GM-01} & \code{GeometricMatter.fiveD\_mixed\_riemann\_equals\_maxwell\_grad} & 5D mixed curvature $2\Rhat^{(1)}_{5bcd} = \dd_b F_{cd}$ \\
+\code{GM-02} & \code{GeometricMatter.fiveD\_u1\_diffeomorphism\_invariance} & $U(1)$ gauge invariance from $x^5 \mapsto x^5 + \Lambda(x)$ \\
+\code{GM-03} & \code{GeometricMatter.fiveD\_vacuum\_ricci\_equals\_maxwell\_equation} & 5D vacuum Ricci $2\Rhat^{(1)}_{5\nu} = -\dd^\mu F_{\mu\nu} = 0$ \\
+\code{GM-04} & \code{GeometricMatter.fiveD\_ghost\_free\_mode\_split\_and\_einstein\_frame} & $5 = 2+2+1$ modes; Einstein-frame $K_{\mathrm{rad}}(1) = +3/2 > 0$ \\
+\code{GM-05} & \code{GeometricMatter.relational\_mass\_and\_automatic\_fierz\_pauli} & Relativistic rest mass $m_n = n/R_5$; auto $c_2 = 1$ \\
+\code{GM-06} & \code{GeometricMatter.fiveD\_plane\_wave\_passes\_acceptance\_gate} & Explicit 5D wave witness passing acceptance gate \\
+\code{GM-07} & \code{GeometricMatter.warped\_5d\_mass\_hierarchy\_and\_planck\_scaling} & Finite $M_{\mathrm{Pl}}^2 < M_5^3/k$ \& strict warped hierarchy \\
+\code{GM-08} & \code{GeometricMatter.goldberger\_wise\_radion\_stabilization\_and\_screening} & $m_\phi^2 = \tfrac{4}{3}\kappa > 0$ \& Yukawa screening below any $\eta_{\max}$ \\
+\code{GM-09} & \code{GeometricMatter.warped\_ds\_kk\_tower\_higuchi\_survival} & $\mu_1^2 \ge \tfrac{2}{3}\Lambda \Rightarrow$ entire KK tower Higuchi-safe \\
+\code{GM-10} & \code{GeometricMatter.nonabelian\_su2\_yang\_mills\_curvature\_algebra} & 81 $SU(2)$ Jacobi identities, $F^a_{\mu\nu}=-F^a_{\nu\mu}$, $\delta_\theta\sum (F^a)^2=0$ \\
+\code{GM-11} & \code{GeometricMatter.timeless\_relational\_clock\_mass\_duality} & Unifies $m_{\max}=m/R_5$ with universal PW backreaction \\
+\bottomrule
+\end{tabular}
+\caption{Complete index of the 29 Lean~4 kernel-verified theorems (\code{graviton-cert v0.4.0}) underlying this paper. All 29 pass \code{Lean.collectAxioms} with zero \code{sorryAx} and zero custom axioms.}
+\label{tab:theorems}
+\end{table}
+
+%======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{Kaluza1921}
+T.~Kaluza, \emph{Zum Unit\"atsproblem der Physik}, Sitzungsber.\ Preuss.\ Akad.\ Wiss.\ Berlin (Math.\ Phys.) \textbf{1921}, 966--972 (1921).
+
+\bibitem{Klein1926}
+O.~Klein, \emph{Quantentheorie und f\"unfdimensionale Relativit\"atstheorie}, Z.\ Phys.\ \textbf{37}, 895--906 (1926).
+
+\bibitem{FierzPauli1939}
+M.~Fierz and W.~Pauli, \emph{On relativistic wave equations for particles of arbitrary spin in an electromagnetic field}, Proc.\ R.\ Soc.\ Lond.\ A \textbf{173}, 211--232 (1939).
+
+\bibitem{BoulwareDeser1972}
+D.~G.~Boulware and S.~Deser, \emph{Can gravitation have a finite range?}, Phys.\ Rev.\ D \textbf{6}, 3368--3382 (1972).
+
+\bibitem{Witten1981}
+E.~Witten, \emph{Search for a realistic Kaluza--Klein theory}, Nucl.\ Phys.\ B \textbf{186}, 412--428 (1981).
+
+\bibitem{DeserNepomechie1983}
+S.~Deser and R.~I.~Nepomechie, \emph{Anomalous propagation of gauge fields in conformally flat spaces}, Phys.\ Lett.\ B \textbf{132}, 321--324 (1983).
+
+\bibitem{PageWootters1983}
+D.~N.~Page and W.~K.~Wootters, \emph{Evolution without evolution: Dynamics described by stationary observables}, Phys.\ Rev.\ D \textbf{27}, 2885--2892 (1983).
+
+\bibitem{Higuchi1987}
+A.~Higuchi, \emph{Forbidden mass range for spin-2 field theory in de Sitter space-time}, Nucl.\ Phys.\ B \textbf{282}, 397--436 (1987).
+
+\bibitem{RandallSundrum1999}
+L.~Randall and R.~Sundrum, \emph{A Large Mass Hierarchy from a Small Extra Dimension}, Phys.\ Rev.\ Lett.\ \textbf{83}, 3370--3373 (1999).
+
+\bibitem{GoldbergerWise1999}
+W.~D.~Goldberger and M.~B.~Wise, \emph{Modulus Stabilization with Bulk Fields}, Phys.\ Rev.\ Lett.\ \textbf{83}, 4922--4925 (1999).
+
+\bibitem{deRham2011}
+C.~de~Rham, G.~Gabadadze, and A.~J.~Tolley, \emph{Resummation of Massive Gravity}, Phys.\ Rev.\ Lett.\ \textbf{106}, 231101 (2011).
+
+\bibitem{Lee2020EotWash}
+J.~G.~Lee, E.~G.~Adelberger, T.~S.~Cook, S.~M.~Fleischer, and B.~R.~Heckel, \emph{New Test of the Gravitational $1/r^2$ Law at Separations down to $52\,\mu\mathrm{m}$}, Phys.\ Rev.\ Lett.\ \textbf{124}, 101101 (2020).
+
+\bibitem{MICROSCOPE2022}
+P.~Touboul \emph{et al.} (MICROSCOPE Collaboration), \emph{MICROSCOPE Mission: Final Results of the Test of the Equivalence Principle}, Phys.\ Rev.\ Lett.\ \textbf{129}, 121102 (2022).
+
+\end{thebibliography}
+
+\end{document}
