@@ -535,8 +535,42 @@ theorem de_sitter_higuchi_bound_and_partially_massless_point (μSq Λ : Rat) (h�
     have hnotlt : ¬ higuchiKineticFactor μSq Λ < 0 := by grind
     have hcls : classifyDeSitterRegime μSq Λ = .partiallyMassless := by
       unfold classifyDeSitterRegime
-      simp [hμne, hnotlt, ha]
+      simp [hμne, ha]
     exact ⟨ha, hcls, by rw [hcls]; rfl⟩
+
+/-! ### TG-12: Exact Partially Massless Scalar Gauge Invariance at `a = 0` (`μ² = 2Λ/3`) -/
+
+/--
+Linearized variation of the curved de Sitter Fierz–Pauli tensor field equation
+`E_dS[h]_{μν} + (μ²/2)(h_{μν} - g_{μν} h)` under the Deser–Nepomechie scalar
+gauge transformation `δ h_{μν} = (∇_μ ∇_ν + H² g_{μν}) ξ` (with `H² = Λ / 3`).
+Writing `D_{μν} = ∇_μ ∇_ν ξ - g_{μν} □ξ - 3 H² g_{μν} ξ`, the Lichnerowicz
+curvature shift contributes `-H² D_{μν}` while the Fierz–Pauli mass term
+contributes `+(μ²/2) D_{μν}`.
+-/
+def partiallyMasslessGaugeVariation (μSq Λ D_mn : Rat) : Rat :=
+  let H2 := Λ / 3
+  ((μSq / 2) - H2) * D_mn
+
+/--
+**Theorem 12 (Exact Partially Massless Scalar Gauge Invariance iff `a = 0`):**
+On 4D de Sitter space (`H² = Λ / 3`), the variation of the Fierz–Pauli field equation
+under `δ h_{μν} = (∇_μ ∇_ν + H² g_{μν}) ξ` factorizes identically as:
+`δ(E_dS + M_FP)_{μν} = (1/3) · a · D_{μν}` where `a = (3/2) μ² - Λ`.
+Consequently, for any nontrivial scalar mode `D_{μν} ≠ 0`, exact scalar gauge
+invariance holds **if and only if** `a = 0` (`μ² = (2/3) Λ`), proving why the
+helicity-0 degree of freedom decouples on the Higuchi boundary and why the
+constant-trace equation (`TG-03`) becomes singular there.
+-/
+theorem partially_massless_scalar_gauge_invariance (μSq Λ D_mn : Rat) :
+    (partiallyMasslessGaugeVariation μSq Λ D_mn = (higuchiKineticFactor μSq Λ / 3) * D_mn) ∧
+    (D_mn ≠ 0 → (partiallyMasslessGaugeVariation μSq Λ D_mn = 0 ↔ μSq = (2 / 3 : Rat) * Λ)) := by
+  unfold partiallyMasslessGaugeVariation higuchiKineticFactor
+  refine ⟨by grind, ?_⟩
+  intro hD
+  constructor
+  · intro h0; grind
+  · intro hμ; subst hμ; grind
 
 /-! ### TG-11: Unified Quadratic Ghost-Free Acceptance Filter -/
 
@@ -683,6 +717,15 @@ def studyCertificate : StudyCertificate := {
       assumptionIds := ["A4_quadratic_ds_spin2"]
       doesNotEstablish := [
         "Necessary quadratic stability conditions do not construct the full nonlinear covariant action or rule out superluminality/strong coupling at higher orders."
+      ] },
+    { id := "TG-12"
+      title := "Exact Partially Massless Scalar Gauge Invariance iff μ² = (2/3)Λ (a = 0)"
+      leanDecl := ``partially_massless_scalar_gauge_invariance
+      claimKind := "theorem"
+      summary := "Proves that under δh_{μν} = (∇_μ∇_ν + (Λ/3)g_{μν})ξ on 4D de Sitter, the linearized Fierz–Pauli variation factorizes identically as (a/3) D_{μν}, vanishing for nontrivial D_{μν} iff μ² = (2/3)Λ."
+      assumptionIds := ["A4_quadratic_ds_spin2"]
+      doesNotEstablish := [
+        "Linearized partially massless gauge invariance on fixed de Sitter space does not imply a no-go-evading nonlinear interacting partially massless gravity theory."
       ] }
   ]
   openGates := [

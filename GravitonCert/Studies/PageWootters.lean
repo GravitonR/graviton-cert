@@ -150,6 +150,100 @@ theorem interaction_constraint_residual_sq (lam : Rat) :
   unfold interactionResidualComponent
   grind
 
+/-! ### PW-06: Universal Clock-Dimension Scaling Law for Interaction Backreaction (all n = m + 1 ≥ 1) -/
+
+/-- Sum of `j²` for `j = 0 .. k-1`. -/
+def sumPow2 : Nat → Rat
+  | 0 => 0
+  | k + 1 => sumPow2 k + ((k : Rat) * (k : Rat))
+
+/-- Sum of `j³` for `j = 0 .. k-1`. -/
+def sumPow3 : Nat → Rat
+  | 0 => 0
+  | k + 1 => sumPow3 k + ((k : Rat) * (k : Rat) * (k : Rat))
+
+/-- Sum of `j⁴` for `j = 0 .. k-1`. -/
+def sumPow4 : Nat → Rat
+  | 0 => 0
+  | k + 1 => sumPow4 k + ((k : Rat) * (k : Rat) * (k : Rat) * (k : Rat))
+
+/-- Sum of squared interaction residuals `∑_{j=0}^{k-1} (λ · j · (m - j))²` for `k ≤ m + 1`. -/
+def interactionResidualSumSq (lam : Rat) (m : Nat) : Nat → Rat
+  | 0 => 0
+  | k + 1 =>
+    let j : Rat := (k : Rat)
+    let c : Rat := lam * j * ((m : Rat) - j)
+    interactionResidualSumSq lam m k + c * c
+
+private theorem sumPow2_closed (k : Nat) :
+    sumPow2 k = (k : Rat) * ((k : Rat) - 1) * (2 * (k : Rat) - 1) / 6 := by
+  induction k with
+  | zero => simp [sumPow2]; grind
+  | succ r ih =>
+    unfold sumPow2
+    rw [ih]
+    have hc : ((r + 1 : Nat) : Rat) = (r : Rat) + 1 := by simp [Rat.natCast_add]
+    rw [hc]; grind
+
+private theorem sumPow3_closed (k : Nat) :
+    sumPow3 k = ((k : Rat) * ((k : Rat) - 1) / 2) * ((k : Rat) * ((k : Rat) - 1) / 2) := by
+  induction k with
+  | zero => simp [sumPow3]; grind
+  | succ r ih =>
+    unfold sumPow3
+    rw [ih]
+    have hc : ((r + 1 : Nat) : Rat) = (r : Rat) + 1 := by simp [Rat.natCast_add]
+    rw [hc]; grind
+
+private theorem sumPow4_closed (k : Nat) :
+    sumPow4 k =
+      (k : Rat) * ((k : Rat) - 1) * (2 * (k : Rat) - 1) *
+      (3 * (k : Rat) * (k : Rat) - 3 * (k : Rat) - 1) / 30 := by
+  induction k with
+  | zero => simp [sumPow4]; grind
+  | succ r ih =>
+    unfold sumPow4
+    rw [ih]
+    have hc : ((r + 1 : Nat) : Rat) = (r : Rat) + 1 := by simp [Rat.natCast_add]
+    rw [hc]; grind
+
+private theorem interactionResidualSumSq_decomp (lam : Rat) (m k : Nat) :
+    interactionResidualSumSq lam m k =
+      (lam * lam) * ((m : Rat) * (m : Rat) * sumPow2 k - 2 * (m : Rat) * sumPow3 k + sumPow4 k) := by
+  induction k with
+  | zero => simp [interactionResidualSumSq, sumPow2, sumPow3, sumPow4]; grind
+  | succ r ih =>
+    unfold interactionResidualSumSq sumPow2 sumPow3 sumPow4
+    rw [ih]
+    grind
+
+/--
+**Theorem 7 (Universal Clock-Bandwidth Backreaction Law `‖𝒞_λ |Ψ_{m+1}⟩‖²` for all `n = m + 1 ≥ 1`):**
+For *every* clock dimension `n = m + 1 ≥ 1` and *every* coupling `λ`, adding
+`-λ H_C ⊗ H_S` to the Page–Wootters constraint leaves exact squared residual norm:
+`‖𝒞_λ |Ψ_{m+1}⟩‖² = (1 / (m + 1)) ∑_{j=0}^m (λ j (m - j))² = λ² · m (m - 1) (m² + 1) / 30`.
+In particular:
+- For `n = 1, 2` (`m = 0, 1`), the residual vanishes identically;
+- For `n = 3` (`m = 2`), it recovers `λ² / 3` (`PW-05`);
+- For large clock dimension `n`, residual norm grows quadratically as `O(|λ| n²)`,
+  quantifying how sharper relational clocks amplify clock–system backreaction.
+-/
+theorem interaction_constraint_residual_sq_universal (lam : Rat) (m : Nat) :
+    interactionResidualSumSq lam m (m + 1) / ((m + 1 : Nat) : Rat) =
+      (lam * lam) * ((m : Rat) * ((m : Rat) - 1) * ((m : Rat) * (m : Rat) + 1)) / 30 := by
+  rw [interactionResidualSumSq_decomp, sumPow2_closed, sumPow3_closed, sumPow4_closed]
+  have hc : ((m + 1 : Nat) : Rat) = (m : Rat) + 1 := by simp [Rat.natCast_add]
+  have hne : ((m : Rat) + 1) ≠ 0 := by
+    have hnn : (0 : Rat) ≤ (m : Rat) := by
+      induction m with
+      | zero => simp
+      | succ k ih =>
+        have h1 : ((k + 1 : Nat) : Rat) = (k : Rat) + 1 := by simp [Rat.natCast_add]
+        rw [h1]; grind
+    grind
+  rw [hc]
+  grind
+
 /-- Certificate metadata linking these Lean 4 theorems to `gravitonresearch.org`. -/
 def studyCertificate : StudyCertificate := {
   studyId := "page-wootters-relational-clock"
@@ -210,6 +304,15 @@ def studyCertificate : StudyCertificate := {
       assumptionIds := ["PW-A1_uniform_ladder"]
       doesNotEstablish := [
         "Quantifies perturbation of the uncoupled history state; does not characterize eigenstates of the full coupled constraint."
+      ] },
+    { id := "PW-06"
+      title := "Universal Clock-Bandwidth Backreaction Law ‖𝒞_λ|Ψ_{m+1}⟩‖² = λ²m(m−1)(m²+1)/30"
+      leanDecl := ``interaction_constraint_residual_sq_universal
+      claimKind := "theorem"
+      summary := "Proves the exact closed-form residual norm-squared for every clock dimension n = m + 1 ≥ 1 and coupling λ, establishing O(|λ| n²) backreaction amplification as clock resolution grows."
+      assumptionIds := ["PW-A1_uniform_ladder"]
+      doesNotEstablish := [
+        "Quantifies breakdown of the uncoupled history ansatz under H_C⊗H_S; does not solve the full gravitational Wheeler–DeWitt or null-cone constraint."
       ] }
   ]
   openGates := [
