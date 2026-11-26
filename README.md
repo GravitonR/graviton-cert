@@ -36,10 +36,12 @@ All active research lines on `gravitonresearch.org` are formally verified with z
 | **`CircadianTiming`** (4 claims) | Circadian Psychophysics / Timing Reliability | Scale-invariance of `CV²`; universal Kuramoto bounds `0 ≤ R_φ² ≤ 1`; statistical identifiability of `κ > 0`; tier classifier soundness (`CT-04`); paired with **ChronoScope** (`/lab/chronoscope/`). |
 | **`ObservationWindow`** (7 claims, 0 open gates) | Quantum Many-Body Dynamics | Exact 4-qubit Majorana Clifford algebra (64 pairs); spectator conservation across all 35 quartic terms; exact 4-block 2×2 Clifford reduction; **zero-floating-point rational-interval proof** of the window sign reversal between `[12,24]` and `[36,48]` (`propext` only). |
 
-## Preprint & Working Paper 03
+## Preprint, PDF & JOSS Peer-Review Package
 
-- **arXiv LaTeX Preprint:** [`paper/main.tex`](paper/main.tex) (*Machine-Checked Obstructions and Constructive Geometric Matter Emergence in Warped 5D Relational Gravity*)
-- **Submission & Zenodo Guide:** [`paper/ARXIV-SUBMISSION-GUIDE.md`](paper/ARXIV-SUBMISSION-GUIDE.md)
+- **Compiled Preprint PDF:** [`paper/graviton-working-paper-03.pdf`](paper/graviton-working-paper-03.pdf) (also hosted live at https://gravitonresearch.org/writing/geometric-origin-of-matter/graviton-working-paper-03.pdf)
+- **arXiv LaTeX Source:** [`paper/main.tex`](paper/main.tex) (*Machine-Checked Obstructions and Constructive Geometric Matter Emergence in Warped 5D Relational Gravity*)
+- **JOSS Submission Package:** [`paper/joss/paper.md`](paper/joss/paper.md) + [`paper/joss/paper.bib`](paper/joss/paper.bib)
+- **Submission & Distribution Guide:** [`paper/ARXIV-SUBMISSION-GUIDE.md`](paper/ARXIV-SUBMISSION-GUIDE.md)
 - **Live Interactive Paper:** https://gravitonresearch.org/writing/geometric-origin-of-matter/
 
 ## Quickstart

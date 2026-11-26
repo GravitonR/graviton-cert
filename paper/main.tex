@@ -1,11 +1,12 @@
 \documentclass[11pt,a4paper]{article}
 
-\usepackage[margin=1in]{geometry}
+\usepackage[margin=0.92in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{array}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+\emergencystretch=2em
 
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
@@ -269,10 +270,12 @@ Running \code{lake exe graviton-cert} inspects every theorem declaration via \co
 \begin{table}[t]
 \centering
 \scriptsize
-\renewcommand{\arraystretch}{1.15}
-\begin{tabular}{@{}lll@{}}
+\renewcommand{\code}[1]{\texttt{#1}}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.16}
+\begin{tabular}{@{}l >{\tiny}l >{\raggedright\arraybackslash}p{7.1cm}@{}}
 \toprule
-\textbf{ID} & \textbf{Lean~4 Declaration (\code{GravitonCert.Studies.*})} & \textbf{Result Established} \\
+\textbf{ID} & {\scriptsize\textbf{Lean~4 Declaration (\code{GravitonCert.Studies.*})}} & \textbf{Result Established} \\
 \midrule
 \code{TG-01} & \code{TimelessGravity.pure\_gauge\_riemann\_zero} & All 256 components of $R^{(1)}_{abcd}[\dd_\mu A_\nu+\dd_\nu A_\mu]=0$ \\
 \code{TG-02} & \code{TimelessGravity.transverse\_and\_conserved\_forces\_constant\_trace} & $\dd^\mu\mathcal{E}_{\mu\nu}=0,\ \dd^\mu h_{\mu\nu}=0,\ \mu^2\neq 0 \Rightarrow \dd_\nu h = 0$ \\
@@ -311,6 +314,7 @@ Running \code{lake exe graviton-cert} inspects every theorem declaration via \co
 \label{tab:theorems}
 \end{table}
 
+\clearpage
 %======================================================================
 \begin{thebibliography}{99}
 
