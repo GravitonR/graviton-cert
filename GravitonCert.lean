@@ -7,6 +7,7 @@ import GravitonCert.Studies.SpinChemistry
 import GravitonCert.Studies.CircadianTiming
 import GravitonCert.Studies.ObservationWindow
 import GravitonCert.Studies.NullConeGravity
+import GravitonCert.Studies.GeometricMatter
 
 namespace GravitonCert
 
@@ -17,7 +18,8 @@ def allStudies : List StudyCertificate := [
   Studies.SpinChemistry.studyCertificate,
   Studies.CircadianTiming.studyCertificate,
   Studies.ObservationWindow.studyCertificate,
-  Studies.NullConeGravity.studyCertificate
+  Studies.NullConeGravity.studyCertificate,
+  Studies.GeometricMatter.studyCertificate
 ]
 
 end GravitonCert
