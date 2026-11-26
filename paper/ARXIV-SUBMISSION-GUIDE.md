@@ -4,7 +4,9 @@ This folder contains the camera-ready LaTeX preprint for **Graviton Working Pape
 
 - **Manuscript:** `paper/main.tex`
 - **Title:** *Machine-Checked Obstructions and Constructive Geometric Matter Emergence in Warped 5D Relational Gravity*
-- **Verified Codebase Tag:** `https://github.com/GravitonR/graviton-cert/releases/tag/v0.4.0`
+- **Author & ORCID:** Inam Haq (`https://orcid.org/0009-0005-4331-0409`)
+- **Permanent Zenodo DOI (`v0.4.1`):** `https://doi.org/10.5281/zenodo.24570906` (Concept DOI: `https://doi.org/10.5281/zenodo.24570905`)
+- **Verified Codebase Tag:** `https://github.com/GravitonR/graviton-cert/releases/tag/v0.4.1`
 - **Live Interactive Paper:** `https://gravitonresearch.org/writing/geometric-origin-of-matter/`
 - **Live Stability Explorer:** `https://gravitonresearch.org/inquiry/timeless-gravity/`
 
@@ -25,7 +27,7 @@ This folder contains the camera-ready LaTeX preprint for **Graviton Working Pape
 2. **Cross-List Category:** `hep-th` (*High Energy Physics - Theory*)
 3. **Files to Upload:** Upload `paper/main.tex` directly (self-contained single file; bibliography is embedded cleanly via `\begin{thebibliography}`).
 4. **Comments Field (recommended):**
-   > `9 pages, 1 table. All 29 theorems (TG-01..12, PW-01..06, GM-01..11) are machine-checked in Lean 4 (v4.36.0, zero sorryAx, zero custom axioms) in graviton-cert v0.4.0: https://github.com/GravitonR/graviton-cert`
+   > `9 pages, 1 table. All 29 theorems (TG-01..12, PW-01..06, GM-01..11) are machine-checked in Lean 4 (v4.36.0, zero sorryAx, zero custom axioms) in graviton-cert v0.4.1 (DOI: 10.5281/zenodo.24570906, https://github.com/GravitonR/graviton-cert)`
 5. **Endorsement Note (if first `gr-qc` upload):** Either Ahmad Farag Ali or Hasan Alshal (both published arXiv authors in `gr-qc`/`hep-th`) can endorse the `gr-qc` submission in one click via the arXiv endorsement link.
 
 ---

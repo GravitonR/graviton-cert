@@ -24,7 +24,7 @@
 \title{\textbf{Machine-Checked Obstructions and Constructive Geometric Matter Emergence in Warped 5D Relational Gravity}}
 
 \author{
-  Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \href{https://orcid.org/0009-0005-4331-0409}{0009-0005-4331-0409}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \code{v0.4.1}).}
+  Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \href{https://orcid.org/0009-0005-4331-0409}{0009-0005-4331-0409}. Permanent Lean~4 verification archive: \href{https://doi.org/10.5281/zenodo.24570906}{DOI: 10.5281/zenodo.24570906} (\url{https://github.com/GravitonR/graviton-cert}, tag \code{v0.4.1}).}
 }
 
 \date{November 26, 2026}
@@ -258,7 +258,7 @@ Higher-dimensional Einstein--Hilbert gravity is perturbatively nonrenormalizable
 \label{sec:verification}
 %======================================================================
 
-Every theorem in Sections~\ref{sec:4d-obstructions}--\ref{sec:su2-and-clocks} is machine-checked in Lean~4 (\code{v4.36.0}) using pure core Lean~4 with zero external library dependencies, zero \code{sorryAx}, and zero custom axioms (relying solely on Lean's standard logical foundations \code{propext}, \code{Classical.choice}, and \code{Quot.sound}). Independent reproduction takes under 30 seconds:
+Every theorem in Sections~\ref{sec:4d-obstructions}--\ref{sec:su2-and-clocks} is machine-checked in Lean~4 (\code{v4.36.0}) using pure core Lean~4 with zero external library dependencies, zero \code{sorryAx}, and zero custom axioms (relying solely on Lean's standard logical foundations \code{propext}, \code{Classical.choice}, and \code{Quot.sound}), archived permanently at \href{https://doi.org/10.5281/zenodo.24570906}{DOI: 10.5281/zenodo.24570906} (concept DOI: \href{https://doi.org/10.5281/zenodo.24570905}{10.5281/zenodo.24570905}). Independent reproduction takes under 30 seconds:
 \begin{verbatim}
 git clone https://github.com/GravitonR/graviton-cert.git
 cd graviton-cert && git checkout v0.4.1
