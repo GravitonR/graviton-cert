@@ -1,0 +1,35 @@
+{
+  "title": "graviton-cert: Machine-Checked Obstructions and Constructive Geometric Matter Emergence in Warped 5D Relational Gravity (Lean 4 Formalization)",
+  "upload_type": "software",
+  "description": "Open-source Lean 4 verification archive (50/50 kernel-checked theorems across 7 studies, zero sorryAx, zero custom axioms) from the Graviton Research Foundation. Includes the 29-theorem Timeless Gravity & Geometric Origin of Matter formalization (TG-01..12, PW-01..06, GM-01..11) and the camera-ready arXiv LaTeX preprint (paper/main.tex).",
+  "creators": [
+    {
+      "name": "Haq, Inam",
+      "affiliation": "Graviton Research Foundation"
+    }
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Lean 4",
+    "formal verification",
+    "general relativity",
+    "Kaluza-Klein theory",
+    "Fierz-Pauli massive gravity",
+    "Higuchi bound",
+    "Page-Wootters",
+    "quantum gravity",
+    "Yang-Mills"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "https://gravitonresearch.org/writing/geometric-origin-of-matter/",
+      "relation": "isSupplementTo",
+      "resource_type": "publication-workingpaper"
+    },
+    {
+      "identifier": "https://gravitonresearch.org/inquiry/timeless-gravity/",
+      "relation": "isDocumentedBy",
+      "resource_type": "other"
+    }
+  ]
+}

@@ -24,7 +24,7 @@
 \title{\textbf{Machine-Checked Obstructions and Constructive Geometric Matter Emergence in Warped 5D Relational Gravity}}
 
 \author{
-  Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \code{v0.4.0}).}
+  Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \code{v0.4.1}).}
 }
 
 \date{November 26, 2026}
@@ -48,7 +48,7 @@ The ambition to derive non-gravitational matter, gauge interactions, and rest ma
 
 To enforce a strict separation between proved mathematical structure and open physical obligations, the Graviton Research Foundation developed \code{graviton-cert}, an open-source Lean~4 verification harness that inspects every theorem directly through \code{Lean.collectAxioms}, certifies zero \code{sorryAx} and zero custom axioms, and pairs every theorem with explicit \code{assumptions}, \code{doesNotEstablish} boundaries, and machine-readable \code{openGates}.
 
-In this paper we present the unified mathematical core of the \emph{Timeless Gravity \& Geometric Origin of Matter} program (release \code{v0.4.0}, 29 theorems out of 50 total theorems across seven certified studies). Rather than leaving the 4D audit as a purely negative no-go result, we formulate a formal \code{GeometricMatterAcceptanceGate} in Lean~4—requiring simultaneously (a)~strictly non-vanishing gauge-invariant curvature, (b)~consistent vacuum field equations, and (c)~at least one propagating ghost-free degree of freedom—prove that 4D pure-gauge perturbations fail this gate identically, and construct the warped 5D relational gravity sector that passes it while quantifying its exact experimental and theoretical frontiers.
+In this paper we present the unified mathematical core of the \emph{Timeless Gravity \& Geometric Origin of Matter} program (release \code{v0.4.1}, 29 theorems out of 50 total theorems across seven certified studies). Rather than leaving the 4D audit as a purely negative no-go result, we formulate a formal \code{GeometricMatterAcceptanceGate} in Lean~4—requiring simultaneously (a)~strictly non-vanishing gauge-invariant curvature, (b)~consistent vacuum field equations, and (c)~at least one propagating ghost-free degree of freedom—prove that 4D pure-gauge perturbations fail this gate identically, and construct the warped 5D relational gravity sector that passes it while quantifying its exact experimental and theoretical frontiers.
 
 %======================================================================
 \section{Four-Dimensional Linearized Obstructions and Ghost Walls (\code{TG-01}--\code{TG-12})}
@@ -261,7 +261,7 @@ Higher-dimensional Einstein--Hilbert gravity is perturbatively nonrenormalizable
 Every theorem in Sections~\ref{sec:4d-obstructions}--\ref{sec:su2-and-clocks} is machine-checked in Lean~4 (\code{v4.36.0}) using pure core Lean~4 with zero external library dependencies, zero \code{sorryAx}, and zero custom axioms (relying solely on Lean's standard logical foundations \code{propext}, \code{Classical.choice}, and \code{Quot.sound}). Independent reproduction takes under 30 seconds:
 \begin{verbatim}
 git clone https://github.com/GravitonR/graviton-cert.git
-cd graviton-cert && git checkout v0.4.0
+cd graviton-cert && git checkout v0.4.1
 lake build && lake exe graviton-cert
 \end{verbatim}
 Running \code{lake exe graviton-cert} inspects every theorem declaration via \code{Lean.collectAxioms}, regenerates \code{epistemic-manifest.json} and \code{VERIFICATION.md}, and exits with code~0 only if all 50 theorems across all 7 certified studies pass with zero forbidden axioms. Table~\ref{tab:theorems} indexes the 29 theorems proved in this paper.
@@ -307,7 +307,7 @@ Running \code{lake exe graviton-cert} inspects every theorem declaration via \co
 \code{GM-11} & \code{GeometricMatter.timeless\_relational\_clock\_mass\_duality} & Unifies $m_{\max}=m/R_5$ with universal PW backreaction \\
 \bottomrule
 \end{tabular}
-\caption{Complete index of the 29 Lean~4 kernel-verified theorems (\code{graviton-cert v0.4.0}) underlying this paper. All 29 pass \code{Lean.collectAxioms} with zero \code{sorryAx} and zero custom axioms.}
+\caption{Complete index of the 29 Lean~4 kernel-verified theorems (\code{graviton-cert v0.4.1}) underlying this paper. All 29 pass \code{Lean.collectAxioms} with zero \code{sorryAx} and zero custom axioms.}
 \label{tab:theorems}
 \end{table}
 

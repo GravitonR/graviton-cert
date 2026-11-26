@@ -19,7 +19,7 @@ Most formalization efforts either build general textbook libraries (like `Mathli
 3. **Explicit Non-Claims (`does_not_establish`)** — what the proof formally does *not* prove.
 4. **Open Empirical Gates** — unmeasured biological, physical, or theoretical obligations that mathematics alone cannot close.
 
-## Included Certified Studies (v0.4.0 — 50/50 Kernel-Verified Claims across 7 Studies)
+## Included Certified Studies (v0.4.1 — 50/50 Kernel-Verified Claims across 7 Studies)
 
 All active research lines on `gravitonresearch.org` are formally verified with zero external dependencies beyond Lean 4's core kernel (`0 sorryAx`, `0 custom axioms`, zero floating-point proofs):
 
