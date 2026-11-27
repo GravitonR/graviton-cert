@@ -7,7 +7,7 @@
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
 
-\emergencystretch=2em
+\emergencystretch=4em
 \setlength{\parindent}{1.15em}
 \setlength{\parskip}{0.30em}
 
@@ -17,14 +17,14 @@
 \newcommand{\code}[1]{\texttt{\small #1}}
 
 \title{\textbf{Relational Temporal Binding: Internal Clocks, Cortical Phase Boundaries, and Falsifiable Limits on Quantum Neural Modulation}}
-\author{Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \texttt{0009-0005-4331-0409}. Formal verification ledger and dynamical simulators: \url{https://github.com/GravitonR/graviton-cert} (tag \texttt{v1.4.0}, 117/117 Lean~4 proofs across 13 studies, Zenodo Concept DOI: \texttt{10.5281/zenodo.24570905}). Extends Working Paper 05 (\texttt{10.5281/zenodo.24577879}).}}
-\date{November 26, 2026}
+\author{Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \texttt{0009-0005-4331-0409}. Formal verification ledger, dynamical simulators, and open-source EEG analyzer: \url{https://github.com/GravitonR/graviton-cert} (tag \texttt{v1.5.0}, 117/117 Lean~4 proofs across 13 studies, Zenodo Concept DOI: \texttt{10.5281/zenodo.24570905}; Working Paper~06 Concept DOI: \texttt{10.5281/zenodo.24598696}). Extends Working Paper 05 (\texttt{10.5281/zenodo.24577879}).}}
+\date{November 27, 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-The COGITATE adversarial collaboration (\emph{Nature}, 2025) revealed structural vulnerabilities in both Integrated Information Theory and Global Neuronal Workspace Theory, while quantum-brain proposals remain constrained by 310~K thermal decoherence, shared synaptic noise correlations, and pharmacological confounds. Here we develop \textbf{Relational Temporal Binding Theory (RTBT)}, a mathematically formalized, falsifiable framework verified in Lean~4 (\code{graviton-cert}, Studies~12--13: 36 zero-dependency theorems, \code{NQA-01}--\code{07} and \code{RTBT-01}--\code{29}, zero \code{sorryAx}, zero custom axioms) and tested via continuous-time stochastic differential equation (SDE) simulations. RTBT postulates that unified conscious access arises inside an algebraically connected ($\lambda_2(L) > 0$), closed-loop ($w_{AB}w_{BA} > 0$), delay-coherent ($4d < v\tau_{\mathrm{win}}$), balanced excitatory--inhibitory (E/I) cortical assembly whose finite-$N$ differentiated temporal binding capacity $\mathcal{B}_{\mathrm{exact}} = (1-\rho)R_\phi^2 \frac{N\,\mathrm{SNR}_1^2}{1+(N-1)\rho}\frac{1}{1-(w_E-w_I)}$ and covariance participation ratio $D_{\mathrm{eff}}(N,\rho) = \frac{N}{1+(N-1)\rho^2}$ exceed critical thresholds over a nested hierarchy of optimal finite integration windows. We prove continuous-time Lyapunov stability and critical slowing down, exact Fisher information and Cram\'er--Rao estimation ceilings, two-sided collapse in both anesthesia and generalized seizures, exclusion of parallel cerebellar architectures and low-dimensional or disconnected oscillators, Kelz--Proekt bistable anesthesia hysteresis, Sperry split-brain callosotomy bifurcation, macroscopic 20~W synaptic ATP power floors, Bell-singlet quantum no-signaling across neurons, and a zero-coherence $\mu$s-to-100~ms chemical spin-modulation bridge. Continuous-time SDE simulations confirm that perturbational Lempel--Ziv complexity peaks in the awake band and collapses under both propofol and seizures, while the metaphysical Hard Problem (\code{RTBT-GATE-01}) and wet-lab calibrations (\code{RTBT-GATE-02}--\code{03}) remain explicitly open.
+The COGITATE adversarial collaboration (\emph{Nature}, 2025) revealed structural vulnerabilities in both Integrated Information Theory and Global Neuronal Workspace Theory, while quantum-brain proposals remain constrained by 310~K thermal decoherence, shared synaptic noise correlations, and pharmacological confounds. Here we develop \textbf{Relational Temporal Binding Theory (RTBT)}, a mathematically formalized, falsifiable framework verified in Lean~4 (\code{graviton-cert}, Studies~12--13: 36 zero-dependency theorems, \code{NQA-01}--\code{07} and \code{RTBT-01}--\code{29}, zero \code{sorryAx}, zero custom axioms), tested via continuous-time stochastic differential equation (SDE) simulations, and evaluated empirically across \textbf{72 consecutive human subjects (210 EEG epochs)} from five open-access PhysioNet and OpenNeuro clinical cohorts. RTBT postulates that unified conscious access arises inside an algebraically connected ($\lambda_2(L) > 0$), closed-loop ($w_{AB}w_{BA} > 0$), delay-coherent ($4d < v\tau_{\mathrm{win}}$), balanced excitatory--inhibitory (E/I) cortical assembly whose finite-$N$ differentiated temporal binding capacity $\mathcal{B}_{\mathrm{exact}} = (1-\rho)R_\phi^2 \frac{N\,\mathrm{SNR}_1^2}{1+(N-1)\rho}\frac{1}{1-(w_E-w_I)}$ and covariance participation ratio $D_{\mathrm{eff}}(N,\rho) = \frac{N}{1+(N-1)\rho^2}$ exceed critical thresholds over a nested hierarchy of optimal finite integration windows. Across real human clinical EEG (\code{tools/rtbt-eeg-analyzer.py}), RTBT's biomarkers separate Wake from deep N3 sleep ($N=20$, $\tau_{1/e}$ AUROC $0.914$, $p=3.81\times 10^{-6}$), separate covert REM dreaming from N3 sleep directly corroborating \code{RTBT-14} ($\widehat{\mathcal{B}}$ AUROC $0.946$, $19/20$ patients, $p=3.81\times 10^{-6}$), achieve $20/20$ ($100\%$) eyes-closed resting specificity, detect pre-LOC vs.\ pre-ROC spectral entropy neural inertia in surgical general anesthesia ($N=7$, $6/7$ patients, $p=0.0469$), and document explicit real-world failure modes (sleep-onset seizures, focal discharges, and frontal ocular blink confounds), while the metaphysical Hard Problem (\code{RTBT-GATE-01}) and wet-lab calibrations (\code{RTBT-GATE-02}--\code{03}) remain explicitly open.
 \end{abstract}
 
 \tableofcontents
@@ -90,26 +90,71 @@ Lean~4 machine-checked kernel proofs & 0 & 0 & 0 & 0 & \textbf{45 (117 suite)} \
 \label{tab:compare}
 \end{table}
 
-Continuous-time Wilson--Cowan (1972) Euler--Maruyama SDE simulations (\code{tools/rtbt-dynamics-sim.py}) independently corroborate the analytical theorems: (1)~Kaspar--Schuster LZ76 perturbational complexity (PCI proxy~\cite{Casali2013}) peaks in the balanced awake regime ($\mathrm{LZ\text{-}PCI} = 0.575$, empirical $\rho = 0.049$) and collapses by $>30\times$ under both propofol GABAergic suppression ($\mathrm{LZ\text{-}PCI} = 0.019$) and disinhibited 1D seizure hypersynchrony ($\mathrm{LZ\text{-}PCI} = 0.008$, $\rho = 0.788$); (2)~continuous anesthetic titration reproduces Kelz--Proekt neural inertia ($c_{\mathrm{ind}} = 0.35 > c_{\mathrm{em}} = 0.0$); and (3)~two-hemisphere Kuramoto integration confirms phase locking for intact callosal coupling and persistent drift ($0.8\,\mathrm{rad/s}$) after callosotomy. All 14 clinical and physical counterexamples pass 14/14 in \code{tools/rtbt-benchmark.py}.
+Continuous-time Wilson--Cowan (1972) Euler--Maruyama SDE simulations (implemented in \code{rtbt-dynamics-sim.py}) independently corroborate the analytical theorems: (1)~Kaspar--Schuster LZ76 perturbational complexity (PCI proxy~\cite{Casali2013}) peaks in the balanced awake regime ($\mathrm{LZ\text{-}PCI} = 0.575$, empirical $\rho = 0.049$) and collapses by $>30\times$ under both propofol GABAergic suppression ($\mathrm{LZ\text{-}PCI} = 0.019$) and disinhibited 1D seizure hypersynchrony ($\mathrm{LZ\text{-}PCI} = 0.008$, $\rho = 0.788$); (2)~continuous anesthetic titration reproduces Kelz--Proekt neural inertia ($c_{\mathrm{ind}} = 0.35 > c_{\mathrm{em}} = 0.0$); and (3)~two-hemisphere Kuramoto integration confirms phase locking for intact callosal coupling and persistent drift ($0.8\,\mathrm{rad/s}$) after callosotomy. All 14 clinical and physical counterexamples pass 14/14 in \code{tools/rtbt-benchmark.py}.
+
+\section{Multi-Cohort Empirical Evaluation on Public Human Clinical EEG (\texorpdfstring{$N=72$}{N=72})}
+
+To test whether RTBT's formal dynamical observables generalize beyond synthetic SDEs to noisy clinical human recordings, we built a zero-dependency open-source EEG biomarker analyzer (\code{tools/rtbt-eeg-analyzer.py}, plus a 100\% local client-side browser port at \url{https://gravitonresearch.org/writing/relational-temporal-binding/}) supporting standard \code{.edf}/\code{.edf+}, BrainVision (\code{.vhdr}/\code{.eeg}), and \code{.csv} recordings. Every recording undergoes identical, deterministic preprocessing: $1$--$45\,\mathrm{Hz}$ cosine-tapered FFT bandpass filtering, automatic bad-channel rejection ($>6\times$ median channel SD or flatline), montage-aware Common Average Referencing (CAR) on dense monopolar caps ($\ge 8$ channels), and computation of exact covariance participation ratio $D_{\mathrm{eff}}$ (\code{RTBT-19}), normalized graph Laplacian Fiedler connectivity $\lambda_{2,\mathrm{norm}}$ (\code{RTBT-23}), channel-median autocorrelation decay time $\tau_{1/e}$ (\code{RTBT-28}), Welch spectral entropy $H_{\mathrm{spec}}$, and Schartner--Kaspar--Schuster Hilbert-envelope \code{LZ76} complexity~\cite{Schartner2015} (\code{RTBT-22}).
+
+We evaluated \textbf{72 consecutive human subjects (210 clinical/resting EEG epochs, zero cherry-picking)} across five open-access PhysioNet and OpenNeuro hospital/lab cohorts using deterministic event-anchored selection rules (implemented in \code{tools/rtbt-cohort-benchmark.py}, \code{tools/rtbt-anesthesia-benchmark.py}, and \code{tools/rtbt-propofol-benchmark.py}; exact paired Wilcoxon signed-rank tests and 2{,}000-resample bootstrap AUROCs summarized in Table~\ref{tab:eeg}).
+
+\begin{table}[t]
+\centering
+\scriptsize
+\renewcommand{\code}[1]{\texttt{#1}}
+\setlength{\tabcolsep}{2.6pt}
+\renewcommand{\arraystretch}{1.12}
+\begin{tabular}{@{}l c l l l@{}}
+\toprule
+\textbf{Cohort} & \textbf{$N$} & \textbf{Contrast (Theorem)} & \textbf{Within-Subject Shift} & \textbf{Wilcoxon $p$ / AUROC (95\% CI)} \\
+\midrule
+HMC Sleep~\cite{HMC2021} & 20 & Wake vs.\ N3 (\code{RTBT-28}) & $\tau_{1/e}$: $20.6 \to 60.4\,$ms (19/20) & $p=3.81{\times}10^{-6}$, \textbf{0.914} (.79--1.0) \\
+HMC Sleep~\cite{HMC2021} & 20 & REM vs.\ N3 (\code{RTBT-14}) & $\widehat{\mathcal{B}}$: $0.121$ vs.\ $0.056$ (19/20) & $p=3.81{\times}10^{-6}$, \textbf{0.946} (.84--1.0) \\
+EEGMMIDB~\cite{EEGMMIDB2004} & 20 & Resting Specificity & Eyes Closed 20/20 (100\%) & Pooled \code{LZ76} \textbf{0.893} (.84--.94) \\
+CHB-MIT~\cite{CHBMIT2009} & 15 & Base vs.\ Seizure & $D_{\mathrm{eff}}$ drops 12/15 (80\%)$^\dagger$ & $p=0.095$, 0.618 (.40--.83) \\
+Anesth.\ (\code{ds004541}) & 7 & Pre-LOC vs.\ ROC (\code{RTBT-25}) & $H_{\mathrm{spec}}$: $0.775 \to 0.713$ (6/7) & $p=\mathbf{0.0469}$ ($d_z=+1.04$) \\
+Propofol~\cite{Bajwa2024} & 10 & Awake vs.\ Sedation & Dreaming vs.\ slow-wave & Deep sed2 $\tau_{1/e}$ $+188$--$384\%$ \\
+\bottomrule
+\end{tabular}
+\caption{Zero-cherry-picking evaluation of RTBT biomarkers across 72 human subjects (210 EEG epochs) from five public PhysioNet and OpenNeuro cohorts. $^\dagger$CHB-MIT includes sleep-onset and focal seizures; see failure-mode audit.}
+\label{tab:eeg}
+\end{table}
+
+\textbf{Principal Empirical Findings \& Honest Failure-Mode Audit.}
+\begin{enumerate}
+  \item \textbf{Strong Validation of Critical Slowing (\code{RTBT-28}) and Covert REM Binding (\code{RTBT-14}):} In $N=20$ consecutive overnight hospital PSG patients (\code{hmc-sleep-staging}, $0$ skipped), deep slow-wave sleep (N3) nearly tripled $\tau_{1/e}$ ($20.6 \to 60.4\,\mathrm{ms}$, $19/20$ patients, $d_z=-2.16$, $p=3.81\times 10^{-6}$, AUROC $0.914$) while depressing \code{LZ76} ($0.861 \to 0.687$, $p=1.91\times 10^{-5}$, AUROC $0.899$). Crucially, during covert REM dreaming, RTBT's binding index rebounded sharply above N3 in $19/20$ patients ($0.121$ vs.\ $0.056$, $p=3.81\times 10^{-6}$, AUROC $0.946$), corroborating \code{RTBT-14} on real hospital recordings. Across all 55 PhysioNet subjects ($95$ differentiated vs.\ $35$ collapsed epochs), pooled \code{LZ76} achieved AUROC $0.893$ ($95\%$ CI $0.835$--$0.944$).
+  \item \textbf{Neural Inertia Asymmetry (\code{RTBT-25}) \& Propofol Dreaming Bifurcation:} In OpenNeuro \code{ds004541} ($N=7$ complete surgical general anesthesia trajectories with documented \code{start}, \code{LOC}, and \code{ROC}), spectral entropy $H_{\mathrm{spec}}$ was significantly lower immediately before emergence (\code{pre-ROC}) than immediately before loss of consciousness (\code{pre-LOC}) ($6/7$ patients, $d_z=+1.04$, $p=0.0469$), accompanied by longer $\tau_{1/e}$ ($38.9$ vs.\ $31.2\,\mathrm{ms}$, $6/7$ patients). In Storm Lab's repeated-awakening propofol dataset (\code{ds005620}~\cite{Bajwa2024}, $N=10$), light sedation produced paradoxical GABAergic beta speedup ($\tau_{1/e}$ $20.7 \to 19.5\,\mathrm{ms}$, $p=0.0215$), while deeper sedation (\code{task-sed2}) bifurcated cleanly between volunteers preserving covert-dreaming complexity (\code{LZ76} $\sim 0.82$--$0.89$) and those crossing into deep slow-wave suppression (\code{sub-1016}: $\tau_{1/e}$ $19.1 \to 92.5\,\mathrm{ms}$, \code{LZ76} $0.850 \to 0.697$; \code{sub-1036}: $\tau_{1/e}$ $21.8 \to 62.7\,\mathrm{ms}$).
+  \item \textbf{Explicit Failure Modes Disclosed Openly (\code{AUDITS/rtbt-*-validation.md}):} First, while real-time sliding-window tracking on \code{chb01\_03} captured seizure onset ($2996\,\mathrm{s}$) and post-ictal slow-wave offset ($3036\,\mathrm{s}$) to the second ($D_{\mathrm{eff}}$ $7.00 \to 4.63$, \code{LZ76} $0.730 \to 0.518$) and $D_{\mathrm{eff}}$ dropped in $12/15$ ($80\%$) CHB-MIT patients, unconditioned \code{LZ76} dropped in only $9/15$ ($p=0.454$) because overnight pediatric seizures (\code{chb06}, \code{chb10}, \code{chb14}) often begin out of deep N3 sleep (baseline \code{LZ76} $0.46$--$0.50$), where ictal scalp EMG ($>20\,\mathrm{Hz}$) or focal discharges inflate raw \code{LZ76}. Second, while Eyes-Closed resting specificity reached $20/20$ ($100\%$), $4/20$ Eyes-Open EEGMMIDB recordings exhibited frontal blink delta ($61$--$73\%$) despite awake-level \code{LZ76} ($0.71$--$0.84$). Third, raw surgical OR recordings (\code{ds004541}) contained $3{,}500$--$18{,}400\,\mu\mathrm{V}$ railed electrodes requiring automated bad-channel rejection before CAR. These audits define exact preprocessing requirements for prospective clinical trials (\code{paper/preregistration-brief.md}).
+\end{enumerate}
 
 \begin{gate}[\code{RTBT-GATE-01}--\code{RTBT-GATE-03}]
-Formal verification closes structural contradictions but cannot substitute for observation or metaphysics. Three gates remain explicitly open: (1)~the Hard Problem (why differentiated relational temporal binding is accompanied by first-person phenomenal qualia); (2)~longitudinal human \emph{ChronoScope} calibration of circadian precision $\Pi_{\mathrm{time}}(\phi)$ and sedation-induced $\tau^*(A)$ widening; and (3)~pre-registered multi-lab blinded tests of matched-SAR Larmor RF and bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ anesthesia powered via \code{NQA-06}.
+Formal verification closes structural contradictions and retrospective clinical cohorts corroborate RTBT's sleep, covert-REM, seizure-trajectory, and neural-inertia predictions, but cannot substitute for prospective intervention or metaphysics. Three gates remain explicitly open: (1)~the Hard Problem (why differentiated relational temporal binding is accompanied by first-person phenomenal qualia); (2)~longitudinal human \emph{ChronoScope} calibration of circadian precision $\Pi_{\mathrm{time}}(\phi)$ and sedation-induced $\tau^*(A)$ widening; and (3)~pre-registered multi-lab blinded tests of matched-SAR Larmor RF and bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ anesthesia powered via \code{NQA-06}.
 \end{gate}
 
 \clearpage
-\begin{thebibliography}{9}
+\begin{thebibliography}{12}
 \bibitem{WP05}
 I.~Haq, \emph{Three Machine-Checked Biophysical Gates for Quantum Processes in Neural Dynamics}, Graviton Working Paper~05, Zenodo \texttt{10.5281/zenodo.24577879} (2026).
 \bibitem{COGITATE2025}
 Cogitate Consortium \emph{et al.}, \emph{Adversarial testing of global neuronal workspace and integrated information theories of consciousness}, Nature (2025).
 \bibitem{Casali2013}
 A.~G.~Casali \emph{et al.}, \emph{A theoretically based index of consciousness independent of sensory processing and behavior}, Sci.\ Transl.\ Med.\ \textbf{5}, 198ra105 (2013).
+\bibitem{Schartner2015}
+M.~Schartner \emph{et al.}, \emph{Complexity of multi-dimensional spontaneous EEG decreases during propofol induced general anaesthesia}, PLoS ONE \textbf{10}(8), e0133532 (2015).
 \bibitem{Friedman2010}
 E.~B.~Friedman, Y.~Sun, J.~T.~Moore \emph{et al.}, \emph{A Conserved Behavioral State Barrier Impedes Transitions between Anesthetic-Induced Unconsciousness and Wakefulness: Evidence for Neural Inertia}, PLoS ONE \textbf{5}(7), e11903 (2010).
 \bibitem{Zohary1994}
 E.~Zohary, M.~N.~Shadlen, and W.~T.~Newsome, \emph{Correlated neuronal discharge rate and its implications for psychophysical performance}, Nature \textbf{370}, 140--143 (1994).
 \bibitem{Barato2015}
 A.~C.~Barato and U.~Seifert, \emph{Thermodynamic Uncertainty Relation for Biomolecular Processes}, Phys.\ Rev.\ Lett.\ \textbf{114}, 158101 (2015).
+\bibitem{HMC2021}
+D.~Alvarez-Estevez and R.~M.~Rijsman, \emph{Inter-database validation of a deep learning approach for automatic sleep scoring}, PLoS ONE \textbf{16}(8), e0256111 (2021); PhysioNet \texttt{hmc-sleep-staging}.
+\bibitem{CHBMIT2009}
+A.~H.~Shoeb, \emph{Application of machine learning to epileptic seizure onset detection and treatment}, PhD Thesis, MIT (2009); PhysioNet \texttt{chbmit}.
+\bibitem{EEGMMIDB2004}
+G.~Schalk \emph{et al.}, \emph{BCI2000: A general-purpose brain-computer interface (BCI) system}, IEEE Trans.\ Biomed.\ Eng.\ \textbf{51}(6), 1034--1043 (2004); PhysioNet \texttt{eegmmidb}.
+\bibitem{Bajwa2024}
+I.~J.~Bajwa, A.~S.~Nilsen, R.~Skukies, A.~Aamodt, G.~Ernst, J.~F.~Storm, and B.~E.~Juel, \emph{A repeated awakening study exploring the capacity of complexity measures to capture dreaming during propofol sedation}, OpenNeuro \texttt{ds005620} (2024).
 \end{thebibliography}
 
 \end{document}
