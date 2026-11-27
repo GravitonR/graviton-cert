@@ -4,8 +4,9 @@
 
 **Boundary-Explicit Science in Lean 4** — an open-source framework and kernel-verified research ledger from the [Graviton Research Foundation](https://gravitonresearch.org).
 
-- **Preprint PDF DOI (Zenodo):** https://doi.org/10.5281/zenodo.24571255 (all versions: https://doi.org/10.5281/zenodo.24571254)
-- **Software Archive DOI (`v0.4.1`):** https://doi.org/10.5281/zenodo.24570906 (all versions: https://doi.org/10.5281/zenodo.24570905)
+- **Working Paper 03 Preprint DOI (Warped 5D Gravity):** https://doi.org/10.5281/zenodo.24571255 (all versions: https://doi.org/10.5281/zenodo.24571254)
+- **Working Paper 04 Preprint DOI (Post-Quantum HQC & Hybrid KEM):** https://doi.org/10.5281/zenodo.24576927 (all versions: https://doi.org/10.5281/zenodo.24576926)
+- **Software Archive DOI (`graviton-cert`):** https://doi.org/10.5281/zenodo.24570906 (all versions: https://doi.org/10.5281/zenodo.24570905)
 - **Live Kernel Audit Ledger:** https://gravitonresearch.org/#kernel-audit
 - **Repository:** https://github.com/GravitonR/graviton-cert
 - **License:** MIT
@@ -23,12 +24,13 @@ Most formalization efforts either build general textbook libraries (like `Mathli
 3. **Explicit Non-Claims (`does_not_establish`)** — what the proof formally does *not* prove.
 4. **Open Empirical Gates** — unmeasured biological, physical, or theoretical obligations that mathematics alone cannot close.
 
-## Included Certified Studies (v0.6.0 — 68/68 Kernel-Verified Claims across 9 Studies)
+## Included Certified Studies (v0.7.0 — 75/75 Kernel-Verified Claims across 10 Studies)
 
 All active research lines on `gravitonresearch.org` are formally verified with zero external dependencies beyond Lean 4's core kernel (`0 sorryAx`, `0 custom axioms`, zero floating-point proofs):
 
 | Study | Domain | Key Machine-Checked Results |
 | :--- | :--- | :--- |
+| **`PostQuantumAgentAuth`** (7 claims) | Post-Quantum Protocol & AI Agent Security (`PQ-Guard`) | Merkle-batched PQ capability delegation strictly beating per-call `ML-DSA-65` signing (`>13×` wire savings at 64 calls, `PQA-01`); transitive monotone spend/expiry/bitmask attenuation (`PQA-02`); pre-execution authority firewall & replay-nonce double-spend blocking (`PQA-03`–`04`); hybrid `Ed25519 + ML-DSA` anti-downgrade (`PQA-05`); TLS 1.3 `ML-DSA-65`/`ML-KEM-768` MTU fragmentation bounds (`PQA-06`); executable `PQGuardAcceptanceGate` (`PQA-07`). Paired with [`tools/pq-probe.py`](tools/pq-probe.py) and [`tools/pq-auth.py`](tools/pq-auth.py). |
 | **`PostQuantumHQC`** (10 claims) | Post-Quantum Crypto (NIST HQC 2025) | Exact `𝔽₂[X]/⟨Xⁿ-1⟩` quasi-cyclic ring laws (`HQC-01`); exact HQC decryption noise cancellation & Hamming-weight ceiling (`HQC-02`–`04`); official NIST HQC-128/192/256 MDS geometry & padding slack (`5, 11, 37` bits, `HQC-05`); formal `CVE-2025-48946` implicit-rejection collision & full-ciphertext binding fix (`HQC-06`); broken XOR combiner vs. X-Wing `MAL-BIND` & anti-downgrade (`HQC-07`–`08`); Anti-KyberSlash branchless `cmov` & division-free ML-KEM Barrett reduction (`q=3329, m=20158`, catching unsigned `20159` underflow, `HQC-09`); executable `PQCImplementationAcceptanceGate` (`HQC-10`). Paired with CLI auditor [`tools/pqc-audit.py`](tools/pqc-audit.py), live `liboqs` audit [`AUDITS/liboqs-hqc-audit.md`](AUDITS/liboqs-hqc-audit.md), and Working Paper 04 PDF [`paper/graviton-working-paper-04.pdf`](paper/graviton-working-paper-04.pdf). |
 | **`QuantumErrorCorrection`** (8 claims) | Quantum Error Correction (`QEC-Bridge`) | Universal binary symplectic Pauli laws (`QEC-01`); CSS orthogonality `H_X H_Z^T = 0` & stabilizer invisibility (`QEC-02`–`03`); complete in-kernel Steane `[[7,1,3]]` (exhaustive distance-3 proof over all 128 errors, `QEC-04`) & Shor `[[9,1,3]]` (`QEC-05`); verified in-kernel `𝔽₂` Gaussian elimination kernel preservation (`QEC-06`); decoder syndrome consistency vs. silent logical symmetry-trap witness (`QEC-07`); executable `QECBridgeAcceptanceGate` (`QEC-08`). Paired with [`tools/qec-bridge.py`](tools/qec-bridge.py) (including IBM 72-qubit Bivariate Bicycle qLDPC verification). |
 | **`TimelessGravity`** (12 claims) | Quantum Gravity / Linearized GR | Pure-gauge Riemann vanishing (`R^(1)_{abcd} = 0`, all 256 components); contracted 4D Bianchi identity (`∂^μ G^(1)_{μν} = 0`); ADM Fierz–Pauli uniqueness (`c₂ = 1`); de Sitter Higuchi ghost bound (`μ² ≥ 2Λ/3`); unified quadratic ghost filter; exact partially massless scalar gauge invariance iff `μ² = 2Λ/3`. |
