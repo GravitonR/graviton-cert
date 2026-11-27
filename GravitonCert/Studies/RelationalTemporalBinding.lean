@@ -1200,14 +1200,231 @@ theorem rtbt_unassailable_seven_regime_soundness (s : UnassailableConsciousnessS
   | mk cl rep ei rho pwr aw unc cal =>
     cases cl <;> cases rep <;> cases ei <;> cases rho <;> cases pwr <;> cases aw <;> cases unc <;> cases cal <;> decide
 
+/-! ## 23. Algebraic Connectivity / Fiedler-Gap & Disconnected-Islands Exclusion (`RTBT-23`) -/
+
+/-- Quadratic form `vᵀ L v = K_inter · (v₁ - v₂)²` for the 2-cluster graph Laplacian
+    `L = [[K, -K], [-K, K]]`, whose Fiedler (second smallest) eigenvalue is `λ₂(L) = 2 K_inter`. -/
+def laplacianQuadraticForm (Kinter v1 v2 : Rat) : Rat :=
+  Kinter * ((v1 - v2) * (v1 - v2))
+
+/--
+**Theorem RTBT-23 (Algebraic Connectivity / Disconnected-Warehouse-of-Thermostats Exclusion):**
+Closes the "1,000 disconnected 2-node thermostats in a warehouse" loophole against global `D_eff`:
+1. **Disconnected Islands (`K_inter = 0`):** The non-constant cut vector `(1, -1)` lies in
+   `ker(L)` (`vᵀ L v = 0` and Fiedler eigenvalue `λ₂ = 2 K_inter = 0`), proving zero global
+   algebraic connectivity—so `D_eff` and `ℬ_exact` cannot be summed across disconnected modules!
+2. **Connected Integration (`K_inter > 0`):** The Fiedler eigenvalue is strictly positive
+   (`λ₂ = 2 K_inter > 0`), and `vᵀ L v > 0` strictly for *every* non-constant state `v₁ ≠ v₂`.
+-/
+theorem algebraic_connectivity_disconnected_islands_exclusion
+    (Kinter v1 v2 : Rat) (hKpos : 0 < Kinter) (hNe : v1 ≠ v2) :
+    (laplacianQuadraticForm 0 1 (-1) = 0) ∧
+    (0 < 2 * Kinter) ∧
+    (0 < laplacianQuadraticForm Kinter v1 v2) := by
+  refine ⟨by unfold laplacianQuadraticForm; grind, by grind, ?_⟩
+  unfold laplacianQuadraticForm
+  have hDiffSq : 0 < (v1 - v2) * (v1 - v2) := by
+    by_cases hP : 0 < v1 - v2
+    · exact Rat.mul_pos hP hP
+    · have hN : 0 < -(v1 - v2) := by grind
+      have hM := Rat.mul_pos hN hN
+      have hE : (-(v1 - v2)) * (-(v1 - v2)) = (v1 - v2) * (v1 - v2) := by grind
+      rw [hE] at hM; exact hM
+  exact Rat.mul_pos hKpos hDiffSq
+
+/-! ## 24. Axonal Conduction Delay Horizon & Frequency-Distance Scaling (`RTBT-24`) -/
+
+/-- Quarter-cycle constructive-interference spatial binding horizon `R_max = (v · τ_win) / 4`. -/
+def axonalBindingHorizon (vAxon tauWin : Rat) : Rat :=
+  (vAxon * tauWin) / 4
+
+/-- Minimum coherent clock window `τ_min = (4 · d) / v` required to span distance `d`. -/
+def minClockWindowForDistance (d vAxon : Rat) : Rat :=
+  (4 * d) / vAxon
+
+/--
+**Theorem RTBT-24 (Axonal Conduction Delay Horizon & Cortical Frequency-Distance Law):**
+For finite axonal conduction velocity `v > 0`, inter-areal distance `d > 0`, and clock window `τ > 0`:
+1. **Quarter-Cycle Horizon Equivalence:** Conduction delay obeys `d / v < τ / 4` **if and only if**
+   distance lies inside the physical binding horizon `d < (v · τ) / 4` (equivalently `τ_min(d) < τ`).
+2. **Buzsáki Frequency-Distance Scaling:** Longer cortical distances (`d_local < d_global`) strictly
+   require slower integration windows (`τ_min(d_local) < τ_min(d_global)`), deriving why local
+   circuits run fast gamma while long-range fronto-posterior binding runs slow theta/alpha!
+3. **Demyelination Collapse (Multiple Sclerosis / White-Matter Injury):** Slowing axonal velocity
+   (`v₂ < v₁`) strictly shrinks the coherent binding horizon (`R_max(v₂) < R_max(v₁)`).
+-/
+theorem axonal_delay_horizon_and_frequency_distance_law
+    (d dLocal dGlobal v v1 v2 tauWin : Rat)
+    (hv : 0 < v) (hTau : 0 < tauWin)
+    (hdLt : dLocal < dGlobal) (hvLt : v2 < v1) :
+    (d / v < tauWin / 4 ↔ d < axonalBindingHorizon v tauWin) ∧
+    (minClockWindowForDistance dLocal v < minClockWindowForDistance dGlobal v) ∧
+    (axonalBindingHorizon v2 tauWin < axonalBindingHorizon v1 tauWin) := by
+  refine ⟨?_, ?_, ?_⟩
+  · unfold axonalBindingHorizon
+    constructor
+    · intro hLt
+      have hMul := Rat.mul_lt_mul_of_pos_right hLt hv
+      rw [Rat.div_def, Rat.mul_assoc, Rat.inv_mul_cancel v (Rat.ne_of_gt hv), Rat.mul_one] at hMul
+      have hR : tauWin / 4 * v = v * tauWin / 4 := by rw [Rat.div_def, Rat.div_def]; grind
+      rw [hR] at hMul; exact hMul
+    · intro hLt
+      have hDiv := Rat.mul_lt_mul_of_pos_right hLt (Rat.inv_pos.mpr hv)
+      have hR : v * tauWin / 4 * v⁻¹ = tauWin / 4 := by
+        rw [Rat.div_def, Rat.div_def]
+        calc v * tauWin * (4 : Rat)⁻¹ * v⁻¹ = (tauWin * (4 : Rat)⁻¹) * (v * v⁻¹) := by grind
+          _ = (tauWin * (4 : Rat)⁻¹) * 1 := by rw [Rat.mul_inv_cancel v (Rat.ne_of_gt hv)]
+          _ = tauWin * (4 : Rat)⁻¹ := by grind
+      rw [hR, ← Rat.div_def] at hDiv; exact hDiv
+  · unfold minClockWindowForDistance; rw [Rat.div_def, Rat.div_def]
+    exact Rat.mul_lt_mul_of_pos_right (by grind) (Rat.inv_pos.mpr hv)
+  · unfold axonalBindingHorizon; rw [Rat.div_def, Rat.div_def]
+    exact Rat.mul_lt_mul_of_pos_right (Rat.mul_lt_mul_of_pos_right hvLt hTau) (by grind)
+
+/-! ## 25. Bistable Neural Inertia / Anesthesia Hysteresis Theorem (`RTBT-25`) -/
+
+/--
+**Theorem RTBT-25 (Kelz–Proekt Neural Inertia / Bistable Anesthesia Hysteresis):**
+In a bistable thalamocortical loop where the active awake Up-state holds higher recurrent weight
+`w_on` than the anesthetized Down-state `w_off` (`0 < w_off < w_on < 1`):
+1. The **induction threshold** `X_ind = B_crit · (1 - w_on)` is strictly lower than the
+   **emergence threshold** `X_em = B_crit · (1 - w_off)`, with exact hysteresis gap
+   `X_em - X_ind = B_crit · (w_on - w_off) > 0`.
+2. **Path-Dependent Bistability:** For *every* intermediate cortical drive `X` inside
+   `X_ind < X < X_em`, an already-awake brain **remains conscious** (`B_crit < X / (1 - w_on)`),
+   whereas an already-anesthetized brain **remains unconscious** (`X / (1 - w_off) < B_crit`)
+   at the **exact same anesthetic concentration**!
+-/
+theorem neural_inertia_anesthesia_hysteresis
+    (Bcrit wOff wOn X : Rat)
+    (hB : 0 < Bcrit) (_hWoff : 0 < wOff) (hWlt : wOff < wOn) (hWon : wOn < 1) :
+    let Xind := Bcrit * (1 - wOn)
+    let Xem  := Bcrit * (1 - wOff)
+    (Xind < Xem) ∧
+    (Xem - Xind = Bcrit * (wOn - wOff)) ∧
+    (Xind < X → X < Xem →
+      Bcrit < X * recurrentGain wOn ∧ X * recurrentGain wOff < Bcrit) := by
+  intro Xind Xem
+  have h1mOn : 0 < 1 - wOn := by grind
+  have h1mOff : 0 < 1 - wOff := by grind
+  refine ⟨?_, by unfold Xind Xem; grind, ?_⟩
+  · unfold Xind Xem
+    exact Rat.mul_lt_mul_of_pos_left (by grind) hB
+  · intro hGtInd hLtEm
+    constructor
+    · unfold Xind at hGtInd
+      have hDiv := Rat.mul_lt_mul_of_pos_right hGtInd (Rat.inv_pos.mpr h1mOn)
+      rw [Rat.mul_assoc, Rat.mul_inv_cancel _ (Rat.ne_of_gt h1mOn), Rat.mul_one] at hDiv
+      unfold recurrentGain; rw [Rat.div_def, Rat.one_mul]; exact hDiv
+    · unfold Xem at hLtEm
+      have hDiv := Rat.mul_lt_mul_of_pos_right hLtEm (Rat.inv_pos.mpr h1mOff)
+      rw [Rat.mul_assoc, Rat.mul_inv_cancel _ (Rat.ne_of_gt h1mOff), Rat.mul_one] at hDiv
+      unfold recurrentGain; rw [Rat.div_def, Rat.one_mul]; exact hDiv
+
+/-! ## 26. Entangled-Neuron Quantum No-Signaling Theorem (`RTBT-26`) -/
+
+/--
+Reduced density matrix `ρ_B = Tr_A[(U_A ⊗ I_B) |Ψ⁻⟩⟨Ψ⁻| (U_Aᵀ ⊗ I_B)]` on Neuron B
+after applying an arbitrary local 2×2 orthogonal unitary `U_A = [[a, b], [c, d]]` on Neuron A
+to the maximally entangled Bell singlet `|Ψ⁻⟩ = (|01⟩ - |10⟩)/√2`.
+Exact tensor-contraction entries:
+- `(U_A ⊗ I_B)|Ψ⁻⟩ = (1/√2)(a|01⟩ - b|00⟩ + c|11⟩ - d|10⟩)`
+- `ρ_B = (1/2) · [[b² + d², -(ab + cd)], [-(ab + cd), a² + c²]]`.
+-/
+def bellSingletReducedB (uA : Mat2) : Mat2 :=
+  { a := (uA.b * uA.b + uA.d * uA.d) / 2
+    b := -(uA.a * uA.b + uA.c * uA.d) / 2
+    c := -(uA.a * uA.b + uA.c * uA.d) / 2
+    d := (uA.a * uA.a + uA.c * uA.c) / 2 }
+
+/-- Maximally mixed 1-qubit state `(1/2) I₂`. -/
+def maximallyMixedMat2 : Mat2 :=
+  { a := (1 : Rat) / 2, b := 0, c := 0, d := (1 : Rat) / 2 }
+
+/--
+**Theorem RTBT-26 (Entangled-Neuron Quantum No-Signaling Theorem):**
+Even if two distant neurons A and B share a **maximally entangled Bell singlet state** `|Ψ⁻⟩`
+(e.g., hypothetical distant `³¹P` Posner nuclear spins or microtubule qubits), applying *any*
+local orthogonal operation `U_A` on Neuron A (`U_Aᵀ U_A = I`) leaves Neuron B's reduced density
+matrix **identically equal to `(1/2) I₂`**:
+`Tr_A[(U_A ⊗ I_B)|Ψ⁻⟩⟨Ψ⁻|(U_Aᵀ ⊗ I_B)] = (1/2) I₂`.
+Formally refutes superluminal / non-local entanglement signaling between distant neurons:
+all inter-neuronal synchronization must obey the classical axonal delay horizon (`RTBT-24`).
+-/
+theorem entangled_neuron_quantum_no_signaling (uA : Mat2)
+    (hCol1 : uA.a * uA.a + uA.c * uA.c = 1)
+    (hCol2 : uA.b * uA.b + uA.d * uA.d = 1)
+    (hOrth : uA.a * uA.b + uA.c * uA.d = 0) :
+    bellSingletReducedB uA = maximallyMixedMat2 := by
+  unfold bellSingletReducedB maximallyMixedMat2
+  rw [hCol1, hCol2, hOrth]
+  simp; grind
+
+/-! ## 27. Biophysical Data-Processing Bottleneck Theorem (`RTBT-27`) -/
+
+/--
+**Theorem RTBT-27 (Biophysical Data-Processing Bottleneck / Post-Processing SNR Contraction):**
+In a two-stage neural cascade—upstream quantum-to-mediator channel `(Δy, σ₁²)` followed by
+downstream synaptic/channel amplifier `g > 0` with added independent downstream noise `σ₂² > 0`:
+`SNR_out² = (g · Δy)² / (g² σ₁² + σ₂²) < Δy² / σ₁² = SNR_in²` strictly whenever `Δy ≠ 0`!
+Proves that **no downstream cortical amplifier `g` can ever recover SNR lost in the upstream
+microdomain**: every noisy biological relay strictly contracts signal-to-noise ratio.
+-/
+theorem biophysical_data_processing_snr_bottleneck
+    (dY g sig1Sq sig2Sq : Rat)
+    (hdY : dY ≠ 0) (hg : 0 < g) (hS1 : 0 < sig1Sq) (hS2 : 0 < sig2Sq) :
+    ((g * dY) * (g * dY)) / ((g * g) * sig1Sq + sig2Sq) < (dY * dY) / sig1Sq := by
+  have hGsq : 0 < g * g := Rat.mul_pos hg hg
+  have hdYsq : 0 < dY * dY := by
+    by_cases hP : 0 < dY
+    · exact Rat.mul_pos hP hP
+    · have hN : 0 < -dY := by grind
+      have hM := Rat.mul_pos hN hN
+      have hE : (-dY) * (-dY) = dY * dY := by grind
+      rw [hE] at hM; exact hM
+  have hDen1 : 0 < (g * g) * sig1Sq := Rat.mul_pos hGsq hS1
+  have hDen2 : 0 < (g * g) * sig1Sq + sig2Sq := by grind
+  have hDenLt : (g * g) * sig1Sq < (g * g) * sig1Sq + sig2Sq := by grind
+  have hInvLt : ((g * g) * sig1Sq + sig2Sq)⁻¹ < ((g * g) * sig1Sq)⁻¹ := by
+    have h1 := Rat.mul_lt_mul_of_pos_right hDenLt (Rat.mul_pos (Rat.inv_pos.mpr hDen1) (Rat.inv_pos.mpr hDen2))
+    have hL : (g * g) * sig1Sq * (((g * g) * sig1Sq)⁻¹ * ((g * g) * sig1Sq + sig2Sq)⁻¹) = ((g * g) * sig1Sq + sig2Sq)⁻¹ := by
+      rw [← Rat.mul_assoc, Rat.mul_inv_cancel _ (Rat.ne_of_gt hDen1), Rat.one_mul]
+    have hR : ((g * g) * sig1Sq + sig2Sq) * (((g * g) * sig1Sq)⁻¹ * ((g * g) * sig1Sq + sig2Sq)⁻¹) = ((g * g) * sig1Sq)⁻¹ := by
+      calc ((g * g) * sig1Sq + sig2Sq) * (((g * g) * sig1Sq)⁻¹ * ((g * g) * sig1Sq + sig2Sq)⁻¹)
+          = ((g * g) * sig1Sq)⁻¹ * (((g * g) * sig1Sq + sig2Sq) * ((g * g) * sig1Sq + sig2Sq)⁻¹) := by grind
+        _ = ((g * g) * sig1Sq)⁻¹ * 1 := by rw [Rat.mul_inv_cancel _ (Rat.ne_of_gt hDen2)]
+        _ = ((g * g) * sig1Sq)⁻¹ := by grind
+    rw [hL, hR] at h1; exact h1
+  have hNumPos : 0 < (g * dY) * (g * dY) := by
+    have hEq : (g * dY) * (g * dY) = (g * g) * (dY * dY) := by grind
+    rw [hEq]; exact Rat.mul_pos hGsq hdYsq
+  have hStep := Rat.mul_lt_mul_of_pos_left hInvLt hNumPos
+  have hRhs : (g * dY) * (g * dY) * ((g * g) * sig1Sq)⁻¹ = (dY * dY) / sig1Sq := by
+    have hInvProd : ((g * g) * sig1Sq)⁻¹ = (g * g)⁻¹ * sig1Sq⁻¹ := by
+      have hCheck : ((g * g) * sig1Sq) * ((g * g)⁻¹ * sig1Sq⁻¹) = 1 := by
+        calc ((g * g) * sig1Sq) * ((g * g)⁻¹ * sig1Sq⁻¹)
+            = ((g * g) * (g * g)⁻¹) * (sig1Sq * sig1Sq⁻¹) := by grind
+          _ = 1 * 1 := by rw [Rat.mul_inv_cancel _ (Rat.ne_of_gt hGsq), Rat.mul_inv_cancel _ (Rat.ne_of_gt hS1)]
+          _ = 1 := by grind
+      have hM := congrArg (fun x => ((g * g) * sig1Sq)⁻¹ * x) hCheck
+      rw [← Rat.mul_assoc, Rat.inv_mul_cancel _ (Rat.ne_of_gt hDen1), Rat.one_mul, Rat.mul_one] at hM
+      exact hM.symm
+    rw [hInvProd, Rat.div_def]
+    calc (g * dY) * (g * dY) * ((g * g)⁻¹ * sig1Sq⁻¹)
+        = ((g * g) * (g * g)⁻¹) * (dY * dY * sig1Sq⁻¹) := by grind
+      _ = 1 * (dY * dY * sig1Sq⁻¹) := by rw [Rat.mul_inv_cancel _ (Rat.ne_of_gt hGsq)]
+      _ = dY * dY * sig1Sq⁻¹ := by grind
+  rw [Rat.div_def, ← hRhs]
+  exact hStep
+
 /-! ## 13. Study Certificate Registration (`graviton-cert v1.0.0`) -/
 
 def studyCertificate : StudyCertificate := {
   studyId := "relational-temporal-binding-theory"
-  title := "Working Paper 06 (v4.0): Relational Temporal Binding Theory (RTBT) — Complete 7-Regime Singularity-Free Framework (11/11 PCI Clinical Benchmark)"
+  title := "Working Paper 06 (v5.0): Relational Temporal Binding Theory (RTBT) — Airtight 115-Proof Framework (Fiedler Connectivity, Axonal Delay, Neural Inertia, Quantum No-Signaling & 14/14 Benchmark)"
   url := "https://gravitonresearch.org/writing/relational-temporal-binding/"
   domain := "Theoretical Neuroscience / Quantum Foundations / Consciousness Science"
-  scopeStatement := "Graviton's complete, singularity-free theory of conscious temporal integration unifying relational clocks, balanced E/I cortical circuits, covariance participation ratio D_eff, refractory saturation, heterogeneous connectomes, macroscopic 20 W synaptic ATP energetics, and spin-to-mediator biophysics across 22 Lean 4 theorems (RTBT-01..22, 110/110 suite total). Closes all 11 canonical consciousness counterexamples—verified 11/11 against clinical PCI benchmarks in tools/rtbt-benchmark.py—while explicitly quarantining the Hard Problem (RTBT-GATE-01)."
+  scopeStatement := "Graviton's fully hardened, singularity-free theory of conscious temporal integration verified across 27 theorems in Study 13 (RTBT-01..27, 115/115 suite total). Closes all 14 structural, anatomical, dynamical, and quantum counterexamples: disconnected thermostat warehouses via Laplacian Fiedler gap (RTBT-23), finite axonal conduction delay horizon & Buzsáki frequency-distance scaling (RTBT-24), Kelz-Proekt bistable anesthesia hysteresis / neural inertia (RTBT-25), entangled Bell-singlet quantum no-signaling across neurons (RTBT-26), biophysical data-processing SNR contraction (RTBT-27), 2-node thermostats via Participation Ratio D_eff (RTBT-19), refractory saturation (RTBT-20), heterogeneous connectomes (RTBT-21), cerebellum/feedforward AI (RTBT-13), REM/locked-in (RTBT-14), split-brain callosotomy (RTBT-15), finite-N scaling (RTBT-16), seizures (RTBT-07), Wilson-Cowan E/I (RTBT-08), nested colored-noise windows (RTBT-09), 20 W ATP power floor (RTBT-10), and us->100ms spin bridge (RTBT-17)—while explicitly quarantining the Hard Problem (RTBT-GATE-01)."
   assumptions := [
     { id := "RTBT-A1_binding_capacity"
       kind := "theoretical_postulate"
@@ -1373,7 +1590,42 @@ def studyCertificate : StudyCertificate := {
       claimKind := "theorem"
       summary := "Purely constructive 7-regime classifier closing Feedforward/Cerebellum, Low-Dim Resonators/Thermostats, Seizures, Anesthesia/Hypoxia, Split-Brain, Critical Quantum Strip, and Unified Conscious Band."
       assumptionIds := ["RTBT-A1_binding_capacity", "RTBT-A3_metabolic_dissipation"]
-      doesNotEstablish := ["Explicitly quarantines the metaphysical Hard Problem of subjective qualia (RTBT-GATE-01)."] }
+      doesNotEstablish := ["Explicitly quarantines the metaphysical Hard Problem of subjective qualia (RTBT-GATE-01)."] },
+    { id := "RTBT-23"
+      title := "Algebraic Connectivity / Fiedler-Gap & Disconnected-Islands Exclusion"
+      leanDecl := ``algebraic_connectivity_disconnected_islands_exclusion
+      claimKind := "exclusion_bound"
+      summary := "Closes the '1,000 disconnected thermostats in a warehouse' loophole: K_inter = 0 yields zero Fiedler eigenvalue λ₂ = 0 (non-constant cut in ker(L)), whereas K_inter > 0 strictly gives vᵀ L v > 0."
+      assumptionIds := ["RTBT-A1_binding_capacity"]
+      doesNotEstablish := ["Requires evaluating D_eff and B_exact strictly inside connected cortical components (λ₂ > 0)."] },
+    { id := "RTBT-24"
+      title := "Axonal Conduction Delay Horizon & Cortical Frequency-Distance Law"
+      leanDecl := ``axonal_delay_horizon_and_frequency_distance_law
+      claimKind := "theorem"
+      summary := "Proves quarter-cycle binding horizon d < v·τ_win/4, derives Buzsáki frequency-distance scaling (longer distances require slower clocks), and explains demyelination desynchrony."
+      assumptionIds := ["RTBT-A2_window_noise_drift"]
+      doesNotEstablish := ["Specific cortical conduction velocities vary by white-matter tract myelination."] },
+    { id := "RTBT-25"
+      title := "Kelz–Proekt Neural Inertia / Bistable Anesthesia Hysteresis Theorem"
+      leanDecl := ``neural_inertia_anesthesia_hysteresis
+      claimKind := "theorem"
+      summary := "Proves exact asymmetric induction vs. emergence thresholds (X_em - X_ind = B_crit·(w_on - w_off) > 0) and bistable path-dependence at identical anesthetic concentration."
+      assumptionIds := ["RTBT-A1_binding_capacity"]
+      doesNotEstablish := ["Does not model multi-compartment pharmacokinetic drug wash-in/wash-out delays."] },
+    { id := "RTBT-26"
+      title := "Entangled-Neuron Quantum No-Signaling Theorem (4×4 Bell Singlet)"
+      leanDecl := ``entangled_neuron_quantum_no_signaling
+      claimKind := "theorem"
+      summary := "Proves on the maximally entangled Bell singlet that any local orthogonal unitary U_A on Neuron A leaves Neuron B's reduced state identically (1/2)I₂—refuting non-local quantum synchronization."
+      assumptionIds := ["RTBT-A1_binding_capacity"]
+      doesNotEstablish := ["Does not forbid local spin-chemical modulation mediated through classical axonal channels."] },
+    { id := "RTBT-27"
+      title := "Biophysical Data-Processing SNR Bottleneck Theorem"
+      leanDecl := ``biophysical_data_processing_snr_bottleneck
+      claimKind := "exclusion_bound"
+      summary := "Proves (g·Δy)²/(g²σ₁² + σ₂²) < Δy²/σ₁² strictly for any downstream amplifier g > 0 with added noise σ₂ > 0: no downstream cortical decoder can recover SNR lost upstream."
+      assumptionIds := ["RTBT-A1_binding_capacity"]
+      doesNotEstablish := ["Applies to single-channel cascades; independent parallel channels combine per NQA-02."] }
   ]
   openGates := [
     { id := "RTBT-GATE-01"

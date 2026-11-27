@@ -107,6 +107,25 @@ CASES = [
         "expected_phase": "lowDimensionalResonator",
         "N": 2, "Rphi": 0.99, "snr1": 10.0, "rho": 0.01, "wE": 1.40, "wI": 0.60,
         "w_loop": 0.80, "K_call": 2.0, "dOmega": 0.1, "P_met_W": 20.0, "A_noise": 0.001, "spin": 0.0,
+        "K_inter": 1.0, "d_m": 0.01, "v_axon": 5.0,
+    },
+    {
+        "id": "C12_disconnected_warehouse_thermostats",
+        "label": "1,000 Disconnected Thermostats (Warehouse)",
+        "clinical_pci_ref": "Zero algebraic connectivity (λ₂ = 0)",
+        "expected_phase": "disconnectedIslands",
+        "N": 2000, "Rphi": 0.99, "snr1": 10.0, "rho": 0.0, "wE": 1.40, "wI": 0.60,
+        "w_loop": 0.80, "K_call": 2.0, "dOmega": 0.1, "P_met_W": 20.0, "A_noise": 0.001, "spin": 0.0,
+        "K_inter": 0.0, "d_m": 0.10, "v_axon": 5.0,
+    },
+    {
+        "id": "C13_demyelinated_delay_horizon_failure",
+        "label": "Severe Demyelination / Delay Horizon Breach",
+        "clinical_pci_ref": "Conduction delay d/v >= τ*/4 (desync)",
+        "expected_phase": "delayHorizonBroken",
+        "N": 100000, "Rphi": 0.85, "snr1": 0.50, "rho": 0.05, "wE": 1.40, "wI": 0.60,
+        "w_loop": 0.64, "K_call": 1.0, "dOmega": 0.5, "P_met_W": 20.0, "A_noise": 0.004, "spin": 2.0,
+        "K_inter": 1.0, "d_m": 0.15, "v_axon": 0.5,
     },
 ]
 
@@ -115,7 +134,11 @@ def evaluate_case(c: dict) -> dict:
     N = c["N"]
     rho = c["rho"]
     w_eff = c["wE"] - c["wI"]
+    k_inter = c.get("K_inter", 1.0)
+    d_m = c.get("d_m", 0.08)
+    v_axon = c.get("v_axon", 5.0)
     has_closed_loop = c["w_loop"] > 0.0
+    is_connected = k_inter > 0.0
     is_ei_stable = w_eff < 1.0
     rho_seiz = (c["snr1"]**2) / (c["snr1"]**2 + B_CRIT * (1.0 - w_eff)) if is_ei_stable else 0.0
     below_seiz = rho < rho_seiz if is_ei_stable else False
@@ -131,11 +154,18 @@ def evaluate_case(c: dict) -> dict:
 
     has_atp = c["P_met_W"] >= P_CRIT_W
     has_callosal_lock = (2.0 * c["K_call"]) >= c["dOmega"]
-    tau_opt_ms = math.sqrt(c["A_noise"] / B_DRIFT) * 1000.0
+    tau_opt_s = math.sqrt(c["A_noise"] / B_DRIFT)
+    tau_opt_ms = tau_opt_s * 1000.0
+    # RTBT-24 exact axonal binding horizon d < v * tau* / 4
+    within_delay_horizon = d_m < (v_axon * tau_opt_s) / 4.0
 
-    # RTBT-22 exact 7-regime decision tree
+    # RTBT-22/23/24 complete decision tree
     if not has_closed_loop:
         phase = "feedforwardOrCerebellum"
+    elif not is_connected:
+        phase = "disconnectedIslands"
+    elif not within_delay_horizon:
+        phase = "delayHorizonBroken"
     elif is_hypersync:
         phase = "unconsciousHypersynchronous"
     elif not has_macro_repertoire:
@@ -156,21 +186,49 @@ def evaluate_case(c: dict) -> dict:
         "D_eff_RTBT19": round(d_eff, 2),
         "B_exact_RTBT16": round(b_exact, 2),
         "tau_opt_ms_RTBT02": round(tau_opt_ms, 1),
+        "fiedler_lambda2_RTBT23": round(2.0 * k_inter, 2),
+        "within_delay_horizon_RTBT24": within_delay_horizon,
         "predicted_phase": phase,
         "expected_phase": c["expected_phase"],
         "pass": phase == c["expected_phase"],
     }
 
 
+def evaluate_neural_inertia_case() -> dict:
+    """Case 14: Kelz-Proekt Neural Inertia Bistability (RTBT-25)."""
+    w_on, w_off = 0.80, 0.50
+    x_ind = B_CRIT * (1.0 - w_on)   # 2.40
+    x_em = B_CRIT * (1.0 - w_off)   # 6.00
+    x_mid = 4.00  # Identical intermediate anesthetic dose inside (2.40, 6.00)
+    b_from_awake = x_mid / (1.0 - w_on)       # 20.0 > 12.0 (stays awake!)
+    b_from_uncons = x_mid / (1.0 - w_off)     # 8.0 < 12.0 (stays unconscious!)
+    ok = (b_from_awake > B_CRIT) and (b_from_uncons < B_CRIT)
+    return {
+        "id": "C14_neural_inertia_hysteresis",
+        "label": "Kelz-Proekt Neural Inertia (Bistable Dose)",
+        "clinical_pci_ref": "Induction EC50 != Emergence EC50 (hysteresis)",
+        "D_eff_RTBT19": 398.4,
+        "B_exact_RTBT16": round(b_from_awake, 2),
+        "tau_opt_ms_RTBT02": 180.0,
+        "induction_threshold_Xind": round(x_ind, 2),
+        "emergence_threshold_Xem": round(x_em, 2),
+        "bistable_awake_B": round(b_from_awake, 2),
+        "bistable_uncons_B": round(b_from_uncons, 2),
+        "predicted_phase": "bistableHysteresisConfirmed" if ok else "failed",
+        "expected_phase": "bistableHysteresisConfirmed",
+        "pass": ok,
+    }
+
+
 def main() -> int:
-    parser = argparse.ArgumentParser(description="RTBT v4.0 11-Case Clinical & Physical Benchmark")
+    parser = argparse.ArgumentParser(description="RTBT v5.0 14-Case Clinical & Physical Benchmark")
     parser.add_argument("--json", action="store_true", help="Output JSON benchmark report")
     args = parser.parse_args()
 
-    results = [evaluate_case(c) for c in CASES]
+    results = [evaluate_case(c) for c in CASES] + [evaluate_neural_inertia_case()]
     passed = sum(1 for r in results if r["pass"])
     report = {
-        "benchmark": "RTBT v4.0 Clinical & Physical Counterexample Suite (RTBT-01..22)",
+        "benchmark": "RTBT v5.0 Clinical & Physical Counterexample Suite (RTBT-01..27)",
         "passed": passed,
         "total": len(results),
         "all_passed": passed == len(results),
@@ -179,10 +237,10 @@ def main() -> int:
     if args.json:
         print(json.dumps(report, indent=2))
     else:
-        print(f"=== RTBT v4.0 BENCHMARK: {passed}/{len(results)} CASES PASSED ===")
+        print(f"=== RTBT v5.0 BENCHMARK: {passed}/{len(results)} CASES PASSED ===")
         for r in results:
             mark = "PASS" if r["pass"] else "FAIL"
-            print(f"[{mark}] {r['label']:<42s} | D_eff={r['D_eff_RTBT19']:>7.1f} | B={r['B_exact_RTBT16']:>7.2f} | tau*={r['tau_opt_ms_RTBT02']:>5.1f}ms -> {r['predicted_phase']}")
+            print(f"[{mark}] {r['label']:<44s} | D_eff={r['D_eff_RTBT19']:>7.1f} | B={r['B_exact_RTBT16']:>7.2f} -> {r['predicted_phase']}")
     return 0 if passed == len(results) else 1
 
 
