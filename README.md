@@ -92,9 +92,16 @@ python3 tools/rtbt-eeg-analyzer.py path/to/recording.csv --sfreq 250 --duration 
 
 # Reproduce the 55-subject (145-epoch) multi-cohort PhysioNet validation audit
 python3 tools/rtbt-cohort-benchmark.py --n-hmc 20 --n-chb 15 --n-mmidb 20
+
+# Reproduce the OpenNeuro general anesthesia & controlled propofol sedation audits
+python3 tools/rtbt-anesthesia-benchmark.py
+python3 tools/rtbt-propofol-benchmark.py
 ```
 
-See [AUDITS/rtbt-cohort-validation.md](AUDITS/rtbt-cohort-validation.md) for the full 55-subject statistical results (HMC Wake vs. N3 AUROC `0.914`, $p = 3.81 \times 10^{-6}$; Covert REM vs. N3 `RTBT-14` AUROC `0.946`, $p = 3.81 \times 10^{-6}$; EEGMMIDB Eyes-Closed specificity `20/20`; CHB-MIT seizure audit and failure-mode analysis).
+See the complete 5-cohort (`N = 72` real human subjects, `210` EEG epochs) empirical audit reports:
+- [AUDITS/rtbt-cohort-validation.md](AUDITS/rtbt-cohort-validation.md) — PhysioNet HMC Sleep (`N=20`: Wake vs. N3 AUROC `0.914`, $p = 3.81 \times 10^{-6}$; Covert REM vs. N3 `RTBT-14` AUROC `0.946`, $p = 3.81 \times 10^{-6}$), EEGMMIDB (`N=20`, Eyes-Closed `20/20`), and CHB-MIT Epilepsy (`N=15` + honest failure-mode audit).
+- [AUDITS/rtbt-anesthesia-validation.md](AUDITS/rtbt-anesthesia-validation.md) — OpenNeuro `ds004541` Surgical General Anesthesia (`N=7`: `pre-LOC` vs. `pre-ROC` spectral entropy neural inertia asymmetry `6/7`, $d_z = +1.04$, $p = 0.0469$).
+- [AUDITS/rtbt-propofol-validation.md](AUDITS/rtbt-propofol-validation.md) — OpenNeuro `ds005620` Controlled Propofol Sedation (`N=10`, Bajwa et al. 2024: dreaming-preserved vs. deep slow-wave collapse bifurcation + light-propofol beta shift).
 
 > **Epistemic Quarantine (`RTBT-GATE-01`):** Research biomarker tool only — not a medical device or clinical diagnostic instrument, and makes no claim to measure subjective qualia. Uncleaned ocular blink artifacts in eyes-open frontal EEG can elevate `1–4 Hz` delta power independently of consciousness state.
 

@@ -1,0 +1,2146 @@
+{
+  "title": "RTBT Human General Anesthesia EEG Validation (OpenNeuro ds004541)",
+  "epistemic_quarantine": "RTBT-GATE-01: Research biomarker validation only; not a medical device or clinical anesthesia monitor.",
+  "included_subjects": 7,
+  "skipped": [
+    {
+      "subject": "sub-11",
+      "skipped": true,
+      "reason": "Missing start/loc/roc events (['other', 'start', 'verbal/soft', 'verbal/strong', 'motor', 'tetanic/1'])"
+    }
+  ],
+  "stats": {
+    "baseline_vs_unconscious": {
+      "lz76_single_mean": {
+        "n": 7,
+        "mean_x": 0.8253,
+        "mean_y": 0.8737,
+        "mean_diff": -0.0484,
+        "cohens_dz": -0.597,
+        "pos": 2,
+        "neg": 5,
+        "w_stat": 5.0,
+        "p_value": 0.1562
+      },
+      "spectral_entropy": {
+        "n": 7,
+        "mean_x": 0.7261,
+        "mean_y": 0.7598,
+        "mean_diff": -0.0337,
+        "cohens_dz": -0.478,
+        "pos": 3,
+        "neg": 4,
+        "w_stat": 9.0,
+        "p_value": 0.4688
+      },
+      "tau_1e_ms": {
+        "n": 7,
+        "mean_x": 46.84,
+        "mean_y": 32.2557,
+        "mean_diff": 14.5843,
+        "cohens_dz": 0.749,
+        "pos": 5,
+        "neg": 2,
+        "w_stat": 5.0,
+        "p_value": 0.1562
+      },
+      "D_eff": {
+        "n": 7,
+        "mean_x": 3.6947,
+        "mean_y": 3.7004,
+        "mean_diff": -0.0057,
+        "cohens_dz": -0.006,
+        "pos": 4,
+        "neg": 3,
+        "w_stat": 14.0,
+        "p_value": 1.0
+      },
+      "rho_abs_mean": {
+        "n": 7,
+        "mean_x": 0.4034,
+        "mean_y": 0.3969,
+        "mean_diff": 0.0065,
+        "cohens_dz": 0.077,
+        "pos": 3,
+        "neg": 4,
+        "w_stat": 14.0,
+        "p_value": 1.0
+      },
+      "delta": {
+        "n": 7,
+        "mean_x": 0.53,
+        "mean_y": 0.4262,
+        "mean_diff": 0.1038,
+        "cohens_dz": 0.555,
+        "pos": 4,
+        "neg": 3,
+        "w_stat": 6.0,
+        "p_value": 0.2188
+      },
+      "rtbt_binding_index": {
+        "n": 7,
+        "mean_x": 0.0802,
+        "mean_y": 0.0862,
+        "mean_diff": -0.0061,
+        "cohens_dz": -0.168,
+        "pos": 3,
+        "neg": 4,
+        "w_stat": 12.0,
+        "p_value": 0.8125
+      }
+    },
+    "recovery_vs_unconscious": {
+      "lz76_single_mean": {
+        "n": 7,
+        "mean_x": 0.791,
+        "mean_y": 0.8737,
+        "mean_diff": -0.0827,
+        "cohens_dz": -0.607,
+        "pos": 1,
+        "neg": 6,
+        "w_stat": 2.0,
+        "p_value": 0.04688
+      },
+      "spectral_entropy": {
+        "n": 7,
+        "mean_x": 0.7151,
+        "mean_y": 0.7598,
+        "mean_diff": -0.0447,
+        "cohens_dz": -0.374,
+        "pos": 2,
+        "neg": 5,
+        "w_stat": 7.0,
+        "p_value": 0.2969
+      },
+      "tau_1e_ms": {
+        "n": 7,
+        "mean_x": 37.4814,
+        "mean_y": 32.2557,
+        "mean_diff": 5.2257,
+        "cohens_dz": 0.154,
+        "pos": 3,
+        "neg": 4,
+        "w_stat": 14.0,
+        "p_value": 1.0
+      },
+      "D_eff": {
+        "n": 7,
+        "mean_x": 3.324,
+        "mean_y": 3.7004,
+        "mean_diff": -0.3764,
+        "cohens_dz": -0.394,
+        "pos": 2,
+        "neg": 5,
+        "w_stat": 8.0,
+        "p_value": 0.375
+      },
+      "rho_abs_mean": {
+        "n": 7,
+        "mean_x": 0.4827,
+        "mean_y": 0.3969,
+        "mean_diff": 0.0858,
+        "cohens_dz": 0.499,
+        "pos": 5,
+        "neg": 2,
+        "w_stat": 7.0,
+        "p_value": 0.2969
+      },
+      "delta": {
+        "n": 7,
+        "mean_x": 0.4666,
+        "mean_y": 0.4262,
+        "mean_diff": 0.0404,
+        "cohens_dz": 0.147,
+        "pos": 3,
+        "neg": 4,
+        "w_stat": 12.0,
+        "p_value": 0.8125
+      },
+      "rtbt_binding_index": {
+        "n": 7,
+        "mean_x": 0.0693,
+        "mean_y": 0.0862,
+        "mean_diff": -0.017,
+        "cohens_dz": -0.446,
+        "pos": 2,
+        "neg": 5,
+        "w_stat": 8.0,
+        "p_value": 0.375
+      }
+    },
+    "pre_loc_vs_pre_roc_inertia": {
+      "lz76_single_mean": {
+        "n": 7,
+        "mean_x": 0.8544,
+        "mean_y": 0.8199,
+        "mean_diff": 0.0344,
+        "cohens_dz": 0.326,
+        "pos": 5,
+        "neg": 2,
+        "w_stat": 9.0,
+        "p_value": 0.4688
+      },
+      "spectral_entropy": {
+        "n": 7,
+        "mean_x": 0.7746,
+        "mean_y": 0.7129,
+        "mean_diff": 0.0618,
+        "cohens_dz": 1.039,
+        "pos": 6,
+        "neg": 1,
+        "w_stat": 2.0,
+        "p_value": 0.04688
+      },
+      "tau_1e_ms": {
+        "n": 7,
+        "mean_x": 31.1614,
+        "mean_y": 38.9371,
+        "mean_diff": -7.7757,
+        "cohens_dz": -0.504,
+        "pos": 1,
+        "neg": 6,
+        "w_stat": 6.0,
+        "p_value": 0.2188
+      },
+      "D_eff": {
+        "n": 7,
+        "mean_x": 3.3957,
+        "mean_y": 3.5471,
+        "mean_diff": -0.1514,
+        "cohens_dz": -0.221,
+        "pos": 3,
+        "neg": 4,
+        "w_stat": 12.0,
+        "p_value": 0.8125
+      },
+      "rho_abs_mean": {
+        "n": 7,
+        "mean_x": 0.4676,
+        "mean_y": 0.4498,
+        "mean_diff": 0.0179,
+        "cohens_dz": 0.25,
+        "pos": 4,
+        "neg": 3,
+        "w_stat": 10.0,
+        "p_value": 0.5781
+      },
+      "delta": {
+        "n": 7,
+        "mean_x": 0.4239,
+        "mean_y": 0.4893,
+        "mean_diff": -0.0655,
+        "cohens_dz": -0.596,
+        "pos": 1,
+        "neg": 6,
+        "w_stat": 5.0,
+        "p_value": 0.1562
+      },
+      "rtbt_binding_index": {
+        "n": 7,
+        "mean_x": 0.0816,
+        "mean_y": 0.0743,
+        "mean_diff": 0.0073,
+        "cohens_dz": 0.222,
+        "pos": 4,
+        "neg": 3,
+        "w_stat": 9.0,
+        "p_value": 0.4688
+      }
+    },
+    "auroc_baseline_vs_unconscious": {
+      "lz76_single_mean": {
+        "auroc": 0.3061,
+        "ci95": [
+          0.0408,
+          0.6122
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "spectral_entropy": {
+        "auroc": 0.3469,
+        "ci95": [
+          0.0612,
+          0.6531
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "inv_tau_1e_ms": {
+        "auroc": 0.3061,
+        "ci95": [
+          0.0204,
+          0.6122
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "D_eff": {
+        "auroc": 0.5,
+        "ci95": [
+          0.1837,
+          0.8163
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "rtbt_binding_index": {
+        "auroc": 0.4286,
+        "ci95": [
+          0.102,
+          0.7755
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      }
+    },
+    "auroc_recovery_vs_unconscious": {
+      "lz76_single_mean": {
+        "auroc": 0.2041,
+        "ci95": [
+          0.0,
+          0.4898
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "spectral_entropy": {
+        "auroc": 0.4082,
+        "ci95": [
+          0.1224,
+          0.7347
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "inv_tau_1e_ms": {
+        "auroc": 0.4286,
+        "ci95": [
+          0.1224,
+          0.7551
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "D_eff": {
+        "auroc": 0.4286,
+        "ci95": [
+          0.1224,
+          0.7959
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      },
+      "rtbt_binding_index": {
+        "auroc": 0.3878,
+        "ci95": [
+          0.102,
+          0.7347
+        ],
+        "n_pos": 7,
+        "n_neg": 7
+      }
+    }
+  },
+  "subjects": [
+    {
+      "subject": "sub-02",
+      "skipped": false,
+      "events_s": {
+        "start": 385.205,
+        "loc": 895.848,
+        "end": 948.42,
+        "roc": 1970.693
+      },
+      "epochs": {
+        "baseline": {
+          "label": "sub-02 baseline [295s]",
+          "n_channels": 10,
+          "n_rejected_bad_channels": 9,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 20.0,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "Fz",
+            "C4",
+            "T8",
+            "P7",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.48,
+            "D_eff_ratio": 0.348,
+            "rho_abs_mean": 0.3987,
+            "fiedler_lambda2_unnorm": 2.2585,
+            "fiedler_lambda2_norm": 0.6268,
+            "tau_1e_ms": 15.57,
+            "tau_1e_mean_ms": 21.45,
+            "tau_int_ms": 20.56,
+            "spectral_entropy": 0.8139,
+            "lz76_single_mean": 0.9667,
+            "lz76_spatiotemporal": 0.8754,
+            "bands": {
+              "delta": 0.3055,
+              "theta": 0.1537,
+              "alpha": 0.1031,
+              "beta": 0.298,
+              "gamma": 0.1183
+            },
+            "fast_to_delta_ratio": 1.7,
+            "rtbt_binding_index": 0.1366
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            295.2,
+            315.2
+          ]
+        },
+        "pre_loc": {
+          "label": "sub-02 pre_loc [856s]",
+          "n_channels": 13,
+          "n_rejected_bad_channels": 6,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.75,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "Fz",
+            "T7",
+            "C4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 1.235,
+            "D_eff_ratio": 0.095,
+            "rho_abs_mean": 0.8729,
+            "fiedler_lambda2_unnorm": 7.3411,
+            "fiedler_lambda2_norm": 0.972,
+            "tau_1e_ms": 61.96,
+            "tau_1e_mean_ms": 63.26,
+            "tau_int_ms": 52.11,
+            "spectral_entropy": 0.6078,
+            "lz76_single_mean": 0.4903,
+            "lz76_spatiotemporal": 0.3398,
+            "bands": {
+              "delta": 0.7325,
+              "theta": 0.1896,
+              "alpha": 0.0528,
+              "beta": 0.0226,
+              "gamma": 0.0027
+            },
+            "fast_to_delta_ratio": 0.107,
+            "rtbt_binding_index": 0.0024
+          },
+          "rtbt_phase": "UNCONSCIOUS_HYPERSYNCHRONOUS",
+          "theorem_mapping": "RTBT-07 / RTBT-16 / RTBT-19 (hypersynchronous dimensionality & complexity collapse)",
+          "window_s": [
+            855.8,
+            875.8
+          ]
+        },
+        "unconscious": {
+          "label": "sub-02 unconscious [956s]",
+          "n_channels": 12,
+          "n_rejected_bad_channels": 7,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.75,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "Fz",
+            "F8",
+            "C4",
+            "T8",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.062,
+            "D_eff_ratio": 0.2551,
+            "rho_abs_mean": 0.4122,
+            "fiedler_lambda2_unnorm": 1.5055,
+            "fiedler_lambda2_norm": 0.5249,
+            "tau_1e_ms": 18.4,
+            "tau_1e_mean_ms": 20.24,
+            "tau_int_ms": 21.18,
+            "spectral_entropy": 0.7821,
+            "lz76_single_mean": 0.9255,
+            "lz76_spatiotemporal": 0.807,
+            "bands": {
+              "delta": 0.345,
+              "theta": 0.1475,
+              "alpha": 0.1323,
+              "beta": 0.2682,
+              "gamma": 0.0685
+            },
+            "fast_to_delta_ratio": 1.359,
+            "rtbt_binding_index": 0.0896
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            955.8,
+            975.8
+          ]
+        },
+        "pre_roc": {
+          "label": "sub-02 pre_roc [1931s]",
+          "n_channels": 18,
+          "n_rejected_bad_channels": 1,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.71,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 1.536,
+            "D_eff_ratio": 0.0853,
+            "rho_abs_mean": 0.7752,
+            "fiedler_lambda2_unnorm": 9.9679,
+            "fiedler_lambda2_norm": 0.996,
+            "tau_1e_ms": 91.22,
+            "tau_1e_mean_ms": 87.92,
+            "tau_int_ms": 73.22,
+            "spectral_entropy": 0.494,
+            "lz76_single_mean": 0.645,
+            "lz76_spatiotemporal": 0.577,
+            "bands": {
+              "delta": 0.839,
+              "theta": 0.084,
+              "alpha": 0.0281,
+              "beta": 0.0369,
+              "gamma": 0.012
+            },
+            "fast_to_delta_ratio": 0.092,
+            "rtbt_binding_index": 0.0035
+          },
+          "rtbt_phase": "UNCONSCIOUS_HYPERSYNCHRONOUS",
+          "theorem_mapping": "RTBT-07 / RTBT-16 / RTBT-19 (hypersynchronous dimensionality & complexity collapse)",
+          "window_s": [
+            1930.7,
+            1950.7
+          ]
+        },
+        "recovery": {
+          "label": "sub-02 recovery [2001s]",
+          "n_channels": 13,
+          "n_rejected_bad_channels": 6,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.71,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "Fz",
+            "T7",
+            "C4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 1.298,
+            "D_eff_ratio": 0.0998,
+            "rho_abs_mean": 0.8417,
+            "fiedler_lambda2_unnorm": 6.3727,
+            "fiedler_lambda2_norm": 0.9534,
+            "tau_1e_ms": 91.82,
+            "tau_1e_mean_ms": 90.15,
+            "tau_int_ms": 74.85,
+            "spectral_entropy": 0.4927,
+            "lz76_single_mean": 0.5571,
+            "lz76_spatiotemporal": 0.3587,
+            "bands": {
+              "delta": 0.8698,
+              "theta": 0.0578,
+              "alpha": 0.0127,
+              "beta": 0.0456,
+              "gamma": 0.0142
+            },
+            "fast_to_delta_ratio": 0.083,
+            "rtbt_binding_index": 0.0025
+          },
+          "rtbt_phase": "UNCONSCIOUS_HYPERSYNCHRONOUS",
+          "theorem_mapping": "RTBT-07 / RTBT-16 / RTBT-19 (hypersynchronous dimensionality & complexity collapse)",
+          "window_s": [
+            2000.7,
+            2020.7
+          ]
+        }
+      }
+    },
+    {
+      "subject": "sub-03",
+      "skipped": false,
+      "events_s": {
+        "start": 764.146,
+        "loc": 897.309,
+        "end": 1072.701,
+        "roc": 1456.794
+      },
+      "epochs": {
+        "baseline": {
+          "label": "sub-03 baseline [674s]",
+          "n_channels": 15,
+          "n_rejected_bad_channels": 4,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.85,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.648,
+            "D_eff_ratio": 0.3098,
+            "rho_abs_mean": 0.3459,
+            "fiedler_lambda2_unnorm": 2.9797,
+            "fiedler_lambda2_norm": 0.7254,
+            "tau_1e_ms": 20.26,
+            "tau_1e_mean_ms": 24.84,
+            "tau_int_ms": 18.94,
+            "spectral_entropy": 0.7822,
+            "lz76_single_mean": 0.9063,
+            "lz76_spatiotemporal": 0.8476,
+            "bands": {
+              "delta": 0.2484,
+              "theta": 0.3583,
+              "alpha": 0.1078,
+              "beta": 0.2202,
+              "gamma": 0.0306
+            },
+            "fast_to_delta_ratio": 1.444,
+            "rtbt_binding_index": 0.1208
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            674.1,
+            694.1
+          ]
+        },
+        "pre_loc": {
+          "label": "sub-03 pre_loc [857s]",
+          "n_channels": 15,
+          "n_rejected_bad_channels": 4,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.89,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.763,
+            "D_eff_ratio": 0.3175,
+            "rho_abs_mean": 0.3218,
+            "fiedler_lambda2_unnorm": 2.7006,
+            "fiedler_lambda2_norm": 0.7117,
+            "tau_1e_ms": 16.11,
+            "tau_1e_mean_ms": 15.07,
+            "tau_int_ms": 13.26,
+            "spectral_entropy": 0.8563,
+            "lz76_single_mean": 0.9275,
+            "lz76_spatiotemporal": 0.8779,
+            "bands": {
+              "delta": 0.1931,
+              "theta": 0.2137,
+              "alpha": 0.1559,
+              "beta": 0.3819,
+              "gamma": 0.0455
+            },
+            "fast_to_delta_ratio": 3.021,
+            "rtbt_binding_index": 0.151
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            857.3,
+            877.3
+          ]
+        },
+        "unconscious": {
+          "label": "sub-03 unconscious [957s]",
+          "n_channels": 13,
+          "n_rejected_bad_channels": 6,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.89,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.241,
+            "D_eff_ratio": 0.3263,
+            "rho_abs_mean": 0.3529,
+            "fiedler_lambda2_unnorm": 2.6626,
+            "fiedler_lambda2_norm": 0.7072,
+            "tau_1e_ms": 18.86,
+            "tau_1e_mean_ms": 18.47,
+            "tau_int_ms": 15.89,
+            "spectral_entropy": 0.7894,
+            "lz76_single_mean": 0.9077,
+            "lz76_spatiotemporal": 0.8986,
+            "bands": {
+              "delta": 0.3085,
+              "theta": 0.1172,
+              "alpha": 0.3326,
+              "beta": 0.2289,
+              "gamma": 0.0116
+            },
+            "fast_to_delta_ratio": 1.858,
+            "rtbt_binding_index": 0.1305
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            957.3,
+            977.3
+          ]
+        },
+        "pre_roc": {
+          "label": "sub-03 pre_roc [1417s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.61,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.174,
+            "D_eff_ratio": 0.2982,
+            "rho_abs_mean": 0.3722,
+            "fiedler_lambda2_unnorm": 2.8313,
+            "fiedler_lambda2_norm": 0.835,
+            "tau_1e_ms": 17.24,
+            "tau_1e_mean_ms": 16.71,
+            "tau_int_ms": 14.17,
+            "spectral_entropy": 0.7721,
+            "lz76_single_mean": 0.8864,
+            "lz76_spatiotemporal": 0.8537,
+            "bands": {
+              "delta": 0.2634,
+              "theta": 0.08,
+              "alpha": 0.2639,
+              "beta": 0.3657,
+              "gamma": 0.0124
+            },
+            "fast_to_delta_ratio": 2.437,
+            "rtbt_binding_index": 0.1122
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            1416.8,
+            1436.8
+          ]
+        },
+        "recovery": {
+          "label": "sub-03 recovery [1487s]",
+          "n_channels": 13,
+          "n_rejected_bad_channels": 6,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.61,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.645,
+            "D_eff_ratio": 0.2804,
+            "rho_abs_mean": 0.402,
+            "fiedler_lambda2_unnorm": 2.7749,
+            "fiedler_lambda2_norm": 0.7587,
+            "tau_1e_ms": 14.66,
+            "tau_1e_mean_ms": 13.8,
+            "tau_int_ms": 11.78,
+            "spectral_entropy": 0.7899,
+            "lz76_single_mean": 0.8673,
+            "lz76_spatiotemporal": 0.8268,
+            "bands": {
+              "delta": 0.1615,
+              "theta": 0.0698,
+              "alpha": 0.263,
+              "beta": 0.4622,
+              "gamma": 0.0215
+            },
+            "fast_to_delta_ratio": 4.624,
+            "rtbt_binding_index": 0.1028
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            1486.8,
+            1506.8
+          ]
+        }
+      }
+    },
+    {
+      "subject": "sub-04",
+      "skipped": false,
+      "events_s": {
+        "start": 611.308,
+        "loc": 1026.446,
+        "end": 2293.889,
+        "roc": 4773.877
+      },
+      "epochs": {
+        "baseline": {
+          "label": "sub-04 baseline [521s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.89,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.179,
+            "D_eff_ratio": 0.227,
+            "rho_abs_mean": 0.4409,
+            "fiedler_lambda2_unnorm": 3.254,
+            "fiedler_lambda2_norm": 0.6846,
+            "tau_1e_ms": 53.05,
+            "tau_1e_mean_ms": 44.47,
+            "tau_int_ms": 40.73,
+            "spectral_entropy": 0.712,
+            "lz76_single_mean": 0.8379,
+            "lz76_spatiotemporal": 0.8235,
+            "bands": {
+              "delta": 0.5949,
+              "theta": 0.1377,
+              "alpha": 0.0529,
+              "beta": 0.1242,
+              "gamma": 0.0694
+            },
+            "fast_to_delta_ratio": 0.414,
+            "rtbt_binding_index": 0.0538
+          },
+          "rtbt_phase": "UNCONSCIOUS_SLOWWAVE_FRAGMENTED",
+          "theorem_mapping": "RTBT-01 / RTBT-28 (slow-wave critical slowing & complexity collapse)",
+          "window_s": [
+            521.3,
+            541.3
+          ]
+        },
+        "pre_loc": {
+          "label": "sub-04 pre_loc [986s]",
+          "n_channels": 15,
+          "n_rejected_bad_channels": 4,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.95,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.819,
+            "D_eff_ratio": 0.2546,
+            "rho_abs_mean": 0.3989,
+            "fiedler_lambda2_unnorm": 3.2411,
+            "fiedler_lambda2_norm": 0.6942,
+            "tau_1e_ms": 18.18,
+            "tau_1e_mean_ms": 18.13,
+            "tau_int_ms": 25.01,
+            "spectral_entropy": 0.8381,
+            "lz76_single_mean": 0.9444,
+            "lz76_spatiotemporal": 0.8703,
+            "bands": {
+              "delta": 0.3025,
+              "theta": 0.1167,
+              "alpha": 0.207,
+              "beta": 0.2977,
+              "gamma": 0.0299
+            },
+            "fast_to_delta_ratio": 1.767,
+            "rtbt_binding_index": 0.0969
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            986.4,
+            1006.4
+          ]
+        },
+        "unconscious": {
+          "label": "sub-04 unconscious [1086s]",
+          "n_channels": 15,
+          "n_rejected_bad_channels": 4,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.95,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.48,
+            "D_eff_ratio": 0.232,
+            "rho_abs_mean": 0.4256,
+            "fiedler_lambda2_unnorm": 3.3814,
+            "fiedler_lambda2_norm": 0.7173,
+            "tau_1e_ms": 20.22,
+            "tau_1e_mean_ms": 19.77,
+            "tau_int_ms": 17.1,
+            "spectral_entropy": 0.8147,
+            "lz76_single_mean": 0.9158,
+            "lz76_spatiotemporal": 0.8779,
+            "bands": {
+              "delta": 0.2975,
+              "theta": 0.1565,
+              "alpha": 0.2748,
+              "beta": 0.2138,
+              "gamma": 0.0199
+            },
+            "fast_to_delta_ratio": 1.709,
+            "rtbt_binding_index": 0.0849
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            1086.4,
+            1106.4
+          ]
+        },
+        "pre_roc": {
+          "label": "sub-04 pre_roc [4734s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.72,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.048,
+            "D_eff_ratio": 0.2892,
+            "rho_abs_mean": 0.3818,
+            "fiedler_lambda2_unnorm": 3.0559,
+            "fiedler_lambda2_norm": 0.8035,
+            "tau_1e_ms": 30.92,
+            "tau_1e_mean_ms": 29.97,
+            "tau_int_ms": 34.9,
+            "spectral_entropy": 0.7743,
+            "lz76_single_mean": 0.9323,
+            "lz76_spatiotemporal": 0.85,
+            "bands": {
+              "delta": 0.452,
+              "theta": 0.1676,
+              "alpha": 0.1566,
+              "beta": 0.1451,
+              "gamma": 0.0642
+            },
+            "fast_to_delta_ratio": 0.81,
+            "rtbt_binding_index": 0.0957
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            4733.9,
+            4753.9
+          ]
+        },
+        "recovery": {
+          "label": "sub-04 recovery [4804s]",
+          "n_channels": 15,
+          "n_rejected_bad_channels": 4,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.72,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.826,
+            "D_eff_ratio": 0.255,
+            "rho_abs_mean": 0.3967,
+            "fiedler_lambda2_unnorm": 3.4553,
+            "fiedler_lambda2_norm": 0.7329,
+            "tau_1e_ms": 31.21,
+            "tau_1e_mean_ms": 31.55,
+            "tau_int_ms": 31.26,
+            "spectral_entropy": 0.7689,
+            "lz76_single_mean": 0.8883,
+            "lz76_spatiotemporal": 0.8552,
+            "bands": {
+              "delta": 0.4597,
+              "theta": 0.2132,
+              "alpha": 0.1389,
+              "beta": 0.1284,
+              "gamma": 0.0312
+            },
+            "fast_to_delta_ratio": 0.649,
+            "rtbt_binding_index": 0.0801
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            4803.9,
+            4823.9
+          ]
+        }
+      }
+    },
+    {
+      "subject": "sub-07",
+      "skipped": false,
+      "events_s": {
+        "start": 603.355,
+        "loc": 981.542,
+        "end": 1260.245,
+        "roc": 2594.025
+      },
+      "epochs": {
+        "baseline": {
+          "label": "sub-07 baseline [513s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.84,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "F4",
+            "F8",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 2.451,
+            "D_eff_ratio": 0.1751,
+            "rho_abs_mean": 0.539,
+            "fiedler_lambda2_unnorm": 2.6097,
+            "fiedler_lambda2_norm": 0.7992,
+            "tau_1e_ms": 57.82,
+            "tau_1e_mean_ms": 51.81,
+            "tau_int_ms": 48.69,
+            "spectral_entropy": 0.6671,
+            "lz76_single_mean": 0.8099,
+            "lz76_spatiotemporal": 0.8273,
+            "bands": {
+              "delta": 0.6913,
+              "theta": 0.1681,
+              "alpha": 0.0854,
+              "beta": 0.054,
+              "gamma": 0.0196
+            },
+            "fast_to_delta_ratio": 0.23,
+            "rtbt_binding_index": 0.0293
+          },
+          "rtbt_phase": "UNCONSCIOUS_SLOWWAVE_FRAGMENTED",
+          "theorem_mapping": "RTBT-01 / RTBT-28 (slow-wave critical slowing & complexity collapse)",
+          "window_s": [
+            513.4,
+            533.4
+          ]
+        },
+        "pre_loc": {
+          "label": "sub-07 pre_loc [942s]",
+          "n_channels": 16,
+          "n_rejected_bad_channels": 3,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.66,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.444,
+            "D_eff_ratio": 0.2152,
+            "rho_abs_mean": 0.4301,
+            "fiedler_lambda2_unnorm": 4.0476,
+            "fiedler_lambda2_norm": 0.7055,
+            "tau_1e_ms": 27.54,
+            "tau_1e_mean_ms": 29.11,
+            "tau_int_ms": 39.74,
+            "spectral_entropy": 0.7736,
+            "lz76_single_mean": 0.9253,
+            "lz76_spatiotemporal": 0.8824,
+            "bands": {
+              "delta": 0.4688,
+              "theta": 0.1372,
+              "alpha": 0.1792,
+              "beta": 0.1738,
+              "gamma": 0.0093
+            },
+            "fast_to_delta_ratio": 0.773,
+            "rtbt_binding_index": 0.0628
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            941.5,
+            961.5
+          ]
+        },
+        "unconscious": {
+          "label": "sub-07 unconscious [1042s]",
+          "n_channels": 16,
+          "n_rejected_bad_channels": 3,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.66,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.583,
+            "D_eff_ratio": 0.2239,
+            "rho_abs_mean": 0.4182,
+            "fiedler_lambda2_unnorm": 3.6389,
+            "fiedler_lambda2_norm": 0.7894,
+            "tau_1e_ms": 24.7,
+            "tau_1e_mean_ms": 27.78,
+            "tau_int_ms": 20.85,
+            "spectral_entropy": 0.7885,
+            "lz76_single_mean": 0.8685,
+            "lz76_spatiotemporal": 0.7429,
+            "bands": {
+              "delta": 0.3169,
+              "theta": 0.2233,
+              "alpha": 0.2664,
+              "beta": 0.1623,
+              "gamma": 0.0081
+            },
+            "fast_to_delta_ratio": 1.378,
+            "rtbt_binding_index": 0.0738
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            1041.5,
+            1061.5
+          ]
+        },
+        "pre_roc": {
+          "label": "sub-07 pre_roc [2554s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.98,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.527,
+            "D_eff_ratio": 0.3234,
+            "rho_abs_mean": 0.3225,
+            "fiedler_lambda2_unnorm": 2.4353,
+            "fiedler_lambda2_norm": 0.5978,
+            "tau_1e_ms": 41.18,
+            "tau_1e_mean_ms": 42.81,
+            "tau_int_ms": 37.55,
+            "spectral_entropy": 0.7227,
+            "lz76_single_mean": 0.7716,
+            "lz76_spatiotemporal": 0.8575,
+            "bands": {
+              "delta": 0.5395,
+              "theta": 0.2494,
+              "alpha": 0.1274,
+              "beta": 0.0748,
+              "gamma": 0.0091
+            },
+            "fast_to_delta_ratio": 0.392,
+            "rtbt_binding_index": 0.0888
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            2554.0,
+            2574.0
+          ]
+        },
+        "recovery": {
+          "label": "sub-07 recovery [2624s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.98,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.68,
+            "D_eff_ratio": 0.3343,
+            "rho_abs_mean": 0.3334,
+            "fiedler_lambda2_unnorm": 3.0257,
+            "fiedler_lambda2_norm": 0.731,
+            "tau_1e_ms": 37.3,
+            "tau_1e_mean_ms": 41.05,
+            "tau_int_ms": 35.87,
+            "spectral_entropy": 0.7284,
+            "lz76_single_mean": 0.7281,
+            "lz76_spatiotemporal": 0.7555,
+            "bands": {
+              "delta": 0.5204,
+              "theta": 0.2329,
+              "alpha": 0.1398,
+              "beta": 0.0853,
+              "gamma": 0.0114
+            },
+            "fast_to_delta_ratio": 0.454,
+            "rtbt_binding_index": 0.087
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            2624.0,
+            2644.0
+          ]
+        }
+      }
+    },
+    {
+      "subject": "sub-08",
+      "skipped": false,
+      "events_s": {
+        "start": 526.022,
+        "loc": 785.033,
+        "end": 824.233,
+        "roc": 2085.152
+      },
+      "epochs": {
+        "baseline": {
+          "label": "sub-08 baseline [436s]",
+          "n_channels": 12,
+          "n_rejected_bad_channels": 7,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.98,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.782,
+            "D_eff_ratio": 0.3152,
+            "rho_abs_mean": 0.3491,
+            "fiedler_lambda2_unnorm": 1.561,
+            "fiedler_lambda2_norm": 0.554,
+            "tau_1e_ms": 73.96,
+            "tau_1e_mean_ms": 67.3,
+            "tau_int_ms": 58.76,
+            "spectral_entropy": 0.6087,
+            "lz76_single_mean": 0.709,
+            "lz76_spatiotemporal": 0.7241,
+            "bands": {
+              "delta": 0.7721,
+              "theta": 0.0936,
+              "alpha": 0.0378,
+              "beta": 0.0685,
+              "gamma": 0.0357
+            },
+            "fast_to_delta_ratio": 0.184,
+            "rtbt_binding_index": 0.0558
+          },
+          "rtbt_phase": "UNCONSCIOUS_SLOWWAVE_FRAGMENTED",
+          "theorem_mapping": "RTBT-01 / RTBT-28 (slow-wave critical slowing & complexity collapse)",
+          "window_s": [
+            436.0,
+            456.0
+          ]
+        },
+        "pre_loc": {
+          "label": "sub-08 pre_loc [745s]",
+          "n_channels": 12,
+          "n_rejected_bad_channels": 7,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.77,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.454,
+            "D_eff_ratio": 0.2879,
+            "rho_abs_mean": 0.4216,
+            "fiedler_lambda2_unnorm": 2.9464,
+            "fiedler_lambda2_norm": 0.7201,
+            "tau_1e_ms": 21.46,
+            "tau_1e_mean_ms": 20.83,
+            "tau_int_ms": 22.22,
+            "spectral_entropy": 0.8433,
+            "lz76_single_mean": 0.9557,
+            "lz76_spatiotemporal": 0.89,
+            "bands": {
+              "delta": 0.3132,
+              "theta": 0.2463,
+              "alpha": 0.1691,
+              "beta": 0.245,
+              "gamma": 0.0403
+            },
+            "fast_to_delta_ratio": 1.451,
+            "rtbt_binding_index": 0.1098
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            745.0,
+            765.0
+          ]
+        },
+        "unconscious": {
+          "label": "sub-08 unconscious [845s]",
+          "n_channels": 11,
+          "n_rejected_bad_channels": 8,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.77,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 2.828,
+            "D_eff_ratio": 0.2571,
+            "rho_abs_mean": 0.4791,
+            "fiedler_lambda2_unnorm": 2.3259,
+            "fiedler_lambda2_norm": 0.7264,
+            "tau_1e_ms": 64.51,
+            "tau_1e_mean_ms": 63.03,
+            "tau_int_ms": 48.25,
+            "spectral_entropy": 0.7061,
+            "lz76_single_mean": 0.8542,
+            "lz76_spatiotemporal": 0.8455,
+            "bands": {
+              "delta": 0.6526,
+              "theta": 0.1047,
+              "alpha": 0.058,
+              "beta": 0.1095,
+              "gamma": 0.0398
+            },
+            "fast_to_delta_ratio": 0.318,
+            "rtbt_binding_index": 0.0545
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            845.0,
+            865.0
+          ]
+        },
+        "pre_roc": {
+          "label": "sub-08 pre_roc [2045s]",
+          "n_channels": 12,
+          "n_rejected_bad_channels": 7,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.65,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.02,
+            "D_eff_ratio": 0.2517,
+            "rho_abs_mean": 0.4573,
+            "fiedler_lambda2_unnorm": 3.1121,
+            "fiedler_lambda2_norm": 0.6619,
+            "tau_1e_ms": 36.41,
+            "tau_1e_mean_ms": 36.49,
+            "tau_int_ms": 34.84,
+            "spectral_entropy": 0.7269,
+            "lz76_single_mean": 0.8116,
+            "lz76_spatiotemporal": 0.758,
+            "bands": {
+              "delta": 0.5027,
+              "theta": 0.2468,
+              "alpha": 0.1377,
+              "beta": 0.0767,
+              "gamma": 0.0073
+            },
+            "fast_to_delta_ratio": 0.441,
+            "rtbt_binding_index": 0.0598
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            2045.2,
+            2065.2
+          ]
+        },
+        "recovery": {
+          "label": "sub-08 recovery [2115s]",
+          "n_channels": 12,
+          "n_rejected_bad_channels": 7,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.65,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 2.536,
+            "D_eff_ratio": 0.2113,
+            "rho_abs_mean": 0.534,
+            "fiedler_lambda2_unnorm": 3.5669,
+            "fiedler_lambda2_norm": 0.8096,
+            "tau_1e_ms": 39.15,
+            "tau_1e_mean_ms": 39.34,
+            "tau_int_ms": 43.68,
+            "spectral_entropy": 0.6989,
+            "lz76_single_mean": 0.8284,
+            "lz76_spatiotemporal": 0.8221,
+            "bands": {
+              "delta": 0.5741,
+              "theta": 0.1891,
+              "alpha": 0.1566,
+              "beta": 0.0655,
+              "gamma": 0.0052
+            },
+            "fast_to_delta_ratio": 0.396,
+            "rtbt_binding_index": 0.0397
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            2115.2,
+            2135.2
+          ]
+        }
+      }
+    },
+    {
+      "subject": "sub-09",
+      "skipped": false,
+      "events_s": {
+        "start": 502.297,
+        "loc": 993.448,
+        "end": 1031.148,
+        "roc": 1366.69
+      },
+      "epochs": {
+        "baseline": {
+          "label": "sub-09 baseline [412s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.7,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.552,
+            "D_eff_ratio": 0.2537,
+            "rho_abs_mean": 0.4205,
+            "fiedler_lambda2_unnorm": 3.1779,
+            "fiedler_lambda2_norm": 0.7785,
+            "tau_1e_ms": 42.7,
+            "tau_1e_mean_ms": 42.01,
+            "tau_int_ms": 35.04,
+            "spectral_entropy": 0.7349,
+            "lz76_single_mean": 0.7002,
+            "lz76_spatiotemporal": 0.6195,
+            "bands": {
+              "delta": 0.5135,
+              "theta": 0.2166,
+              "alpha": 0.0467,
+              "beta": 0.1473,
+              "gamma": 0.0601
+            },
+            "fast_to_delta_ratio": 0.495,
+            "rtbt_binding_index": 0.056
+          },
+          "rtbt_phase": "CRITICAL_BOUNDARY_TRANSITION",
+          "theorem_mapping": "RTBT-03 / RTBT-25 / RTBT-28 (boundary slowing / transitional strip)",
+          "window_s": [
+            412.3,
+            432.3
+          ]
+        },
+        "pre_loc": {
+          "label": "sub-09 pre_loc [953s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.75,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.851,
+            "D_eff_ratio": 0.2751,
+            "rho_abs_mean": 0.3776,
+            "fiedler_lambda2_unnorm": 2.9742,
+            "fiedler_lambda2_norm": 0.7699,
+            "tau_1e_ms": 54.4,
+            "tau_1e_mean_ms": 50.91,
+            "tau_int_ms": 44.89,
+            "spectral_entropy": 0.681,
+            "lz76_single_mean": 0.8099,
+            "lz76_spatiotemporal": 0.8046,
+            "bands": {
+              "delta": 0.6645,
+              "theta": 0.1221,
+              "alpha": 0.1022,
+              "beta": 0.0871,
+              "gamma": 0.0149
+            },
+            "fast_to_delta_ratio": 0.307,
+            "rtbt_binding_index": 0.0652
+          },
+          "rtbt_phase": "UNCONSCIOUS_SLOWWAVE_FRAGMENTED",
+          "theorem_mapping": "RTBT-01 / RTBT-28 (slow-wave critical slowing & complexity collapse)",
+          "window_s": [
+            953.4,
+            973.4
+          ]
+        },
+        "unconscious": {
+          "label": "sub-09 unconscious [1053s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.75,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.935,
+            "D_eff_ratio": 0.3525,
+            "rho_abs_mean": 0.3224,
+            "fiedler_lambda2_unnorm": 2.5445,
+            "fiedler_lambda2_norm": 0.7406,
+            "tau_1e_ms": 52.0,
+            "tau_1e_mean_ms": 49.51,
+            "tau_int_ms": 45.47,
+            "spectral_entropy": 0.6943,
+            "lz76_single_mean": 0.8458,
+            "lz76_spatiotemporal": 0.8311,
+            "bands": {
+              "delta": 0.6306,
+              "theta": 0.1121,
+              "alpha": 0.0958,
+              "beta": 0.1104,
+              "gamma": 0.0609
+            },
+            "fast_to_delta_ratio": 0.424,
+            "rtbt_binding_index": 0.0964
+          },
+          "rtbt_phase": "CRITICAL_BOUNDARY_TRANSITION",
+          "theorem_mapping": "RTBT-03 / RTBT-25 / RTBT-28 (boundary slowing / transitional strip)",
+          "window_s": [
+            1053.4,
+            1073.4
+          ]
+        },
+        "pre_roc": {
+          "label": "sub-09 pre_roc [1327s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.71,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.801,
+            "D_eff_ratio": 0.3429,
+            "rho_abs_mean": 0.322,
+            "fiedler_lambda2_unnorm": 2.4706,
+            "fiedler_lambda2_norm": 0.7255,
+            "tau_1e_ms": 34.08,
+            "tau_1e_mean_ms": 35.21,
+            "tau_int_ms": 37.96,
+            "spectral_entropy": 0.7412,
+            "lz76_single_mean": 0.8321,
+            "lz76_spatiotemporal": 0.8651,
+            "bands": {
+              "delta": 0.5152,
+              "theta": 0.1408,
+              "alpha": 0.2165,
+              "beta": 0.0869,
+              "gamma": 0.0146
+            },
+            "fast_to_delta_ratio": 0.617,
+            "rtbt_binding_index": 0.1039
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            1326.7,
+            1346.7
+          ]
+        },
+        "recovery": {
+          "label": "sub-09 recovery [1397s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.71,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.763,
+            "D_eff_ratio": 0.3402,
+            "rho_abs_mean": 0.3261,
+            "fiedler_lambda2_unnorm": 2.7271,
+            "fiedler_lambda2_norm": 0.7839,
+            "tau_1e_ms": 23.86,
+            "tau_1e_mean_ms": 29.1,
+            "tau_int_ms": 19.51,
+            "spectral_entropy": 0.794,
+            "lz76_single_mean": 0.8444,
+            "lz76_spatiotemporal": 0.7933,
+            "bands": {
+              "delta": 0.3339,
+              "theta": 0.1958,
+              "alpha": 0.3001,
+              "beta": 0.1136,
+              "gamma": 0.0314
+            },
+            "fast_to_delta_ratio": 1.333,
+            "rtbt_binding_index": 0.1286
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            1396.7,
+            1416.7
+          ]
+        }
+      }
+    },
+    {
+      "subject": "sub-10",
+      "skipped": false,
+      "events_s": {
+        "start": 509.992,
+        "loc": 761.013,
+        "end": 1169.916,
+        "roc": 3103.811
+      },
+      "epochs": {
+        "baseline": {
+          "label": "sub-10 baseline [420s]",
+          "n_channels": 13,
+          "n_rejected_bad_channels": 6,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.61,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.771,
+            "D_eff_ratio": 0.367,
+            "rho_abs_mean": 0.33,
+            "fiedler_lambda2_unnorm": 2.6163,
+            "fiedler_lambda2_norm": 0.8117,
+            "tau_1e_ms": 64.52,
+            "tau_1e_mean_ms": 46.45,
+            "tau_int_ms": 46.26,
+            "spectral_entropy": 0.7636,
+            "lz76_single_mean": 0.8471,
+            "lz76_spatiotemporal": 0.7362,
+            "bands": {
+              "delta": 0.5843,
+              "theta": 0.0616,
+              "alpha": 0.0548,
+              "beta": 0.1483,
+              "gamma": 0.1533
+            },
+            "fast_to_delta_ratio": 0.61,
+            "rtbt_binding_index": 0.1088
+          },
+          "rtbt_phase": "CRITICAL_BOUNDARY_TRANSITION",
+          "theorem_mapping": "RTBT-03 / RTBT-25 / RTBT-28 (boundary slowing / transitional strip)",
+          "window_s": [
+            420.0,
+            440.0
+          ]
+        },
+        "pre_loc": {
+          "label": "sub-10 pre_loc [721s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.79,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.204,
+            "D_eff_ratio": 0.2289,
+            "rho_abs_mean": 0.4506,
+            "fiedler_lambda2_unnorm": 4.069,
+            "fiedler_lambda2_norm": 0.7766,
+            "tau_1e_ms": 18.48,
+            "tau_1e_mean_ms": 18.75,
+            "tau_int_ms": 15.4,
+            "spectral_entropy": 0.8224,
+            "lz76_single_mean": 0.9276,
+            "lz76_spatiotemporal": 0.8273,
+            "bands": {
+              "delta": 0.2924,
+              "theta": 0.125,
+              "alpha": 0.2543,
+              "beta": 0.2928,
+              "gamma": 0.0113
+            },
+            "fast_to_delta_ratio": 1.91,
+            "rtbt_binding_index": 0.0831
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            721.0,
+            741.0
+          ]
+        },
+        "unconscious": {
+          "label": "sub-10 unconscious [821s]",
+          "n_channels": 14,
+          "n_rejected_bad_channels": 5,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.79,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.774,
+            "D_eff_ratio": 0.2696,
+            "rho_abs_mean": 0.3681,
+            "fiedler_lambda2_unnorm": 2.3476,
+            "fiedler_lambda2_norm": 0.512,
+            "tau_1e_ms": 27.1,
+            "tau_1e_mean_ms": 30.13,
+            "tau_int_ms": 36.9,
+            "spectral_entropy": 0.7435,
+            "lz76_single_mean": 0.7984,
+            "lz76_spatiotemporal": 0.7857,
+            "bands": {
+              "delta": 0.4324,
+              "theta": 0.1689,
+              "alpha": 0.2753,
+              "beta": 0.1071,
+              "gamma": 0.0138
+            },
+            "fast_to_delta_ratio": 0.916,
+            "rtbt_binding_index": 0.0739
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            821.0,
+            841.0
+          ]
+        },
+        "pre_roc": {
+          "label": "sub-10 pre_roc [3064s]",
+          "n_channels": 13,
+          "n_rejected_bad_channels": 6,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.79,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 2.724,
+            "D_eff_ratio": 0.2095,
+            "rho_abs_mean": 0.5175,
+            "fiedler_lambda2_unnorm": 3.4865,
+            "fiedler_lambda2_norm": 0.8522,
+            "tau_1e_ms": 21.51,
+            "tau_1e_mean_ms": 21.2,
+            "tau_int_ms": 17.92,
+            "spectral_entropy": 0.759,
+            "lz76_single_mean": 0.8606,
+            "lz76_spatiotemporal": 0.8533,
+            "bands": {
+              "delta": 0.3134,
+              "theta": 0.154,
+              "alpha": 0.3836,
+              "beta": 0.1373,
+              "gamma": 0.0044
+            },
+            "fast_to_delta_ratio": 1.676,
+            "rtbt_binding_index": 0.056
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            3063.8,
+            3083.8
+          ]
+        },
+        "recovery": {
+          "label": "sub-10 recovery [3134s]",
+          "n_channels": 13,
+          "n_rejected_bad_channels": 6,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 19.79,
+          "sfreq_hz": 1000.0,
+          "channels_sample": [
+            "Fp1",
+            "Fp2",
+            "F7",
+            "F3",
+            "Fz",
+            "F4",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 2.52,
+            "D_eff_ratio": 0.1938,
+            "rho_abs_mean": 0.5453,
+            "fiedler_lambda2_unnorm": 3.9652,
+            "fiedler_lambda2_norm": 0.8576,
+            "tau_1e_ms": 24.37,
+            "tau_1e_mean_ms": 22.57,
+            "tau_int_ms": 20.22,
+            "spectral_entropy": 0.7328,
+            "lz76_single_mean": 0.8235,
+            "lz76_spatiotemporal": 0.7777,
+            "bands": {
+              "delta": 0.3466,
+              "theta": 0.1583,
+              "alpha": 0.4108,
+              "beta": 0.0769,
+              "gamma": 0.0033
+            },
+            "fast_to_delta_ratio": 1.417,
+            "rtbt_binding_index": 0.0442
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)",
+          "window_s": [
+            3133.8,
+            3153.8
+          ]
+        }
+      }
+    }
+  ]
+}

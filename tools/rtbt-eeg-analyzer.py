@@ -41,6 +41,7 @@ Usage examples:
 from __future__ import annotations
 
 import argparse
+import array
 import cmath
 import csv
 import json
@@ -677,6 +678,102 @@ def read_edf_window(
     return ch_labels, signals, sfreq
 
 
+def read_brainvision_window(
+    vhdr_source: str,
+    start_s: float = 0.0,
+    duration_s: float = 10.0,
+    selected_channels: Optional[Sequence[str]] = None,
+) -> Tuple[List[str], List[List[float]], float]:
+    """
+    Read a [start_s, start_s + duration_s] window from a BrainVision (.vhdr + .eeg)
+    recording (supports both local paths and direct HTTPS byte-range streaming).
+    """
+    raw_hdr = _fetch_bytes(vhdr_source, 0, 65536).decode("utf-8", errors="ignore")
+    data_file = None
+    n_ch = 0
+    sfreq = 0.0
+    bin_fmt = "IEEE_FLOAT_32"
+    labels: List[str] = []
+    resolutions: List[float] = []
+    section = ""
+    for line in raw_hdr.splitlines():
+        s = line.strip()
+        if not s or s.startswith(";"):
+            continue
+        if s.startswith("[") and s.endswith("]"):
+            section = s[1:-1].strip()
+            continue
+        if "=" not in s:
+            continue
+        k, v = s.split("=", 1)
+        k, v = k.strip(), v.strip()
+        if section == "Common Infos":
+            if k == "DataFile":
+                data_file = v
+            elif k == "NumberOfChannels":
+                n_ch = int(v)
+            elif k == "SamplingInterval":
+                sfreq = 1e6 / float(v)
+        elif section == "Binary Infos":
+            if k == "BinaryFormat":
+                bin_fmt = v.upper()
+        elif section == "Channel Infos" and k.startswith("Ch"):
+            parts = v.split(",")
+            labels.append(parts[0].strip())
+            res_val = float(parts[2]) if len(parts) >= 3 and parts[2].strip() else 1.0
+            resolutions.append(res_val)
+
+    if not data_file or n_ch <= 0 or sfreq <= 0:
+        raise ValueError(f"Invalid BrainVision header: {vhdr_source}")
+
+    if vhdr_source.startswith("http://") or vhdr_source.startswith("https://"):
+        base_url = vhdr_source.rsplit("/", 1)[0]
+        eeg_source = f"{base_url}/{data_file}"
+    else:
+        eeg_source = os.path.join(os.path.dirname(os.path.abspath(vhdr_source)), data_file)
+
+    is_f32 = "FLOAT" in bin_fmt
+    bps = 4 if is_f32 else 2
+    st_samp = max(0, int(round(start_s * sfreq)))
+    n_samp = max(64, int(round(duration_s * sfreq)))
+    byte_off = st_samp * n_ch * bps
+    byte_len = n_samp * n_ch * bps
+    raw = _fetch_bytes(eeg_source, byte_off, byte_len)
+    actual_samp = len(raw) // (n_ch * bps)
+    if actual_samp < 64:
+        raise ValueError("Truncated BrainVision .eeg data for requested window.")
+
+    arr = array.array("f" if is_f32 else "h")
+    arr.frombytes(raw[: actual_samp * n_ch * bps])
+
+    wanted = {c.strip().upper() for c in selected_channels} if selected_channels else None
+    ch_indices: List[int] = []
+    ch_labels: List[str] = []
+    seen = set()
+    for i, lbl in enumerate(labels):
+        key = lbl.strip().upper()
+        if wanted is not None:
+            if key not in wanted or key in seen:
+                continue
+        else:
+            if not _is_eeg_label(lbl) or key in seen:
+                continue
+        seen.add(key)
+        ch_indices.append(i)
+        ch_labels.append(lbl.strip())
+
+    # Decimate ultra-high rates (e.g. 5000 Hz) immediately via stride/slice for speed
+    pre_step = max(1, int(sfreq // 250.0)) if sfreq > 500.0 else 1
+    out_sfreq = sfreq / pre_step
+    signals: List[List[float]] = []
+    for ci in ch_indices:
+        scale = resolutions[ci] if not is_f32 else 1.0
+        col = arr[ci :: n_ch * pre_step]
+        signals.append([v * scale for v in col] if scale != 1.0 else list(col))
+
+    return ch_labels, signals, out_sfreq
+
+
 def read_csv_window(
     path: str,
     sfreq: Optional[float] = None,
@@ -774,14 +871,44 @@ def analyze_eeg_epoch(
     if n_ch < 2 or n_t < 64:
         raise ValueError(f"Need >= 2 channels and >= 64 samples (got {n_ch} ch x {n_t} samples).")
 
+    # Pre-decimate very high sampling rates (> 300 Hz, e.g. 1000 Hz HD-EEG) using
+    # non-overlapping boxcar averaging to ~200-250 Hz before 1-45 Hz FFT bandpass.
+    pre_decim = max(1, int(sfreq // 200.0)) if sfreq > 300.0 else 1
+    work_sfreq = sfreq / pre_decim
     # Bandpass (default 1.0-45.0 Hz, matching Schartner et al. 2015 / Casali et al. 2013)
-    # and decimate to ~128 Hz if sampling rate is higher.
-    decim = max(1, int(round(sfreq / 128.0))) if sfreq >= 200.0 else 1
-    eff_sfreq = sfreq / decim
+    # and decimate to ~128 Hz if working rate is higher.
+    decim = max(1, int(round(work_sfreq / 128.0))) if work_sfreq >= 200.0 else 1
+    eff_sfreq = work_sfreq / decim
     clean: List[List[float]] = []
     for s in raw_signals:
-        bp = detrend_and_bandpass(s[:n_t], sfreq, low_hz=low_hz, high_hz=min(high_hz, 0.45 * eff_sfreq))
+        if pre_decim > 1:
+            m = n_t // pre_decim
+            inv_p = 1.0 / pre_decim
+            s_work = [sum(s[i * pre_decim : (i + 1) * pre_decim]) * inv_p for i in range(m)]
+        else:
+            s_work = s[:n_t]
+        bp = detrend_and_bandpass(s_work, work_sfreq, low_hz=low_hz, high_hz=min(high_hz, 0.45 * eff_sfreq))
         clean.append(bp[::decim])
+
+    # Automatic bad-channel rejection (flatlines or railed/unplugged electrodes with
+    # amplitude > 6x median channel SD) before CAR so bad wires never pollute clean EEG.
+    ch_sds = []
+    for s in clean:
+        m_s = sum(s) / len(s)
+        ch_sds.append(math.sqrt(sum((v - m_s) ** 2 for v in s) / len(s)))
+    pos_sds = [sd for sd in ch_sds if sd > 1e-6]
+    med_sd = _median(pos_sds) if pos_sds else 0.0
+    keep_idx = [
+        i for i, sd in enumerate(ch_sds)
+        if sd > 1e-6 and (med_sd <= 0.0 or sd <= 6.0 * med_sd)
+    ]
+    n_rejected = n_ch - len(keep_idx)
+    if len(keep_idx) >= 2 and n_rejected > 0:
+        clean = [clean[i] for i in keep_idx]
+        labels = [labels[i] for i in keep_idx]
+        n_ch = len(clean)
+    else:
+        n_rejected = 0
 
     # Apply Common Average Reference (CAR) on dense monopolar caps (>= 8 ch) to remove
     # common-reference volume conduction without distorting bipolar hospital montages.
@@ -858,6 +985,7 @@ def analyze_eeg_epoch(
     return {
         "label": label_name,
         "n_channels": n_ch,
+        "n_rejected_bad_channels": n_rejected,
         "rereference": "CAR" if use_car else "native",
         "bandpass_hz": [low_hz, high_hz],
         "duration_s": round(n_t / sfreq, 2),

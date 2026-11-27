@@ -1,0 +1,1672 @@
+{
+  "title": "RTBT Controlled Human Propofol Sedation Validation (OpenNeuro ds005620, Bajwa et al. 2024)",
+  "epistemic_quarantine": "RTBT-GATE-01: Research biomarker validation only; not a medical device.",
+  "included_subjects": 10,
+  "skipped": [],
+  "stats": {
+    "awake_vs_sed1": {
+      "lz76_single_mean": {
+        "n": 10,
+        "mean_x": 0.8511,
+        "mean_y": 0.833,
+        "mean_diff": 0.0181,
+        "cohens_dz": 0.353,
+        "pos": 6,
+        "neg": 4,
+        "w_stat": 18.0,
+        "p_value": 0.375
+      },
+      "spectral_entropy": {
+        "n": 10,
+        "mean_x": 0.7684,
+        "mean_y": 0.7721,
+        "mean_diff": -0.0037,
+        "cohens_dz": -0.05,
+        "pos": 6,
+        "neg": 4,
+        "w_stat": 27.0,
+        "p_value": 1.0
+      },
+      "tau_1e_ms": {
+        "n": 10,
+        "mean_x": 20.679,
+        "mean_y": 19.539,
+        "mean_diff": 1.14,
+        "cohens_dz": 0.906,
+        "pos": 9,
+        "neg": 1,
+        "w_stat": 5.5,
+        "p_value": 0.02148
+      },
+      "D_eff": {
+        "n": 10,
+        "mean_x": 3.9144,
+        "mean_y": 3.9755,
+        "mean_diff": -0.0611,
+        "cohens_dz": -0.122,
+        "pos": 4,
+        "neg": 6,
+        "w_stat": 24.0,
+        "p_value": 0.7695
+      },
+      "rho_abs_mean": {
+        "n": 10,
+        "mean_x": 0.4124,
+        "mean_y": 0.4033,
+        "mean_diff": 0.0091,
+        "cohens_dz": 0.237,
+        "pos": 5,
+        "neg": 5,
+        "w_stat": 22.0,
+        "p_value": 0.625
+      },
+      "delta": {
+        "n": 10,
+        "mean_x": 0.1963,
+        "mean_y": 0.2533,
+        "mean_diff": -0.0569,
+        "cohens_dz": -0.584,
+        "pos": 2,
+        "neg": 8,
+        "w_stat": 11.0,
+        "p_value": 0.1055
+      },
+      "rtbt_binding_index": {
+        "n": 10,
+        "mean_x": 0.0708,
+        "mean_y": 0.0693,
+        "mean_diff": 0.0015,
+        "cohens_dz": 0.068,
+        "pos": 5,
+        "neg": 5,
+        "w_stat": 25.0,
+        "p_value": 0.8457
+      }
+    },
+    "awake_vs_sed2": {
+      "lz76_single_mean": {
+        "n": 10,
+        "mean_x": 0.8511,
+        "mean_y": 0.8149,
+        "mean_diff": 0.0362,
+        "cohens_dz": 0.424,
+        "pos": 6,
+        "neg": 4,
+        "w_stat": 17.0,
+        "p_value": 0.3223
+      },
+      "spectral_entropy": {
+        "n": 10,
+        "mean_x": 0.7684,
+        "mean_y": 0.7432,
+        "mean_diff": 0.0252,
+        "cohens_dz": 0.176,
+        "pos": 6,
+        "neg": 4,
+        "w_stat": 23.0,
+        "p_value": 0.6953
+      },
+      "tau_1e_ms": {
+        "n": 10,
+        "mean_x": 20.679,
+        "mean_y": 31.815,
+        "mean_diff": -11.136,
+        "cohens_dz": -0.435,
+        "pos": 4,
+        "neg": 6,
+        "w_stat": 18.0,
+        "p_value": 0.375
+      },
+      "D_eff": {
+        "n": 10,
+        "mean_x": 3.9144,
+        "mean_y": 3.9735,
+        "mean_diff": -0.0591,
+        "cohens_dz": -0.063,
+        "pos": 6,
+        "neg": 4,
+        "w_stat": 27.0,
+        "p_value": 1.0
+      },
+      "rho_abs_mean": {
+        "n": 10,
+        "mean_x": 0.4124,
+        "mean_y": 0.4046,
+        "mean_diff": 0.0077,
+        "cohens_dz": 0.116,
+        "pos": 4,
+        "neg": 6,
+        "w_stat": 26.0,
+        "p_value": 0.9219
+      },
+      "delta": {
+        "n": 10,
+        "mean_x": 0.1963,
+        "mean_y": 0.3601,
+        "mean_diff": -0.1638,
+        "cohens_dz": -0.943,
+        "pos": 2,
+        "neg": 8,
+        "w_stat": 4.0,
+        "p_value": 0.01367
+      },
+      "rtbt_binding_index": {
+        "n": 10,
+        "mean_x": 0.0708,
+        "mean_y": 0.0612,
+        "mean_diff": 0.0096,
+        "cohens_dz": 0.268,
+        "pos": 7,
+        "neg": 3,
+        "w_stat": 18.0,
+        "p_value": 0.375
+      }
+    },
+    "auroc_awake_vs_sed2": {
+      "lz76_single_mean": {
+        "auroc": 0.68,
+        "ci95": [
+          0.41,
+          0.91
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "spectral_entropy": {
+        "auroc": 0.6,
+        "ci95": [
+          0.33,
+          0.85
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "inv_tau_1e_ms": {
+        "auroc": 0.55,
+        "ci95": [
+          0.28,
+          0.82
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "D_eff": {
+        "auroc": 0.56,
+        "ci95": [
+          0.29,
+          0.83
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "rtbt_binding_index": {
+        "auroc": 0.64,
+        "ci95": [
+          0.37,
+          0.9
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      }
+    },
+    "auroc_awake_vs_sed1": {
+      "lz76_single_mean": {
+        "auroc": 0.61,
+        "ci95": [
+          0.33,
+          0.88
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "spectral_entropy": {
+        "auroc": 0.56,
+        "ci95": [
+          0.28,
+          0.82
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "inv_tau_1e_ms": {
+        "auroc": 0.41,
+        "ci95": [
+          0.17,
+          0.69
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "D_eff": {
+        "auroc": 0.515,
+        "ci95": [
+          0.24,
+          0.79
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      },
+      "rtbt_binding_index": {
+        "auroc": 0.54,
+        "ci95": [
+          0.27,
+          0.82
+        ],
+        "n_pos": 10,
+        "n_neg": 10
+      }
+    }
+  },
+  "subjects": [
+    {
+      "subject": "sub-1010",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1010 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.656,
+            "D_eff_ratio": 0.245,
+            "rho_abs_mean": 0.3624,
+            "fiedler_lambda2_unnorm": 4.5135,
+            "fiedler_lambda2_norm": 0.7785,
+            "tau_1e_ms": 30.06,
+            "tau_1e_mean_ms": 37.94,
+            "tau_int_ms": 26.84,
+            "spectral_entropy": 0.7973,
+            "lz76_single_mean": 0.9034,
+            "lz76_spatiotemporal": 0.9239,
+            "bands": {
+              "delta": 0.354,
+              "theta": 0.2027,
+              "alpha": 0.1699,
+              "beta": 0.1496,
+              "gamma": 0.0528
+            },
+            "fast_to_delta_ratio": 1.052,
+            "rtbt_binding_index": 0.0887
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1010 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.212,
+            "D_eff_ratio": 0.2217,
+            "rho_abs_mean": 0.3839,
+            "fiedler_lambda2_unnorm": 4.0449,
+            "fiedler_lambda2_norm": 0.7583,
+            "tau_1e_ms": 28.83,
+            "tau_1e_mean_ms": 36.54,
+            "tau_int_ms": 46.23,
+            "spectral_entropy": 0.6844,
+            "lz76_single_mean": 0.8345,
+            "lz76_spatiotemporal": 0.8598,
+            "bands": {
+              "delta": 0.5242,
+              "theta": 0.0987,
+              "alpha": 0.2041,
+              "beta": 0.1354,
+              "gamma": 0.0094
+            },
+            "fast_to_delta_ratio": 0.666,
+            "rtbt_binding_index": 0.0533
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1010 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.932,
+            "D_eff_ratio": 0.207,
+            "rho_abs_mean": 0.4077,
+            "fiedler_lambda2_unnorm": 5.2737,
+            "fiedler_lambda2_norm": 0.7977,
+            "tau_1e_ms": 33.34,
+            "tau_1e_mean_ms": 38.65,
+            "tau_int_ms": 46.03,
+            "spectral_entropy": 0.6751,
+            "lz76_single_mean": 0.8283,
+            "lz76_spatiotemporal": 0.9277,
+            "bands": {
+              "delta": 0.5621,
+              "theta": 0.1076,
+              "alpha": 0.1901,
+              "beta": 0.129,
+              "gamma": 0.0095
+            },
+            "fast_to_delta_ratio": 0.585,
+            "rtbt_binding_index": 0.0469
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1016",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1016 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.904,
+            "D_eff_ratio": 0.2055,
+            "rho_abs_mean": 0.4095,
+            "fiedler_lambda2_unnorm": 5.1062,
+            "fiedler_lambda2_norm": 0.7887,
+            "tau_1e_ms": 19.11,
+            "tau_1e_mean_ms": 20.02,
+            "tau_int_ms": 16.15,
+            "spectral_entropy": 0.8272,
+            "lz76_single_mean": 0.8502,
+            "lz76_spatiotemporal": 0.8787,
+            "bands": {
+              "delta": 0.2505,
+              "theta": 0.1424,
+              "alpha": 0.3297,
+              "beta": 0.1929,
+              "gamma": 0.0341
+            },
+            "fast_to_delta_ratio": 2.222,
+            "rtbt_binding_index": 0.0735
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1016 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.456,
+            "D_eff_ratio": 0.2345,
+            "rho_abs_mean": 0.3673,
+            "fiedler_lambda2_unnorm": 4.6822,
+            "fiedler_lambda2_norm": 0.7511,
+            "tau_1e_ms": 16.73,
+            "tau_1e_mean_ms": 17.08,
+            "tau_int_ms": 13.79,
+            "spectral_entropy": 0.7986,
+            "lz76_single_mean": 0.9026,
+            "lz76_spatiotemporal": 0.8975,
+            "bands": {
+              "delta": 0.255,
+              "theta": 0.0963,
+              "alpha": 0.2226,
+              "beta": 0.3634,
+              "gamma": 0.0271
+            },
+            "fast_to_delta_ratio": 2.404,
+            "rtbt_binding_index": 0.094
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1016 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.597,
+            "D_eff_ratio": 0.1893,
+            "rho_abs_mean": 0.427,
+            "fiedler_lambda2_unnorm": 5.4672,
+            "fiedler_lambda2_norm": 0.7815,
+            "tau_1e_ms": 92.55,
+            "tau_1e_mean_ms": 91.88,
+            "tau_int_ms": 65.02,
+            "spectral_entropy": 0.5293,
+            "lz76_single_mean": 0.6969,
+            "lz76_spatiotemporal": 0.89,
+            "bands": {
+              "delta": 0.7622,
+              "theta": 0.084,
+              "alpha": 0.0901,
+              "beta": 0.0412,
+              "gamma": 0.0049
+            },
+            "fast_to_delta_ratio": 0.179,
+            "rtbt_binding_index": 0.0242
+          },
+          "rtbt_phase": "UNCONSCIOUS_SLOWWAVE_FRAGMENTED",
+          "theorem_mapping": "RTBT-01 / RTBT-28 (slow-wave critical slowing & complexity collapse)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1017",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1017 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.073,
+            "D_eff_ratio": 0.2144,
+            "rho_abs_mean": 0.3964,
+            "fiedler_lambda2_unnorm": 4.6009,
+            "fiedler_lambda2_norm": 0.7825,
+            "tau_1e_ms": 18.56,
+            "tau_1e_mean_ms": 19.4,
+            "tau_int_ms": 15.26,
+            "spectral_entropy": 0.7963,
+            "lz76_single_mean": 0.8744,
+            "lz76_spatiotemporal": 0.9164,
+            "bands": {
+              "delta": 0.1864,
+              "theta": 0.1684,
+              "alpha": 0.4199,
+              "beta": 0.157,
+              "gamma": 0.0288
+            },
+            "fast_to_delta_ratio": 3.249,
+            "rtbt_binding_index": 0.0782
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1017 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.402,
+            "D_eff_ratio": 0.1791,
+            "rho_abs_mean": 0.4413,
+            "fiedler_lambda2_unnorm": 4.4466,
+            "fiedler_lambda2_norm": 0.7371,
+            "tau_1e_ms": 19.79,
+            "tau_1e_mean_ms": 19.86,
+            "tau_int_ms": 16.39,
+            "spectral_entropy": 0.7624,
+            "lz76_single_mean": 0.8134,
+            "lz76_spatiotemporal": 0.8862,
+            "bands": {
+              "delta": 0.2193,
+              "theta": 0.099,
+              "alpha": 0.4585,
+              "beta": 0.1871,
+              "gamma": 0.0058
+            },
+            "fast_to_delta_ratio": 2.97,
+            "rtbt_binding_index": 0.0533
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1017 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.748,
+            "D_eff_ratio": 0.1973,
+            "rho_abs_mean": 0.4186,
+            "fiedler_lambda2_unnorm": 4.9882,
+            "fiedler_lambda2_norm": 0.7503,
+            "tau_1e_ms": 16.65,
+            "tau_1e_mean_ms": 16.53,
+            "tau_int_ms": 13.71,
+            "spectral_entropy": 0.7864,
+            "lz76_single_mean": 0.8478,
+            "lz76_spatiotemporal": 0.8824,
+            "bands": {
+              "delta": 0.1522,
+              "theta": 0.0769,
+              "alpha": 0.4632,
+              "beta": 0.3005,
+              "gamma": 0.0099
+            },
+            "fast_to_delta_ratio": 5.083,
+            "rtbt_binding_index": 0.0673
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1022",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1022 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.304,
+            "D_eff_ratio": 0.2265,
+            "rho_abs_mean": 0.3813,
+            "fiedler_lambda2_unnorm": 4.522,
+            "fiedler_lambda2_norm": 0.8136,
+            "tau_1e_ms": 16.99,
+            "tau_1e_mean_ms": 17.22,
+            "tau_int_ms": 14.94,
+            "spectral_entropy": 0.8336,
+            "lz76_single_mean": 0.9049,
+            "lz76_spatiotemporal": 0.8938,
+            "bands": {
+              "delta": 0.2208,
+              "theta": 0.1118,
+              "alpha": 0.3801,
+              "beta": 0.2309,
+              "gamma": 0.033
+            },
+            "fast_to_delta_ratio": 2.917,
+            "rtbt_binding_index": 0.092
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1022 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.422,
+            "D_eff_ratio": 0.2328,
+            "rho_abs_mean": 0.3738,
+            "fiedler_lambda2_unnorm": 4.5289,
+            "fiedler_lambda2_norm": 0.7769,
+            "tau_1e_ms": 15.15,
+            "tau_1e_mean_ms": 15.29,
+            "tau_int_ms": 12.46,
+            "spectral_entropy": 0.8155,
+            "lz76_single_mean": 0.8854,
+            "lz76_spatiotemporal": 0.8824,
+            "bands": {
+              "delta": 0.1272,
+              "theta": 0.0877,
+              "alpha": 0.3343,
+              "beta": 0.4384,
+              "gamma": 0.0147
+            },
+            "fast_to_delta_ratio": 6.19,
+            "rtbt_binding_index": 0.0936
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1022 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.173,
+            "D_eff_ratio": 0.167,
+            "rho_abs_mean": 0.4594,
+            "fiedler_lambda2_unnorm": 4.5659,
+            "fiedler_lambda2_norm": 0.748,
+            "tau_1e_ms": 19.05,
+            "tau_1e_mean_ms": 19.2,
+            "tau_int_ms": 15.86,
+            "spectral_entropy": 0.7764,
+            "lz76_single_mean": 0.8103,
+            "lz76_spatiotemporal": 0.8221,
+            "bands": {
+              "delta": 0.2526,
+              "theta": 0.1433,
+              "alpha": 0.3452,
+              "beta": 0.2739,
+              "gamma": 0.0076
+            },
+            "fast_to_delta_ratio": 2.481,
+            "rtbt_binding_index": 0.049
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1024",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1024 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.353,
+            "D_eff_ratio": 0.2291,
+            "rho_abs_mean": 0.3791,
+            "fiedler_lambda2_unnorm": 4.7925,
+            "fiedler_lambda2_norm": 0.7852,
+            "tau_1e_ms": 16.86,
+            "tau_1e_mean_ms": 16.44,
+            "tau_int_ms": 14.29,
+            "spectral_entropy": 0.8638,
+            "lz76_single_mean": 0.9534,
+            "lz76_spatiotemporal": 0.9164,
+            "bands": {
+              "delta": 0.1534,
+              "theta": 0.1701,
+              "alpha": 0.3333,
+              "beta": 0.2659,
+              "gamma": 0.0412
+            },
+            "fast_to_delta_ratio": 4.175,
+            "rtbt_binding_index": 0.1025
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1024 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.028,
+            "D_eff_ratio": 0.212,
+            "rho_abs_mean": 0.399,
+            "fiedler_lambda2_unnorm": 4.9093,
+            "fiedler_lambda2_norm": 0.7894,
+            "tau_1e_ms": 13.5,
+            "tau_1e_mean_ms": 13.35,
+            "tau_int_ms": 11.07,
+            "spectral_entropy": 0.8189,
+            "lz76_single_mean": 0.847,
+            "lz76_spatiotemporal": 0.8636,
+            "bands": {
+              "delta": 0.0978,
+              "theta": 0.0449,
+              "alpha": 0.2537,
+              "beta": 0.5971,
+              "gamma": 0.0152
+            },
+            "fast_to_delta_ratio": 8.855,
+            "rtbt_binding_index": 0.0796
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1024 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.055,
+            "D_eff_ratio": 0.2134,
+            "rho_abs_mean": 0.3948,
+            "fiedler_lambda2_unnorm": 4.2452,
+            "fiedler_lambda2_norm": 0.7956,
+            "tau_1e_ms": 13.72,
+            "tau_1e_mean_ms": 13.69,
+            "tau_int_ms": 11.28,
+            "spectral_entropy": 0.8314,
+            "lz76_single_mean": 0.8486,
+            "lz76_spatiotemporal": 0.8447,
+            "bands": {
+              "delta": 0.1246,
+              "theta": 0.0465,
+              "alpha": 0.3345,
+              "beta": 0.4586,
+              "gamma": 0.017
+            },
+            "fast_to_delta_ratio": 6.502,
+            "rtbt_binding_index": 0.0819
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1033",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1033 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 2.836,
+            "D_eff_ratio": 0.1493,
+            "rho_abs_mean": 0.5041,
+            "fiedler_lambda2_unnorm": 4.7107,
+            "fiedler_lambda2_norm": 0.8206,
+            "tau_1e_ms": 22.94,
+            "tau_1e_mean_ms": 23.13,
+            "tau_int_ms": 18.85,
+            "spectral_entropy": 0.6267,
+            "lz76_single_mean": 0.7743,
+            "lz76_spatiotemporal": 0.8787,
+            "bands": {
+              "delta": 0.1525,
+              "theta": 0.1598,
+              "alpha": 0.599,
+              "beta": 0.0651,
+              "gamma": 0.0129
+            },
+            "fast_to_delta_ratio": 4.439,
+            "rtbt_binding_index": 0.0302
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1033 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.645,
+            "D_eff_ratio": 0.1919,
+            "rho_abs_mean": 0.4269,
+            "fiedler_lambda2_unnorm": 5.5344,
+            "fiedler_lambda2_norm": 0.7794,
+            "tau_1e_ms": 22.26,
+            "tau_1e_mean_ms": 22.63,
+            "tau_int_ms": 18.63,
+            "spectral_entropy": 0.7679,
+            "lz76_single_mean": 0.7962,
+            "lz76_spatiotemporal": 0.8787,
+            "bands": {
+              "delta": 0.2503,
+              "theta": 0.3065,
+              "alpha": 0.2556,
+              "beta": 0.1389,
+              "gamma": 0.0082
+            },
+            "fast_to_delta_ratio": 1.609,
+            "rtbt_binding_index": 0.0567
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1033 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.667,
+            "D_eff_ratio": 0.193,
+            "rho_abs_mean": 0.4241,
+            "fiedler_lambda2_unnorm": 5.3412,
+            "fiedler_lambda2_norm": 0.79,
+            "tau_1e_ms": 22.22,
+            "tau_1e_mean_ms": 22.72,
+            "tau_int_ms": 18.42,
+            "spectral_entropy": 0.7752,
+            "lz76_single_mean": 0.8165,
+            "lz76_spatiotemporal": 0.807,
+            "bands": {
+              "delta": 0.2704,
+              "theta": 0.2904,
+              "alpha": 0.2718,
+              "beta": 0.1413,
+              "gamma": 0.0094
+            },
+            "fast_to_delta_ratio": 1.563,
+            "rtbt_binding_index": 0.0594
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1036",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1036 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.304,
+            "D_eff_ratio": 0.2265,
+            "rho_abs_mean": 0.3826,
+            "fiedler_lambda2_unnorm": 4.4311,
+            "fiedler_lambda2_norm": 0.8187,
+            "tau_1e_ms": 21.84,
+            "tau_1e_mean_ms": 22.29,
+            "tau_int_ms": 18.74,
+            "spectral_entropy": 0.8048,
+            "lz76_single_mean": 0.8768,
+            "lz76_spatiotemporal": 0.8711,
+            "bands": {
+              "delta": 0.3031,
+              "theta": 0.2375,
+              "alpha": 0.1968,
+              "beta": 0.1822,
+              "gamma": 0.0198
+            },
+            "fast_to_delta_ratio": 1.316,
+            "rtbt_binding_index": 0.0831
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1036 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.33,
+            "D_eff_ratio": 0.2279,
+            "rho_abs_mean": 0.3829,
+            "fiedler_lambda2_unnorm": 4.6722,
+            "fiedler_lambda2_norm": 0.8015,
+            "tau_1e_ms": 20.23,
+            "tau_1e_mean_ms": 20.7,
+            "tau_int_ms": 17.6,
+            "spectral_entropy": 0.7741,
+            "lz76_single_mean": 0.8337,
+            "lz76_spatiotemporal": 0.8711,
+            "bands": {
+              "delta": 0.3261,
+              "theta": 0.1195,
+              "alpha": 0.3299,
+              "beta": 0.2141,
+              "gamma": 0.0066
+            },
+            "fast_to_delta_ratio": 1.688,
+            "rtbt_binding_index": 0.0772
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1036 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 5.77,
+            "D_eff_ratio": 0.3037,
+            "rho_abs_mean": 0.2942,
+            "fiedler_lambda2_unnorm": 2.8788,
+            "fiedler_lambda2_norm": 0.7608,
+            "tau_1e_ms": 62.72,
+            "tau_1e_mean_ms": 63.17,
+            "tau_int_ms": 50.77,
+            "spectral_entropy": 0.6559,
+            "lz76_single_mean": 0.7665,
+            "lz76_spatiotemporal": 0.9239,
+            "bands": {
+              "delta": 0.6476,
+              "theta": 0.1183,
+              "alpha": 0.145,
+              "beta": 0.0818,
+              "gamma": 0.007
+            },
+            "fast_to_delta_ratio": 0.361,
+            "rtbt_binding_index": 0.0715
+          },
+          "rtbt_phase": "UNCONSCIOUS_SLOWWAVE_FRAGMENTED",
+          "theorem_mapping": "RTBT-01 / RTBT-28 (slow-wave critical slowing & complexity collapse)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1045",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1045 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 2.95,
+            "D_eff_ratio": 0.1553,
+            "rho_abs_mean": 0.4887,
+            "fiedler_lambda2_unnorm": 4.487,
+            "fiedler_lambda2_norm": 0.776,
+            "tau_1e_ms": 21.86,
+            "tau_1e_mean_ms": 21.88,
+            "tau_int_ms": 17.98,
+            "spectral_entropy": 0.6848,
+            "lz76_single_mean": 0.7813,
+            "lz76_spatiotemporal": 0.8447,
+            "bands": {
+              "delta": 0.1517,
+              "theta": 0.1879,
+              "alpha": 0.5694,
+              "beta": 0.092,
+              "gamma": 0.0149
+            },
+            "fast_to_delta_ratio": 4.458,
+            "rtbt_binding_index": 0.036
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1045 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.243,
+            "D_eff_ratio": 0.1707,
+            "rho_abs_mean": 0.4559,
+            "fiedler_lambda2_unnorm": 4.4123,
+            "fiedler_lambda2_norm": 0.7996,
+            "tau_1e_ms": 21.21,
+            "tau_1e_mean_ms": 21.11,
+            "tau_int_ms": 17.7,
+            "spectral_entropy": 0.7185,
+            "lz76_single_mean": 0.7923,
+            "lz76_spatiotemporal": 0.807,
+            "bands": {
+              "delta": 0.3298,
+              "theta": 0.0663,
+              "alpha": 0.3687,
+              "beta": 0.1884,
+              "gamma": 0.0056
+            },
+            "fast_to_delta_ratio": 1.706,
+            "rtbt_binding_index": 0.0449
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1045 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.495,
+            "D_eff_ratio": 0.2366,
+            "rho_abs_mean": 0.3679,
+            "fiedler_lambda2_unnorm": 3.9053,
+            "fiedler_lambda2_norm": 0.7583,
+            "tau_1e_ms": 15.77,
+            "tau_1e_mean_ms": 16.16,
+            "tau_int_ms": 16.08,
+            "spectral_entropy": 0.8694,
+            "lz76_single_mean": 0.8987,
+            "lz76_spatiotemporal": 0.8749,
+            "bands": {
+              "delta": 0.278,
+              "theta": 0.1107,
+              "alpha": 0.2164,
+              "beta": 0.2628,
+              "gamma": 0.0956
+            },
+            "fast_to_delta_ratio": 2.068,
+            "rtbt_binding_index": 0.1006
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1046",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1046 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.298,
+            "D_eff_ratio": 0.1736,
+            "rho_abs_mean": 0.4517,
+            "fiedler_lambda2_unnorm": 5.0556,
+            "fiedler_lambda2_norm": 0.7612,
+            "tau_1e_ms": 18.39,
+            "tau_1e_mean_ms": 18.84,
+            "tau_int_ms": 15.18,
+            "spectral_entropy": 0.704,
+            "lz76_single_mean": 0.7524,
+            "lz76_spatiotemporal": 0.8372,
+            "bands": {
+              "delta": 0.1072,
+              "theta": 0.1061,
+              "alpha": 0.6248,
+              "beta": 0.0898,
+              "gamma": 0.0183
+            },
+            "fast_to_delta_ratio": 6.837,
+            "rtbt_binding_index": 0.0438
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1046 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.904,
+            "D_eff_ratio": 0.2055,
+            "rho_abs_mean": 0.41,
+            "fiedler_lambda2_unnorm": 5.2901,
+            "fiedler_lambda2_norm": 0.8044,
+            "tau_1e_ms": 17.92,
+            "tau_1e_mean_ms": 17.93,
+            "tau_int_ms": 14.75,
+            "spectral_entropy": 0.792,
+            "lz76_single_mean": 0.7915,
+            "lz76_spatiotemporal": 0.8485,
+            "bands": {
+              "delta": 0.1363,
+              "theta": 0.174,
+              "alpha": 0.3828,
+              "beta": 0.2713,
+              "gamma": 0.0047
+            },
+            "fast_to_delta_ratio": 4.833,
+            "rtbt_binding_index": 0.0662
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1046 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.551,
+            "D_eff_ratio": 0.1869,
+            "rho_abs_mean": 0.4344,
+            "fiedler_lambda2_unnorm": 5.0113,
+            "fiedler_lambda2_norm": 0.8064,
+            "tau_1e_ms": 19.42,
+            "tau_1e_mean_ms": 19.49,
+            "tau_int_ms": 16.05,
+            "spectral_entropy": 0.7664,
+            "lz76_single_mean": 0.786,
+            "lz76_spatiotemporal": 0.8938,
+            "bands": {
+              "delta": 0.1917,
+              "theta": 0.1797,
+              "alpha": 0.4966,
+              "beta": 0.1465,
+              "gamma": 0.0047
+            },
+            "fast_to_delta_ratio": 3.379,
+            "rtbt_binding_index": 0.0549
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    },
+    {
+      "subject": "sub-1054",
+      "skipped": false,
+      "states": {
+        "awake_ec": {
+          "label": "sub-1054 awake_ec [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.466,
+            "D_eff_ratio": 0.2351,
+            "rho_abs_mean": 0.3679,
+            "fiedler_lambda2_unnorm": 4.1191,
+            "fiedler_lambda2_norm": 0.7769,
+            "tau_1e_ms": 20.18,
+            "tau_1e_mean_ms": 19.27,
+            "tau_int_ms": 16.62,
+            "spectral_entropy": 0.7459,
+            "lz76_single_mean": 0.84,
+            "lz76_spatiotemporal": 0.8108,
+            "bands": {
+              "delta": 0.0836,
+              "theta": 0.2883,
+              "alpha": 0.4335,
+              "beta": 0.1398,
+              "gamma": 0.0323
+            },
+            "fast_to_delta_ratio": 7.244,
+            "rtbt_binding_index": 0.0798
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed1": {
+          "label": "sub-1054 propofol_sed1 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 4.113,
+            "D_eff_ratio": 0.2165,
+            "rho_abs_mean": 0.3918,
+            "fiedler_lambda2_unnorm": 4.4336,
+            "fiedler_lambda2_norm": 0.7917,
+            "tau_1e_ms": 19.77,
+            "tau_1e_mean_ms": 19.78,
+            "tau_int_ms": 16.45,
+            "spectral_entropy": 0.7887,
+            "lz76_single_mean": 0.8337,
+            "lz76_spatiotemporal": 0.8334,
+            "bands": {
+              "delta": 0.2666,
+              "theta": 0.1395,
+              "alpha": 0.3253,
+              "beta": 0.2338,
+              "gamma": 0.0064
+            },
+            "fast_to_delta_ratio": 2.121,
+            "rtbt_binding_index": 0.0743
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        },
+        "propofol_sed2": {
+          "label": "sub-1054 propofol_sed2 [15-25s]",
+          "n_channels": 19,
+          "n_rejected_bad_channels": 0,
+          "rereference": "CAR",
+          "bandpass_hz": [
+            1.0,
+            45.0
+          ],
+          "duration_s": 10.0,
+          "sfreq_hz": 250.0,
+          "channels_sample": [
+            "O2",
+            "O1",
+            "P8",
+            "P4",
+            "Pz",
+            "P3",
+            "..."
+          ],
+          "biomarkers": {
+            "D_eff": 3.747,
+            "D_eff_ratio": 0.1972,
+            "rho_abs_mean": 0.4182,
+            "fiedler_lambda2_unnorm": 4.0278,
+            "fiedler_lambda2_norm": 0.8077,
+            "tau_1e_ms": 22.71,
+            "tau_1e_mean_ms": 23.16,
+            "tau_int_ms": 33.05,
+            "spectral_entropy": 0.7668,
+            "lz76_single_mean": 0.8494,
+            "lz76_spatiotemporal": 0.89,
+            "bands": {
+              "delta": 0.3596,
+              "theta": 0.1183,
+              "alpha": 0.2678,
+              "beta": 0.2165,
+              "gamma": 0.0087
+            },
+            "fast_to_delta_ratio": 1.371,
+            "rtbt_binding_index": 0.0562
+          },
+          "rtbt_phase": "AWAKE_OR_REM_DIFFERENTIATED",
+          "theorem_mapping": "RTBT-14 / RTBT-16 / RTBT-19 (differentiated relational binding band)"
+        }
+      }
+    }
+  ]
+}
