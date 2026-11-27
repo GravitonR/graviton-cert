@@ -1,0 +1,151 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=0.92in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+\emergencystretch=2em
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{gate}[theorem]{Open Gate}
+
+\newcommand{\code}[1]{\texttt{\small #1}}
+
+\title{\textbf{Three Machine-Checked Biophysical Gates for Quantum Processes in Neural Dynamics}}
+
+\author{
+  Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \href{https://orcid.org/0009-0005-4331-0409}{0009-0005-4331-0409}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \code{v0.8.0}, Zenodo Concept DOI: \href{https://doi.org/10.5281/zenodo.24570905}{10.5281/zenodo.24570905}).}
+}
+
+\date{November 26, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Debates over whether quantum processes play a functional role in neural dynamics or conscious experience routinely stall between unverified biophysical optimism and blanket dismissal. Following the landmark COGITATE adversarial collaboration (\emph{Nature}, 2025)—which challenged core predictions of both Integrated Information Theory (IIT) and Global Neuronal Workspace Theory (GNWT) and shifted consciousness science toward pre-registered falsifiable testing—and amid new 2024--2026 findings on microtubule pharmacology (epothilone~B), ultraviolet tryptophan superradiance, hypomagnetic neurogenesis, and nuclear-spin anesthesia tests, the field lacks an exact mathematical filter separating viable quantum neurobiology from thermal noise or classical confounds. Here we present a zero-dependency Lean~4 formalization (\code{SC-01}--\code{SC-05} and \code{BQ-01}--\code{BQ-06}, zero \code{sorryAx}, zero custom axioms) of Graviton's \textbf{Three-Gate Quantum-to-Neural Standard}: (1)~a 310~K decoherence timescale gate proving a $\ge 10^{11}\times$ gap excluding naive charge superpositions while passing spin-protected windows; (2)~a Johnson--Nyquist thermal current SNR gate ($\sigma_I^2 = 4k_B T\Delta f / R_m$) paired with an exact nanoscale microdomain volume ceiling $V_{\max} = |g'|\Delta N/\delta_y$ closing well-mixed kinetic caveats; and (3)~a matched-SAR Larmor RF-resonance contrast identity canceling 100\% of classical thermal and pharmacological confounds, alongside nonlinear leaky integrate-and-fire (LIF) threshold margin bounds. Finally, we explicitly quarantine the Hard Problem of subjective experience (\code{BQ-GATE-01}) and unmeasured wet-lab controls (\code{BQ-GATE-02}, \code{BQ-GATE-03}) as open boundaries that biophysical coupling alone does not close.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+%======================================================================
+\section{Introduction: From Speculation to Adversarial Biophysical Gates}
+%======================================================================
+
+Consciousness science entered a new empirical regime in 2025 with the COGITATE adversarial collaboration~\cite{COGITATE2025} across 256 participants (fMRI, MEG, iEEG), which broke core pre-registered predictions of both IIT (lack of sustained posterior synchronization) and GNWT (absence of robust stimulus-offset ignition), shifting consensus toward recurrent thalamocortical loops, predictive processing, and multi-theory indicator frameworks. Meanwhile, quantum-biology experiments—including epothilone~B microtubule stabilization delaying isoflurane anesthesia~\cite{Wiest2024}, in vitro ultraviolet tryptophan superradiance in microtubules~\cite{Babcock2024}, hypomagnetic modulation of hippocampal neurogenesis via reactive oxygen species (ROS), and debated nuclear-spin isotope anesthesia claims~\cite{Fisher2015}—have revived debate over whether quantum mechanisms operate in the brain.
+
+Crucially, two distinct claims are often conflated:
+\begin{enumerate}
+  \item \textbf{Explanatory claim (Hard Problem transfer):} Even if room-temperature quantum coherence existed inside neurons, replacing classical bits with qubits remains a third-person physical theory and does not by itself derive first-person subjective qualia.
+  \item \textbf{Biophysical claim (falsifiable physics):} Whether specific spin-protected or optical quantum processes survive 310~K decoherence, exceed neuronal thermal noise floors, and survive matched classical controls.
+\end{enumerate}
+
+To make the biophysical claim mathematically airtight, we formalize eleven Lean~4 theorems (\code{SC-01}--\code{SC-05} and \code{BQ-01}--\code{BQ-06}) inside \code{graviton-cert v0.8.0} requiring every candidate quantum-neural mechanism to clear three sequential gates.
+
+%======================================================================
+\section{Gate 1: 310~K Decoherence Timescale Separation (\code{BQ-01})}
+%======================================================================
+
+At physiological brain temperature $T \approx 310\,\mathrm{K}$ ($k_B T \approx 26.7\,\mathrm{meV}$), electric charge and ionic superpositions couple strongly to surrounding water dipoles and ions, decohering on timescales $\tau_{\mathrm{charge}} \le 10^{-13}\,\mathrm{s}$~\cite{Tegmark2000}.
+
+\begin{theorem}[310~K Decoherence Separation; \code{BQ-01}]
+For every charge/ion superposition obeying $0 < \tau_{\mathrm{charge}} \le 10^{-13}\,\mathrm{s}$, relative to neural integration $\tau_{\mathrm{neural}} = 10^{-2}\,\mathrm{s}$ ($10\,\mathrm{ms}$) and radical-pair chemistry $\tau_{\mathrm{chem}} = 10^{-7}\,\mathrm{s}$ ($100\,\mathrm{ns}$):
+\begin{equation}
+  \frac{\tau_{\mathrm{neural}}}{\tau_{\mathrm{charge}}} \ge 10^{11},
+\end{equation}
+so charge superpositions strictly fail Gate~1 against both $\tau_{\mathrm{neural}}$ and $\tau_{\mathrm{chem}}$. By contrast, magnetically isolated electron radical-pair spins ($\tau_{\mathrm{RP}} = 10^{-6}\,\mathrm{s} \ge \tau_{\mathrm{chem}}$) and shielded $^{31}\mathrm{P}$ nuclear spins ($\tau_{\mathrm{nuc}} = 10^{-1}\,\mathrm{s} \ge \tau_{\mathrm{neural}}$) clear Gate~1 and advance to Gate~2.
+\end{theorem}
+
+%======================================================================
+\section{Gate 2: Thermal Noise SNR Floor \& Microdomain Ceiling (\code{SC-04}, \code{BQ-02}, \code{BQ-03})}
+%======================================================================
+
+Clearing decoherence is necessary but far from sufficient: a quantum yield shift must survive kinetic dilution and exceed neuronal membrane noise. In Research Note~01 (\code{SC-01}--\code{SC-05}), we proved the Universal Pathway Exclusion Inequality: for well-mixed formation flux $|F_{\mathrm{RP}}| \le F_{\max}$, singlet yield shift $|\Delta\Phi_S| \le B_\Phi$, clearance $k_{\mathrm{clear}} \ge k_{\min} > 0$, and membrane-current calibration slope $|g'(x_0)| \le G_{\max}$,
+\begin{equation}
+  |\Delta\hat{y}| \le \frac{G_{\max} F_{\max} B_\Phi}{k_{\min}} < \delta_y.
+\end{equation}
+
+We now tighten Gate~2 with the physical Johnson--Nyquist noise floor and close the well-mixed caveat via an exact nanoscale microdomain ceiling:
+
+\begin{theorem}[Johnson--Nyquist SNR Floor \& Microdomain Volume Ceiling; \code{BQ-02}, \code{BQ-03}]
+Let $\sigma_I^2 = 4k_B T\Delta f / R_m$ denote the squared Johnson--Nyquist thermal current noise variance ($k_B T, \Delta f, R_m > 0$). Then:
+\begin{enumerate}
+  \item $\sigma_I^2 > 0$ decreases strictly with membrane resistance $R_m$ and increases strictly with bandwidth $\Delta f$. Whenever $(\Delta\hat{y})^2 < \mathrm{SNR}_{\min}^2\,\sigma_I^2$, the signal fails SNR detection strictly: $(\Delta\hat{y})^2/\sigma_I^2 < \mathrm{SNR}_{\min}^2$.
+  \item For a localized molecule shift $\Delta N > 0$ in compartment volume $V > 0$ ($\Delta c = \Delta N/V$) with nonzero slope $g'$, shrinking volume strictly amplifies $\Delta c$, yet defines an exact maximum volume ceiling
+  \begin{equation}
+    V_{\max} = \frac{|g'|\,\Delta N}{\delta_y}
+  \end{equation}
+  such that every compartment with $V > V_{\max}$ strictly fails threshold ($|g'|(\Delta N/V) < \delta_y$), while $0 < V < V_{\max}$ strictly exceeds $\delta_y$.
+\end{enumerate}
+\end{theorem}
+
+%======================================================================
+\section{Gate 3: Matched-SAR Larmor Control \& LIF Thresholds (\code{BQ-04}--\code{BQ-06})}
+%======================================================================
+
+Pharmacological interventions such as epothilone~B profoundly alter cytoskeletal trafficking and ion-channel anchoring, making classical confounds impossible to exclude without a spin-selective control. For radical-pair mechanisms, weak radiofrequency (RF) fields tuned to the electron Larmor frequency ($\nu_L = \gamma_e B_0 \approx 1.4\,\mathrm{MHz}$ at $B_0 = 50\,\mu\mathrm{T}$) selectively disrupt singlet--triplet interconversion while leaving ordinary chemistry intact.
+
+\begin{theorem}[Matched-SAR Confound Cancellation \& LIF Bifurcation Margin; \code{BQ-04}, \code{BQ-05}]
+Model observed neural response as $Y(S_{\mathrm{spin}}, C_{\mathrm{SAR}}, C_{\mathrm{drug}}) = S_{\mathrm{spin}} + C_{\mathrm{SAR}} + C_{\mathrm{drug}}$. Subtracting off-resonance RF at identical specific absorption rate (SAR) and identical cellular/drug background cancels 100\% of classical thermal and pharmacological confounds identically:
+\begin{equation}
+  Y(S_{\mathrm{spin}}, C_{\mathrm{SAR}}, C_{\mathrm{drug}}) - Y(0, C_{\mathrm{SAR}}, C_{\mathrm{drug}}) = S_{\mathrm{spin}}.
+\end{equation}
+Furthermore, for a leaky integrate-and-fire neuron with sub-threshold margin $M = I_{\mathrm{crit}} - I_0 > 0$, any perturbation with $|\Delta\hat{y}| < M$ strictly cannot trigger a spike ($I_0 + \Delta\hat{y} < I_{\mathrm{crit}}$), whereas $\Delta\hat{y} > M$ crosses threshold.
+\end{theorem}
+
+Theorem~\code{BQ-06} compiles Gates~1--3 into an executable \code{QuantumNeuralAcceptanceGate} that formally rejects both naive charge superpositions and uncontrolled pharmacological claims, while quarantining three explicit Open Gates:
+
+\begin{gate}[\code{BQ-GATE-01}--\code{BQ-GATE-03}]
+(1)~The Hard Problem explanatory boundary between third-person neural dynamics and first-person subjective qualia; (2)~a pre-registered, blinded matched-SAR Larmor RF-resonance patch-clamp experiment on primary cortical/hippocampal neurons; and (3)~multi-lab blinded nuclear-spin isotope replications ($^{129}\mathrm{Xe}/^{131}\mathrm{Xe}$ vs.\ $^{132}\mathrm{Xe}/^{134}\mathrm{Xe}$) under matched classical controls.
+\end{gate}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\renewcommand{\code}[1]{\texttt{#1}}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}l >{\tiny}l >{\raggedright\arraybackslash}p{6.5cm}@{}}
+\toprule
+\textbf{ID} & {\scriptsize\textbf{Lean~4 Declaration}} & \textbf{Result Established} \\
+\midrule
+\code{SC-01} & \code{SpinChemistry.reference\_accounting\_exact} & Exact synthetic steady-state accounting ($20\,\mathrm{nM}, 1.00\,\mathrm{pA}$) \\
+\code{SC-02} & \code{SpinChemistry.si\_unit\_invariance} & Dimensional invariance ($\mu\mathrm{M}/\mathrm{pA}$ vs.\ SI) \\
+\code{SC-03} & \code{SpinChemistry.opposite\_shift\_antisymmetry} & Exact linear antisymmetry $\Delta\hat{y}(-\Delta\Phi_S)=-\Delta\hat{y}(\Delta\Phi_S)$ \\
+\code{SC-04} & \code{SpinChemistry.universal\_pathway\_exclusion} & Universal exclusion $|\Delta\hat{y}|\le G_{\max}F_{\max}B_\Phi/k_{\min}<\delta_y$ \\
+\code{SC-05} & \code{SpinChemistry.graviton\_exclusion\_scenario} & Instantiated exclusion bound ($0.1875\,\mathrm{pA} < 0.5\,\mathrm{pA}$) \\
+\midrule
+\code{BQ-01} & \code{BioQuantumGates.thermal\_decoherence\_timescale\_separation} & $\ge 10^{11}\times$ charge gap at 310~K vs.\ passing spin windows \\
+\code{BQ-02} & \code{BioQuantumGates.johnson\_nyquist\_snr\_exclusion\_bound} & Thermal current variance $\sigma_I^2=4k_BT\Delta f/R_m$ \& SNR exclusion \\
+\code{BQ-03} & \code{BioQuantumGates.microdomain\_volume\_amplification\_threshold} & Exact exclusion volume ceiling $V_{\max}=|g'|\Delta N/\delta_y$ \\
+\code{BQ-04} & \code{BioQuantumGates.matched\_sar\_larmor\_resonance\_confound\_cancellation} & Exact 100\% cancellation of SAR heating \& drug confounds \\
+\code{BQ-05} & \code{BioQuantumGates.lif\_firing\_threshold\_amplification\_vs\_exclusion} & LIF bifurcation margin $|\Delta\hat{y}|<I_{\mathrm{crit}}-I_0$ vs.\ crossing \\
+\code{BQ-06} & \code{BioQuantumGates.quantum\_neural\_acceptance\_gate\_soundness} & Executable 3-Gate standard rejecting charge \& uncontrolled drug claims \\
+\bottomrule
+\end{tabular}
+\caption{All 11 Lean~4 kernel-verified biophysical theorems (\code{graviton-cert v0.8.0}, zero \code{sorryAx}, zero custom axioms).}
+\label{tab:bq}
+\end{table}
+
+\clearpage
+\begin{thebibliography}{9}
+\bibitem{COGITATE2025}
+Cogitate Consortium \emph{et al.}, \emph{Adversarial testing of global neuronal workspace and integrated information theories of consciousness}, Nature (2025).
+\bibitem{Tegmark2000}
+M.~Tegmark, \emph{Importance of quantum decoherence in brain processes}, Phys.\ Rev.\ E \textbf{61}, 4194--4206 (2000).
+\bibitem{Fisher2015}
+M.~P.~A.~Fisher, \emph{Quantum cognition: The possibility of processing with nuclear spins in the brain}, Ann.\ Phys.\ \textbf{362}, 593--602 (2015).
+\bibitem{Wiest2024}
+M.~A.~Khan, Y.~Huang, D.~S.~C.~G.~Silva, and M.~C.~Wiest, \emph{Microtubule-stabilizer epothilone B delays anesthetic-induced unconsciousness in rats}, eNeuro \textbf{11}(8) (2024).
+\bibitem{Babcock2024}
+N.~S.~Babcock, G.~Montes-Cabrera, K.~E.~Oberhofer, M.~Chergui, G.~L.~Celardo, and P.~Kurian, \emph{Ultraviolet Superradiance from Mega-Networks of Tryptophan in Biological Architectures}, J.\ Phys.\ Chem.\ B \textbf{128}, 4035--4046 (2024).
+\end{thebibliography}
+
+\end{document}
