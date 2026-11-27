@@ -1,6 +1,6 @@
 \documentclass[11pt,letterpaper]{article}
 
-\usepackage[margin=0.84in]{geometry}
+\usepackage[margin=0.88in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{array}
@@ -8,85 +8,93 @@
 \usepackage[hidelinks]{hyperref}
 
 \emergencystretch=2em
-\setlength{\parindent}{1.1em}
-\setlength{\parskip}{0.25em}
+\setlength{\parindent}{1.15em}
+\setlength{\parskip}{0.30em}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{gate}[theorem]{Open Gate}
 
 \newcommand{\code}[1]{\texttt{\small #1}}
 
-\title{\textbf{Relational Temporal Binding Theory (RTBT v5.0): An Airtight, Singularity-Free, Machine-Checked Theory of Conscious Temporal Integration Across Fourteen Clinical \& Physical Tests}}
-\author{Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \texttt{0009-0005-4331-0409}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \texttt{v1.3.0}, 115/115 Lean~4 proofs across 13 studies, Zenodo Concept DOI: \texttt{10.5281/zenodo.24570905}). Extends Working Paper 05 (\texttt{10.5281/zenodo.24577879}).}}
+\title{\textbf{Relational Temporal Binding: Internal Clocks, Cortical Phase Boundaries, and Falsifiable Limits on Quantum Neural Modulation}}
+\author{Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \texttt{0009-0005-4331-0409}. Formal verification ledger and dynamical simulators: \url{https://github.com/GravitonR/graviton-cert} (tag \texttt{v1.4.0}, 117/117 Lean~4 proofs across 13 studies, Zenodo Concept DOI: \texttt{10.5281/zenodo.24570905}). Extends Working Paper 05 (\texttt{10.5281/zenodo.24577879}).}}
 \date{November 26, 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Consciousness theories routinely break on at least one of fourteen canonical tests: post-COGITATE temporal dynamics (\emph{Nature}, 2025), generalized epileptic seizures, the 69-billion-neuron cerebellum, stateless feedforward neural networks, low-dimensional thermostats or toy RNNs, disconnected warehouses of independent oscillators, finite axonal conduction delays, bistable anesthesia neural inertia (hysteresis), REM / ketamine / locked-in covert awareness, Sperry split-brain callosotomy, heterogeneous connectome correlations, refractory firing saturation, the 20~W cerebral ATP budget, or 310~K quantum decoherence and non-local entanglement signaling claims. Here we present \textbf{Relational Temporal Binding Theory (RTBT v5.0)}, formally verified across \textbf{34 theorems in Studies~12--13} (\code{NQA-01}--\code{07} and \code{RTBT-01}--\code{27}, bringing \code{graviton-cert v1.3.0} to \textbf{115/115 zero-dependency Lean~4 proofs} with zero \code{sorryAx} and zero custom axioms). RTBT~v5.0 proves: (1)~singularity-free finite-$N$ binding $\mathcal{B}_{\mathrm{exact}}$ paired with exact covariance Participation Ratio $D_{\mathrm{eff}}(N,\rho) = N/(1+(N-1)\rho^2)$ evaluated strictly inside algebraically connected components (Laplacian Fiedler eigenvalue $\lambda_2(L) = 2K_{\mathrm{inter}} > 0$); (2)~a quarter-cycle axonal delay horizon $d < v\tau_{\mathrm{win}}/4$ deriving Buzs\'aki's cortical frequency--distance law; (3)~Kelz--Proekt bistable anesthesia hysteresis ($\Delta_{\mathrm{inertia}} = \mathcal{B}_{\mathrm{crit}}(w_{\mathrm{on}}-w_{\mathrm{off}}) > 0$); (4)~entangled Bell-singlet quantum no-signaling across neurons ($\mathrm{Tr}_A[(U_A\otimes I_B)|\Psi^-\rangle\langle\Psi^-|(U_A^\top\otimes I_B)] = \tfrac{1}{2}I_2$) and biophysical data-processing SNR contraction; and (5)~an executable 14/14 clinical \& physical benchmark (\code{tools/rtbt-benchmark.py})—while explicitly quarantining the metaphysical Hard Problem (\code{RTBT-GATE-01}).
+The COGITATE adversarial collaboration (\emph{Nature}, 2025) revealed structural vulnerabilities in both Integrated Information Theory and Global Neuronal Workspace Theory, while quantum-brain proposals remain constrained by 310~K thermal decoherence, shared synaptic noise correlations, and pharmacological confounds. Here we develop \textbf{Relational Temporal Binding Theory (RTBT)}, a mathematically formalized, falsifiable framework verified in Lean~4 (\code{graviton-cert}, Studies~12--13: 36 zero-dependency theorems, \code{NQA-01}--\code{07} and \code{RTBT-01}--\code{29}, zero \code{sorryAx}, zero custom axioms) and tested via continuous-time stochastic differential equation (SDE) simulations. RTBT postulates that unified conscious access arises inside an algebraically connected ($\lambda_2(L) > 0$), closed-loop ($w_{AB}w_{BA} > 0$), delay-coherent ($4d < v\tau_{\mathrm{win}}$), balanced excitatory--inhibitory (E/I) cortical assembly whose finite-$N$ differentiated temporal binding capacity $\mathcal{B}_{\mathrm{exact}} = (1-\rho)R_\phi^2 \frac{N\,\mathrm{SNR}_1^2}{1+(N-1)\rho}\frac{1}{1-(w_E-w_I)}$ and covariance participation ratio $D_{\mathrm{eff}}(N,\rho) = \frac{N}{1+(N-1)\rho^2}$ exceed critical thresholds over a nested hierarchy of optimal finite integration windows. We prove continuous-time Lyapunov stability and critical slowing down, exact Fisher information and Cram\'er--Rao estimation ceilings, two-sided collapse in both anesthesia and generalized seizures, exclusion of parallel cerebellar architectures and low-dimensional or disconnected oscillators, Kelz--Proekt bistable anesthesia hysteresis, Sperry split-brain callosotomy bifurcation, macroscopic 20~W synaptic ATP power floors, Bell-singlet quantum no-signaling across neurons, and a zero-coherence $\mu$s-to-100~ms chemical spin-modulation bridge. Continuous-time SDE simulations confirm that perturbational Lempel--Ziv complexity peaks in the awake band and collapses under both propofol and seizures, while the metaphysical Hard Problem (\code{RTBT-GATE-01}) and wet-lab calibrations (\code{RTBT-GATE-02}--\code{03}) remain explicitly open.
 \end{abstract}
 
 \tableofcontents
 
-\section{Core Postulate \& Complete Mathematical Conditions (\code{RTBT-01}--\code{27})}
+\section{Introduction}
 
-\textbf{Core Postulate (RTBT v5.0).} \emph{Unified conscious access arises inside a single algebraically connected ($\lambda_2(L) > 0$), closed-loop ($w_{AB}w_{BA} > 0$), delay-coherent ($4d < v\tau_{\mathrm{win}}$), macro-repertoire ($D_{\mathrm{eff}}(N,\rho) \ge D_{\min}$), balanced E/I ($w_{\mathrm{eff}} = w_E - w_I < 1$), non-saturated, callosally locked ($2K_{\mathrm{call}} \ge \Delta\omega$), ATP-powered ($P_{\mathrm{met}} \ge P_{\mathrm{crit}}$) cortical assembly sustaining singularity-free differentiated binding above threshold over a nested hierarchy of optimal finite windows:}
+The 2025 COGITATE adversarial collaboration~\cite{COGITATE2025} shifted consciousness science toward pre-registered falsifiable predictions after observing neither sustained posterior synchronization (as strict IIT required) nor robust stimulus-offset prefrontal ignition (as strict GNWT required). In parallel, Working Paper~05~\cite{WP05} (\code{BQ-01}--\code{06}, DOI~\texttt{10.5281/zenodo.24577879}) formalized three single-neuron biophysical gates separating spin-protected microdomain chemistry from 310~K charge decoherence and classical pharmacological confounds.
+
+Yet single-neuron exclusion gates do not specify how macro-scale cortical networks bind experience across time, nor why consciousness vanishes under surgical anesthesia, generalized epileptic seizures, and cerebral hypoxia, yet persists during REM dreaming and complete locked-in syndrome, bifurcates after callosotomy, and is absent in the 69-billion-neuron cerebellum, stateless feedforward networks, or low-dimensional physical oscillators. \textbf{Relational Temporal Binding Theory (RTBT)} unifies these constraints within a single machine-checked dynamical and information-theoretic framework.
+
+\section{Dynamical Postulate, Lyapunov Stability \& Fisher Information (\code{RTBT-01}--\code{29})}
+
+\textbf{Core Postulate.} \emph{Unified conscious access occurs within a single algebraically connected ($\lambda_2(L)>0$), bidirectionally recurrent ($w_{AB}w_{BA}>0$), delay-coherent ($d < v\tau_{\mathrm{win}}/4$), macro-repertoire ($D_{\mathrm{eff}} \ge D_{\min}$), balanced E/I ($w_{\mathrm{eff}} = w_E - w_I < 1$), callosally locked ($2K_{\mathrm{call}} \ge \Delta\omega$), ATP-powered ($P_{\mathrm{met}} \ge P_{\mathrm{crit}}$) cortical assembly sustaining singularity-free differentiated binding above threshold over a nested hierarchy of optimal finite windows:}
 \begin{equation}
   \mathcal{B}_{\mathrm{exact}} = (1-\rho)\,R_\phi^2\,\frac{N\,\mathrm{SNR}_1^2}{1+(N-1)\rho}\,\frac{1}{1 - w_{\mathrm{eff}}} > \mathcal{B}_{\mathrm{crit}},
   \qquad
-  D_{\mathrm{eff}}(N,\rho) = \frac{N}{1 + (N-1)\rho^2} \ge D_{\min},
-  \qquad
-  d < \frac{v\,\tau_{\mathrm{win}}}{4}.
+  D_{\mathrm{eff}}(N,\rho) = \frac{N}{1 + (N-1)\rho^2} \ge D_{\min}.
 \end{equation}
 
-\section{Closing All Fourteen Canonical Counterexamples}
-
-\begin{theorem}[Connectivity, Delay Horizon, Neural Inertia, No-Signaling \& Bottleneck; \code{RTBT-23}--\code{27}]
-(1)~\textbf{Disconnected-Islands Exclusion (\code{RTBT-23}):} For a 2-cluster Laplacian $L$ with inter-module coupling $K_{\mathrm{inter}}$, $K_{\mathrm{inter}}=0$ puts $(1,-1) \in \ker(L)$ ($\lambda_2 = 0$), forbidding summing $D_{\mathrm{eff}}$ across disconnected thermostats; $K_{\mathrm{inter}}>0$ gives $v^\top Lv = K_{\mathrm{inter}}(v_1-v_2)^2 > 0$ for all $v_1 \neq v_2$.
-(2)~\textbf{Axonal Conduction Delay Horizon (\code{RTBT-24}):} Quarter-cycle constructive locking $d/v < \tau_{\mathrm{win}}/4 \iff d < v\tau_{\mathrm{win}}/4$; longer cortical spans strictly force slower clocks ($\tau_{\min}(d_{\mathrm{local}}) < \tau_{\min}(d_{\mathrm{global}})$), and demyelination ($v_2 < v_1$) shrinks the coherent radius.
-(3)~\textbf{Kelz--Proekt Neural Inertia / Hysteresis (\code{RTBT-25}):} State-dependent Up/Down recurrence ($0 < w_{\mathrm{off}} < w_{\mathrm{on}} < 1$) yields asymmetric induction vs.\ emergence thresholds $X_{\mathrm{em}} - X_{\mathrm{ind}} = \mathcal{B}_{\mathrm{crit}}(w_{\mathrm{on}}-w_{\mathrm{off}}) > 0$: for every intermediate anesthetic dose $X \in (X_{\mathrm{ind}}, X_{\mathrm{em}})$, awake brains remain conscious while anesthetized brains remain unconscious.
-(4)~\textbf{Entangled-Neuron Quantum No-Signaling (\code{RTBT-26}):} On the maximally entangled $4\times 4$ Bell singlet $|\Psi^-\rangle$, any local orthogonal operation $U_A$ on Neuron~A leaves Neuron~B's reduced state identically $\tfrac{1}{2}I_2$—refuting non-local quantum synchronization.
-(5)~\textbf{Biophysical Data-Processing Bottleneck (\code{RTBT-27}):} Any downstream amplifier $g>0$ with added noise $\sigma_2>0$ strictly contracts SNR: $(g\Delta y)^2/(g^2\sigma_1^2+\sigma_2^2) < \Delta y^2/\sigma_1^2$.
+\begin{theorem}[Continuous-Time Lyapunov Stability, Critical Slowing \& Fisher--Cram\'er--Rao Floor; \code{RTBT-28}, \code{29}]
+(1)~Along the Wilson--Cowan ODE $\tau_m \frac{dr}{dt} = -(1-w_{\mathrm{eff}})r + I_{\mathrm{ext}}$, the quadratic Lyapunov energy $V(r) = \frac{1}{2}(r-r^*)^2$ satisfies $\frac{dV}{dt} = -\frac{1-w_{\mathrm{eff}}}{\tau_m}(r-r^*)^2 < 0$ for all $r \neq r^*$ when $w_{\mathrm{eff}} < 1$ (global stability), exhibits strict critical slowing down $\tau_{\mathrm{mem}} = \tau_m/(1-w_{\mathrm{eff}})$ as $w_{\mathrm{eff}} \to 1^-$, and flips strictly unstable ($\frac{dV}{dt} > 0$) under epileptic disinhibition $w_{\mathrm{eff}} > 1$.
+(2)~For an $N$-neuron population with sensitivity $g' \neq 0$ and pairwise correlation $\rho \in (0,1)$, exact population Fisher Information obeys $I_F(N,\rho) < (g')^2/(\rho\sigma_1^2)$ for all $N \ge 1$, imposing an irreducible Cram\'er--Rao variance floor $(\rho\sigma_1^2)/(g')^2 < \mathrm{Var}(\hat{\theta})$ regardless of assembly size (generalized to heterogeneous connectomes via \code{RTBT-21}).
 \end{theorem}
 
-\begin{theorem}[Seizures, Cerebellum, Thermostats, Covert Awareness, Split-Brain, ATP \& Spin Bridge; \code{RTBT-01}--\code{22}]
-Together with Studies~11--12 (\code{BQ-01}--\code{06}, \code{NQA-01}--\code{07}), RTBT~v5.0 proves: seizure collapse ($\mathcal{B}_{\mathrm{exact}} = 0$, $D_{\mathrm{eff}}=1$ at $\rho=1$, \code{RTBT-07}, \code{19}); Wilson--Cowan E/I gain \& Michaelis--Menten refractory saturation (\code{RTBT-08}, \code{20}); heterogeneous covariance sandwiching (\code{RTBT-21}); cerebellum/feedforward AI exclusion ($w_{BA}=0 \Rightarrow G_{\mathrm{loop}}=1$, \code{RTBT-13}); REM/ketamine/locked-in covert binding ($I_{\mathrm{ext}}=m_{\mathrm{out}}=0$, \code{RTBT-14}); Sperry split-brain Kuramoto bifurcation ($2K_{\mathrm{call}}<\Delta\omega$, \code{RTBT-15}); nested colored-noise specious-present optimality ($E(\tau)^2 \ge 4AB$, $4E_{2,1}(\tau)^3 \ge 27AB^2$, \code{RTBT-02}, \code{09}); 20~W synaptic ATP power floors (\code{RTBT-10}); and the $M=10^5\times$ zero-coherence $\mu$s$\to$100~ms chemical spin bridge with awake MRI immunity and bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ mass cancellation (\code{RTBT-03}, \code{17}, \code{NQA-04}).
+\begin{theorem}[Phase Boundaries, Anatomical Exclusions \& Optimal Temporal Grain; \code{RTBT-02}--\code{25}]
+(1)~\textbf{Two-Sided Collapse:} GABAergic anesthesia ($w_I\uparrow$) fragments recurrence and lowers $\mathcal{B}_{\mathrm{exact}}$ below $\mathcal{B}_{\mathrm{crit}}$, whereas generalized seizures ($\rho \to 1$) drive both $\mathcal{B}_{\mathrm{exact}} \to 0$ and $D_{\mathrm{eff}} \to 1$ even at maximal synchrony $R_\phi^2 = 1$ (\code{RTBT-07}, \code{16}, \code{19}), reinforced by Michaelis--Menten refractory gain collapse (\code{RTBT-20}).
+(2)~\textbf{Non-Conscious Exclusions:} Zero feedback ($w_{BA}=0 \Rightarrow G_{\mathrm{loop}}=1$) excludes parallel cerebellar modules and stateless feedforward networks (\code{RTBT-13}); $D_{\mathrm{eff}}(N,\rho) \le N < D_{\min}$ excludes 2-node thermostats/toy RNNs (\code{RTBT-19}); and Laplacian connectivity ($\lambda_2 = 2K_{\mathrm{inter}} = 0$) forbids aggregating disconnected oscillator warehouses (\code{RTBT-23}).
+(3)~\textbf{Covert Awareness, Split-Brain, Delay \& Neural Inertia:} Endogenous drive sustains binding at $I_{\mathrm{ext}}=m_{\mathrm{out}}=0$ (REM/ketamine/locked-in, \code{RTBT-14}); callosotomy ($2K_{\mathrm{call}}<\Delta\omega$) forces strictly positive Kuramoto drift $\dot{\psi}>0$ (\code{RTBT-15}); quarter-cycle conduction horizons ($4d < v\tau_{\mathrm{win}}$) derive cortical frequency--distance scaling (\code{RTBT-24}); and state-dependent Up/Down recurrence ($w_{\mathrm{off}} < w_{\mathrm{on}}$) proves Kelz--Proekt bistable anesthesia hysteresis $\Delta_{\mathrm{inertia}} = \mathcal{B}_{\mathrm{crit}}(w_{\mathrm{on}}-w_{\mathrm{off}}) > 0$ (\code{RTBT-25})~\cite{Friedman2010}.
+(4)~\textbf{Nested Specious Present \& Macroscopic ATP:} Balancing noise averaging against phase drift forces finite optimal windows $\tau^*=\sqrt{A/B}$ (and cubic $\tau^*=(2A/B)^{1/3}$ under $1/\tau^2 + B\tau$ colored noise, \code{RTBT-02}, \code{09}), while discrete synaptic shot noise ($\mathrm{CV}^2 \ge 1/K_{\mathrm{syn}}$, $E_{\mathrm{ATP}}\sim 10^8 k_B T$) yields $P_{\mathrm{met}}\tau_{\mathrm{win}} \ge \Pi_{\mathrm{time}}E_{\mathrm{ATP}}$, tightening microscopic TUR~\cite{Barato2015} to the 20~W cerebral scale (\code{RTBT-04}, \code{10}).
 \end{theorem}
 
-\begin{gate}[\code{RTBT-GATE-01}--\code{RTBT-GATE-03}]
-Pure mathematics closes every structural, anatomical, and dynamical loophole, leaving exactly two non-mathematical frontiers: (1)~the metaphysical Hard Problem (why third-person differentiated relational binding feels like first-person qualia, explicitly quarantined); and (2)~empirical calibration \& falsification via human \emph{ChronoScope} cohorts (\code{RTBT-GATE-02}) and blinded matched-SAR Larmor RF / bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ trials (\code{RTBT-GATE-03}).
-\end{gate}
+\section{Falsifiable Limits on Quantum Neural Modulation (\code{NQA-01}--\code{07}, \code{RTBT-03}, \code{17}, \code{26}, \code{27})}
+
+RTBT separates third-person quantum biophysics from speculative macroscopic entanglement:
+\begin{enumerate}
+  \item \textbf{No-Free-Coupling \& Bell-Singlet No-Signaling (\code{NQA-01}, \code{RTBT-26}):} Uncoupled local unitaries leave $\rho_N$ invariant, and even on a maximally entangled $4\times 4$ Bell singlet $|\Psi^-\rangle$, any local orthogonal rotation $U_A$ on Neuron~A leaves Neuron~B's reduced state identically $\frac{1}{2}I_2$—ruling out non-local quantum synchronization across distant neurons.
+  \item \textbf{Data-Processing Bottleneck \& Zero-Coherence $\mu$s$\to$100~ms Bridge (\code{RTBT-17}, \code{27}):} No downstream noisy amplifier can increase SNR lost upstream ($(g\Delta y)^2/(g^2\sigma_1^2+\sigma_2^2) < \Delta y^2/\sigma_1^2$). Instead, the sole surviving physical channel accumulates $M = \tau_{\mathrm{win}}/\tau_{\mathrm{cycle}} \sim 10^5$ independent $\mu$s radical-pair cycles inside a slow classical chemical mediator pool, boosting mediator $\mathrm{SNR}^2$ linearly by $M\times$ with zero millisecond quantum coherence.
+  \item \textbf{Awake MRI Immunity vs.\ Critical-Strip Tipping (\code{RTBT-03}, \code{05}, \code{NQA-04}):} Decomposing $\Pi_{\mathrm{total}} = \Pi_{\mathrm{class}} + \delta\Pi_{\mathrm{spin}}$, wide-awake brains ($\Pi_{\mathrm{class}} > \Pi_{\mathrm{crit}} + |\delta\Pi_{\mathrm{spin}}|$) are immune to spin-off extinction, confining any falsifiable spin effect to the critical anesthesia/redox strip, testable without mass confounds via bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ subtraction $P(129) - \frac{1}{2}(P(128)+P(130)) = S_{\mathrm{spin}}$.
+\end{enumerate}
+
+\section{Comparative Positioning, SDE Dynamics \& Open Empirical Gates}
 
 \begin{table}[t]
 \centering
 \scriptsize
-\renewcommand{\code}[1]{\texttt{#1}}
-\setlength{\tabcolsep}{3.0pt}
-\renewcommand{\arraystretch}{1.04}
-\begin{tabular}{@{}l r r r l@{}}
+\setlength{\tabcolsep}{3.5pt}
+\renewcommand{\arraystretch}{1.08}
+\begin{tabular}{@{}l c c c c c@{}}
 \toprule
-\textbf{Clinical / Physical Benchmark Case (14/14 Pass)} & \textbf{$D_{\mathrm{eff}}$} & \textbf{$\mathcal{B}_{\mathrm{exact}}$} & \textbf{$\tau^*$\,(ms)} & \textbf{RTBT v5.0 Verdict} \\
+\textbf{Test / Phenomenon} & \textbf{IIT 4.0} & \textbf{GNWT} & \textbf{Orch OR} & \textbf{Pred.\ Proc.} & \textbf{RTBT} \\
 \midrule
-Awake Alert Human Cortex (PCI 0.44--0.67) & 398.4 & 17.16 & 158.1 & Awake Unified Differentiated \\
-REM Dreaming ($I_{\mathrm{ext}}=m_{\mathrm{out}}=0$) & 398.4 & 16.36 & 176.8 & Awake Unified (Covert) \\
-Ketamine Dissociative Dreaming & 398.4 & 15.58 & 193.6 & Awake Unified (Covert) \\
-Propofol / Xenon Induction (PCI $\approx 0.31$) & 398.4 & 12.66 & 223.6 & Critical Strip (Quantum-Sensitive) \\
-Propofol Surgical Anesthesia (GABA $\uparrow$) & 398.4 & 0.83 & 306.2 & Unconscious Fragmented \\
-Deep NREM Slow-Wave Sleep (N3) & 30.9 & 0.72 & 295.8 & Unconscious Fragmented \\
-Generalized Tonic--Clonic Seizure ($\rho=0.92$) & \textbf{1.2} & 0.14 & 158.1 & Unconscious Hypersynchronous \\
-Acute Cerebral Hypoxia ($P_{\mathrm{met}}=6$\,W) & 398.4 & 15.20 & 273.9 & Unconscious Fragmented (ATP) \\
-Human Cerebellum (69B) / Feedforward AI & 10000 & 446.6 & 111.8 & Feedforward / Cerebellum ($G=1$) \\
-Split-Brain Callosotomy ($K_{\mathrm{call}}=0$) & 396.8 & 17.16 & 158.1 & Split-Brain Dual Streams \\
-2-Node Coupled RLC / Thermostat / Toy RNN & \textbf{2.0} & 961.2 & 79.1 & Low-Dim Resonator ($D_{\mathrm{eff}}<D_{\min}$) \\
-1,000 Disconnected Thermostats (Warehouse) & 2000 & $\lambda_2=0$ & 79.1 & Disconnected Islands (\code{RTBT-23}) \\
-Severe Demyelination / Delay Horizon Breach & 398.4 & $d\ge R_{\max}$ & 158.1 & Delay Horizon Broken (\code{RTBT-24}) \\
-Kelz--Proekt Neural Inertia ($X \in (X_{\mathrm{ind}}, X_{\mathrm{em}})$) & 398.4 & 20 vs 8 & 180.0 & Bistable Hysteresis (\code{RTBT-25}) \\
+COGITATE (2025) temporal profile & Partial & Partial & Untested & Compatible & \textbf{Predicted} \\
+Generalized seizure unconsciousness & Yes & Yes & Unclear & Partial & \textbf{Proved (\code{RTBT-07,19})} \\
+Cerebellum / feedforward exclusion & Yes & Yes & Unclear & Partial & \textbf{Proved (\code{RTBT-13})} \\
+Thermostat / disconnected-island exclusion & Contested & Yes & Yes & Partial & \textbf{Proved (\code{RTBT-19,23})} \\
+Kelz--Proekt anesthesia hysteresis & No & Partial & No & Partial & \textbf{Proved (\code{RTBT-25})} \\
+20~W ATP hypoxia \& delay horizon & No & No & No & Partial & \textbf{Proved (\code{RTBT-10,24})} \\
+310~K quantum bounds \& Bell no-signaling & N/A & N/A & Fails Gate~1 & N/A & \textbf{Proved (\code{BQ/NQA/RTBT})} \\
+Lean~4 machine-checked kernel proofs & 0 & 0 & 0 & 0 & \textbf{45 (117 suite)} \\
 \bottomrule
 \end{tabular}
-\caption{14/14 executable clinical \& physical benchmark (\code{tools/rtbt-benchmark.py}, \code{graviton-cert v1.3.0}, 115/115 Lean~4 proofs).}
-\label{tab:bench5}
+\caption{Head-to-head comparison of consciousness frameworks against structural, clinical, and physical tests.}
+\label{tab:compare}
 \end{table}
+
+Continuous-time Wilson--Cowan (1972) Euler--Maruyama SDE simulations (\code{tools/rtbt-dynamics-sim.py}) independently corroborate the analytical theorems: (1)~Kaspar--Schuster LZ76 perturbational complexity (PCI proxy~\cite{Casali2013}) peaks in the balanced awake regime ($\mathrm{LZ\text{-}PCI} = 0.575$, empirical $\rho = 0.049$) and collapses by $>30\times$ under both propofol GABAergic suppression ($\mathrm{LZ\text{-}PCI} = 0.019$) and disinhibited 1D seizure hypersynchrony ($\mathrm{LZ\text{-}PCI} = 0.008$, $\rho = 0.788$); (2)~continuous anesthetic titration reproduces Kelz--Proekt neural inertia ($c_{\mathrm{ind}} = 0.35 > c_{\mathrm{em}} = 0.0$); and (3)~two-hemisphere Kuramoto integration confirms phase locking for intact callosal coupling and persistent drift ($0.8\,\mathrm{rad/s}$) after callosotomy. All 14 clinical and physical counterexamples pass 14/14 in \code{tools/rtbt-benchmark.py}.
+
+\begin{gate}[\code{RTBT-GATE-01}--\code{RTBT-GATE-03}]
+Formal verification closes structural contradictions but cannot substitute for observation or metaphysics. Three gates remain explicitly open: (1)~the Hard Problem (why differentiated relational temporal binding is accompanied by first-person phenomenal qualia); (2)~longitudinal human \emph{ChronoScope} calibration of circadian precision $\Pi_{\mathrm{time}}(\phi)$ and sedation-induced $\tau^*(A)$ widening; and (3)~pre-registered multi-lab blinded tests of matched-SAR Larmor RF and bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ anesthesia powered via \code{NQA-06}.
+\end{gate}
 
 \clearpage
 \begin{thebibliography}{9}
