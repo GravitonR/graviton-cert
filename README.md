@@ -89,7 +89,12 @@ python3 tools/rtbt-eeg-analyzer.py \
 # Analyze any local .edf or multi-channel .csv human EEG recording
 python3 tools/rtbt-eeg-analyzer.py path/to/recording.edf --start 0 --duration 20 --json
 python3 tools/rtbt-eeg-analyzer.py path/to/recording.csv --sfreq 250 --duration 20
+
+# Reproduce the 55-subject (145-epoch) multi-cohort PhysioNet validation audit
+python3 tools/rtbt-cohort-benchmark.py --n-hmc 20 --n-chb 15 --n-mmidb 20
 ```
+
+See [AUDITS/rtbt-cohort-validation.md](AUDITS/rtbt-cohort-validation.md) for the full 55-subject statistical results (HMC Wake vs. N3 AUROC `0.914`, $p = 3.81 \times 10^{-6}$; Covert REM vs. N3 `RTBT-14` AUROC `0.946`, $p = 3.81 \times 10^{-6}$; EEGMMIDB Eyes-Closed specificity `20/20`; CHB-MIT seizure audit and failure-mode analysis).
 
 > **Epistemic Quarantine (`RTBT-GATE-01`):** Research biomarker tool only — not a medical device or clinical diagnostic instrument, and makes no claim to measure subjective qualia. Uncleaned ocular blink artifacts in eyes-open frontal EEG can elevate `1–4 Hz` delta power independently of consciousness state.
 

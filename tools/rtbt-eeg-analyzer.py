@@ -176,14 +176,14 @@ def hilbert_envelope(x: Sequence[float]) -> List[float]:
     return [abs(buf[i]) for i in range(n)]
 
 
-def welch_band_powers(x: Sequence[float], sfreq: float) -> Dict[str, float]:
-    """Compute normalized Welch PSD band fractions (delta, theta, alpha, beta, gamma)."""
+def welch_band_powers(x: Sequence[float], sfreq: float) -> Tuple[Dict[str, float], float]:
+    """Compute normalized Welch PSD band fractions and normalized spectral entropy H_spec in [0, 1]."""
     n = len(x)
     win_len = min(_next_pow2(int(sfreq * 2.0)), _next_pow2(max(64, n // 2)))
     if win_len > n:
         win_len = _next_pow2(n) >> 1
     if win_len < 32:
-        return {"delta": 0.0, "theta": 0.0, "alpha": 0.0, "beta": 0.0, "gamma": 0.0}
+        return {"delta": 0.0, "theta": 0.0, "alpha": 0.0, "beta": 0.0, "gamma": 0.0}, 0.0
 
     step = max(1, win_len // 2)
     hann = [0.5 * (1.0 - math.cos(2.0 * math.pi * i / (win_len - 1))) for i in range(win_len)]
@@ -198,7 +198,7 @@ def welch_band_powers(x: Sequence[float], sfreq: float) -> Dict[str, float]:
         n_seg += 1
 
     if n_seg == 0:
-        return {"delta": 0.0, "theta": 0.0, "alpha": 0.0, "beta": 0.0, "gamma": 0.0}
+        return {"delta": 0.0, "theta": 0.0, "alpha": 0.0, "beta": 0.0, "gamma": 0.0}, 0.0
 
     df = sfreq / win_len
     bands = {
@@ -209,17 +209,26 @@ def welch_band_powers(x: Sequence[float], sfreq: float) -> Dict[str, float]:
         "gamma": (30.0, 45.0),
     }
     raw = {b: 0.0 for b in bands}
+    in_band_p = []
     total = 0.0
     for k, p in enumerate(psd):
         fk = k * df
-        if 0.5 <= fk <= 45.0:
+        if 1.0 <= fk <= 45.0:
             total += p
+            in_band_p.append(p)
             for b, (lo, hi) in bands.items():
                 if lo <= fk < hi:
                     raw[b] += p
-    if total <= 1e-18:
-        return {b: 0.0 for b in bands}
-    return {b: raw[b] / total for b in bands}
+    if total <= 1e-18 or len(in_band_p) <= 1:
+        return {b: 0.0 for b in bands}, 0.0
+
+    h = 0.0
+    for p in in_band_p:
+        pk = p / total
+        if pk > 1e-15:
+            h -= pk * math.log(pk)
+    h_norm = h / math.log(len(in_band_p))
+    return {b: raw[b] / total for b in bands}, h_norm
 
 
 def autocorrelation_timescales(x: Sequence[float], sfreq: float, max_lag_s: float = 0.50) -> Tuple[float, float]:
@@ -794,21 +803,27 @@ def analyze_eeg_epoch(
     # 2. Graph Laplacian Fiedler Algebraic Connectivity lambda_2 (RTBT-23)
     lambda2_unnorm, lambda2_norm = graph_laplacian_fiedler(C)
 
-    # 3. Cortical Memory Timescale tau_mem (RTBT-28, Critical Slowing Down)
+    # 3. Cortical Memory Timescale tau_mem (RTBT-28, Critical Slowing Down) & Spectral Entropy
+    # Using channel medians suppresses localized frontal eye-blink / electrode pop artifacts
+    # on dense scalp caps without requiring ICA.
     tau_e_list = []
     tau_int_list = []
-    band_acc = {"delta": 0.0, "theta": 0.0, "alpha": 0.0, "beta": 0.0, "gamma": 0.0}
+    h_spec_list = []
+    band_lists: Dict[str, List[float]] = {"delta": [], "theta": [], "alpha": [], "beta": [], "gamma": []}
     for s in clean:
         te, ti = autocorrelation_timescales(s, eff_sfreq, max_lag_s=0.50)
         tau_e_list.append(te)
         tau_int_list.append(ti)
-        bpw = welch_band_powers(s, eff_sfreq)
-        for k in band_acc:
-            band_acc[k] += bpw[k]
+        bpw, h_spec = welch_band_powers(s, eff_sfreq)
+        h_spec_list.append(h_spec)
+        for k in band_lists:
+            band_lists[k].append(bpw[k])
 
-    tau_1e_ms = sum(tau_e_list) / n_ch
-    tau_int_ms = sum(tau_int_list) / n_ch
-    bands = {k: round(v / n_ch, 4) for k, v in band_acc.items()}
+    tau_1e_ms = _median(tau_e_list)
+    tau_1e_mean_ms = sum(tau_e_list) / n_ch
+    tau_int_ms = _median(tau_int_list)
+    spectral_entropy = _median(h_spec_list)
+    bands = {k: round(_median(v), 4) for k, v in band_lists.items()}
 
     # 4. Exact Kaspar-Schuster / Schartner LZ76 Complexity (RTBT-22)
     lz_single, lz_joint = compute_eeg_lz76(clean, eff_sfreq)
@@ -816,7 +831,13 @@ def analyze_eeg_epoch(
     # 5. Dimensionless RTBT Empirical Binding Index B_hat & Phase Classification
     fast_frac = bands["alpha"] + bands["beta"] + bands["gamma"]
     slow_frac = bands["delta"]
-    b_index = (1.0 - rho_abs_mean) * d_eff_ratio * lz_single * (1.0 - 0.65 * slow_frac) * (100.0 / (100.0 + tau_int_ms))
+    b_index = (
+        (1.0 - rho_abs_mean)
+        * d_eff_ratio
+        * lz_single
+        * spectral_entropy
+        * (100.0 / (100.0 + tau_int_ms))
+    )
 
     # Mechanistic RTBT phase classification (empirically calibrated for 1-45 Hz scalp EEG):
     # Separates differentiated Wake/REM from both ictal hypersynchrony (RTBT-07/16/19)
@@ -824,10 +845,10 @@ def analyze_eeg_epoch(
     if lz_single < 0.68 and d_eff_ratio < 0.26 and rho_abs_mean >= 0.31:
         phase = "UNCONSCIOUS_HYPERSYNCHRONOUS"
         theorem_ref = "RTBT-07 / RTBT-16 / RTBT-19 (hypersynchronous dimensionality & complexity collapse)"
-    elif slow_frac >= 0.58 and tau_1e_ms >= 44.0 and lz_single < 0.82:
+    elif slow_frac >= 0.56 and tau_1e_ms >= 44.0 and lz_single < 0.84:
         phase = "UNCONSCIOUS_SLOWWAVE_FRAGMENTED"
         theorem_ref = "RTBT-01 / RTBT-28 (slow-wave critical slowing & complexity collapse)"
-    elif lz_single < 0.72 or (slow_frac >= 0.52 and tau_1e_ms >= 44.0):
+    elif lz_single < 0.72 or (slow_frac >= 0.52 and tau_1e_ms >= 44.0 and lz_single < 0.85):
         phase = "CRITICAL_BOUNDARY_TRANSITION"
         theorem_ref = "RTBT-03 / RTBT-25 / RTBT-28 (boundary slowing / transitional strip)"
     else:
@@ -849,7 +870,9 @@ def analyze_eeg_epoch(
             "fiedler_lambda2_unnorm": round(lambda2_unnorm, 4),
             "fiedler_lambda2_norm": round(lambda2_norm, 4),
             "tau_1e_ms": round(tau_1e_ms, 2),
+            "tau_1e_mean_ms": round(tau_1e_mean_ms, 2),
             "tau_int_ms": round(tau_int_ms, 2),
+            "spectral_entropy": round(spectral_entropy, 4),
             "lz76_single_mean": round(lz_single, 4),
             "lz76_spatiotemporal": round(lz_joint, 4),
             "bands": bands,
