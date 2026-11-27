@@ -1,0 +1,176 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=0.92in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!60!black,citecolor=blue!60!black,urlcolor=blue!60!black]{hyperref}
+\emergencystretch=2em
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{gate}[theorem]{Open Gate}
+
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\Ftwo}{\mathbb{F}_2}
+\newcommand{\wt}{\mathrm{wt}}
+
+\title{\textbf{Machine-Checked Verification of NIST HQC Algebra, \code{CVE-2025-48946} Remediation, Hybrid KEM Binding, and Division-Free Constant-Time Arithmetic in Lean~4}}
+
+\author{
+  Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \href{https://orcid.org/0009-0005-4331-0409}{0009-0005-4331-0409}. Permanent Lean~4 verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \code{v0.6.0}, Zenodo Concept DOI: \href{https://doi.org/10.5281/zenodo.24570905}{10.5281/zenodo.24570905}).}
+}
+
+\date{November 26, 2026}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Following NIST's March~2025 selection of Hamming Quasi-Cyclic (HQC) as its code-based backup Key Encapsulation Mechanism (KEM) alongside ML-KEM (FIPS~203) and ahead of NSA CNSA~2.0 commercial procurement mandates (January~2027), formal verification remains heavily skewed toward lattice schemes. Real-world post-quantum failures—including secret-dependent timing leaks (KyberSlash / \code{CVE-2024-36405}), malformed-ciphertext implicit-rejection collisions (\code{CVE-2025-48946}), weak hybrid KEM combiners lacking \code{MAL-BIND} security, and unverified boundary bugs—frequently fall between abstract security proofs and deployed software. We present a zero-dependency Lean~4 formalization (\code{HQC-01}--\code{HQC-10}, zero \code{sorryAx}, zero custom axioms) and an executable static/differential auditor (\code{tools/pqc-audit.py}). We prove: (i)~universal ring laws in $\Ftwo[X]/\langle X^n-1\rangle$, exact HQC decryption noise cancellation $v \oplus u\cdot y = mG \oplus (x\cdot r_2 \oplus r_1\cdot y \oplus e)$, and the universal Hamming-weight ceiling $\wt(e') \le \wt(x)\wt(r_2) + \wt(r_1)\wt(y) + \wt(e)$ for all $n>0$; (ii)~exact MDS Singleton geometry and positive padding slack ($5, 11, 37$ bits) across official NIST HQC-128/192/256 parameters; (iii)~constructive collision witnesses for \code{CVE-2025-48946} alongside strict non-collision and domain separation for full-$(pk,ct)$-bound implicit rejection; (iv)~an explicit \code{MAL-BIND} counterexample breaking naive XOR hybrid combiners versus X-Wing-style bound combiners and middlebox downgrade collapse; and (v)~branchless \code{UInt64} \code{cmov} and division-free ML-KEM Barrett reduction ($q=3329$, exact floor $m=20158=\lfloor 2^{26}/3329\rfloor$), documenting an unsigned underflow bug caught directly by Lean~4 when using rounded $20159$ at $x=11{,}032{,}241$. Finally, we report a concrete audit of live \code{open-quantum-safe/liboqs} (\code{3ad27a3}) and quarantine probabilistic decryption failure rates, physical EM/power masking, and compiler assembly preservation as typed Open Security Gates.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+%======================================================================
+\section{Introduction: Closing the Post-Quantum Verification Gaps}
+%======================================================================
+
+Production post-quantum cryptography (PQC) rarely breaks in asymptotic hardness assumptions; it breaks at the boundary between mathematical specifications and deployed implementations. Four concrete failure classes dominate the 2024--2026 PQC landscape:
+\begin{enumerate}
+  \item \textbf{HQC formalization scarcity:} While ML-KEM enjoys multiple machine-checked stacks (\code{mlkem-native}, \code{libcrux}), NIST's newly selected code-based backup KEM \textbf{HQC} (March~2025) lacks accessible, zero-dependency kernel-checked algebraic and protocol proofs.
+  \item \textbf{Implicit-rejection collisions (\code{CVE-2025-48946}):} Omitting full canonical ciphertext binding from Fujisaki--Okamoto implicit rejection allows distinct malformed ciphertexts to collide onto identical shared secrets.
+  \item \textbf{Hybrid combiner and downgrade failures:} Naive XOR hybrid combiners violate ciphertext/key binding (\code{MAL-BIND}), while enterprise middleboxes stripping PQC extensions silently downgrade hybrid handshakes to classical-only cryptography unless fallback is prohibited.
+  \item \textbf{Secret-dependent division and arithmetic underflow (KyberSlash / \code{CVE-2024-36405}):} Variable-time division instructions (\code{/}, \code{\%}) leak secret keys via timing, while rounded Barrett multipliers can silently underflow unsigned domains.
+\end{enumerate}
+
+To address all four without heavy external libraries, we introduce Study~8 of \code{graviton-cert} (\code{PostQuantumHQC.lean}, \code{HQC-01}--\code{HQC-10}) paired with a practical CLI auditor (\code{tools/pqc-audit.py}) and a live audit of \code{open-quantum-safe/liboqs}.
+
+%======================================================================
+\section{Quasi-Cyclic HQC Ring Algebra and Noise Bounds (\code{HQC-01}--\code{HQC-05})}
+\label{sec:hqc-algebra}
+%======================================================================
+
+Represent elements of $R_n = \Ftwo[X]/\langle X^n - 1\rangle$ ($n > 0$) by Boolean coefficient maps $a : \mathrm{Fin}\,n \to \mathrm{Bool}$, with XOR addition $(a \oplus b)_i = a_i \oplus b_i$ and cyclic convolution $(a \cdot b)_i = \bigoplus_{j=0}^{n-1} (a_j \wedge b_{(i-j)\bmod n})$.
+
+\begin{theorem}[Universal {$\Ftwo[X]/\langle X^n-1\rangle$} Ring Laws; \code{HQC-01}]
+For every $n > 0$ and all $a,b,c \in R_n$: $a \oplus a = 0$, addition is commutative and associative, cyclic multiplication is commutative ($a\cdot b = b\cdot a$) and associative ($(a\cdot b)\cdot c = a\cdot(b\cdot c)$), and distributes over XOR on both sides.
+\end{theorem}
+
+In HQC public-key encryption, the public key is $s = x \oplus h\cdot y$, the ciphertext is $u = r_1 \oplus h\cdot r_2$ and $v = mG \oplus s\cdot r_2 \oplus e$, and decryption computes $v \oplus u\cdot y$.
+
+\begin{theorem}[Exact Noise Cancellation, Hamming Ceiling, and Decoding Gate; \code{HQC-02}--\code{HQC-04}]
+For every $n > 0$ and all $x,y,h,r_1,r_2,e,mG \in R_n$:
+\begin{equation}
+  v \oplus u\cdot y = mG \oplus e', \qquad e' \equiv x\cdot r_2 \oplus r_1\cdot y \oplus e,
+\end{equation}
+and the Hamming weight of the effective noise satisfies the exact universal upper bound
+\begin{equation}
+  \wt(e') \le \wt(x)\,\wt(r_2) + \wt(r_1)\,\wt(y) + \wt(e).
+\end{equation}
+Consequently, for any linear code decoder $\mathrm{Decode}$ of deterministic radius $\delta$, whenever $\wt(x)\wt(r_2) + \wt(r_1)\wt(y) + \wt(e) \le \delta$, HQC decryption recovers $m$ with zero failure.
+\end{theorem}
+
+\begin{theorem}[Official NIST HQC-128 / 192 / 256 Geometry \& Padding Slack; \code{HQC-05}]
+Across all three official NIST HQC parameter sets—\code{HQC-128} ($n=17669$, RS $[46,16,31]$, RM $[384,8,192]$), \code{HQC-192} ($n=35851$, RS $[56,24,33]$, RM $[640,8,320]$), and \code{HQC-256} ($n=57637$, RS $[90,32,59]$, RM $[640,8,320]$):
+\begin{enumerate}
+  \item Every outer Reed--Solomon code satisfies MDS Singleton equality $d_{\mathrm{RS}} = n_{\mathrm{RS}} - k_{\mathrm{RS}} + 1$;
+  \item The concatenated code length fits strictly inside $n$ with positive padding slack $n - n_{\mathrm{RS}}n_{\mathrm{RM}} \in \{5, 11, 37\}$ bits—marking the exact truncation boundary that implementations must zero or cryptographically bind;
+  \item The worst-case deterministic weight $2\omega\omega_r + \omega_e$ strictly exceeds $(d_{\mathrm{RS}}d_{\mathrm{RM}}-1)/2$, formally isolating why HQC operates in the probabilistic decryption-failure regime (\code{HQC-GATE-01}).
+\end{enumerate}
+\end{theorem}
+
+%======================================================================
+\section{\code{CVE-2025-48946}, Hybrid \code{MAL-BIND}, and Anti-KyberSlash (\code{HQC-06}--\code{HQC-10})}
+\label{sec:protocol-ct}
+%======================================================================
+
+\begin{theorem}[\code{CVE-2025-48946} Collision Witness \& Bound Rejection; \code{HQC-06}]
+If implicit rejection omits full ciphertext binding ($K_{\mathrm{rej}} = \mathrm{PRF}(z, pk)$), then every pair of distinct malformed ciphertexts $ct_1 \neq ct_2$ collides onto the identical shared secret $K_{\mathrm{rej}}(ct_1) = K_{\mathrm{rej}}(ct_2)$. Conversely, binding a domain tag, secret $z$, public key $pk$, and full canonical ciphertext $ct$ via a collision-resistant oracle $H(\mathrm{tag}, z, pk, ct)$ guarantees strict \code{MAL-BIND-K-CT}, \code{MAL-BIND-K-PK}, and disjointness of valid versus rejected outputs.
+\end{theorem}
+
+\begin{theorem}[Hybrid Combiner Binding \& Downgrade Collapse; \code{HQC-07}, \code{HQC-08}]
+A naive XOR combiner $K = K_{\mathrm{cl}} \oplus K_{\mathrm{pq}}$ admits trivial collisions ($0\oplus 0 = 1\oplus 1$), violating \code{MAL-BIND}. By contrast, an X-Wing-style domain-separated combiner $K = \mathrm{KDF}(\mathrm{label}, K_1, K_2, ct_1, ct_2, pk_1, pk_2)$ binds the suite label, both ciphertexts, and both public keys. Under an active middlebox downgrade attacker, prohibiting classical fallback preserves security whenever at least one component holds ($\neg\mathrm{clBroken} \vee \neg\mathrm{pqBroken}$), whereas enabling fallback collapses security to classical-only even when PQC is unbroken.
+\end{theorem}
+
+\begin{theorem}[Branchless \code{cmov} and Division-Free ML-KEM Barrett Reduction; \code{HQC-09}]
+For every $a,b : \mathrm{UInt64}$, $\mathrm{ctSelectU64}(m,a,b) = (m \mathbin{\&} a) \mid ((\sim m) \mathbin{\&} b)$ selects $b$ at $m=0$ and $a$ at $m=\sim 0$ without branches. For ML-KEM prime $q = 3329$ and exact floor multiplier $m = \lfloor 2^{26}/3329 \rfloor = 20158$, for every $x < 3329^2 = 11{,}082{,}241$, the division-free reduction
+\begin{equation}
+  r(x) = x - \bigl((x \cdot 20158) \gg 26\bigr)\cdot 3329
+\end{equation}
+never underflows, satisfies $r(x) \equiv x \pmod{3329}$, and obeys $0 \le r(x) < 2\cdot 3329$.
+\end{theorem}
+
+\begin{remark}[Real-Time Underflow Caught by Lean~4]
+Using the rounded signed-16-bit ML-KEM constant $20159$ on the unsigned range $x < 3329^2$ overshoots $2^{26}$ ($20159\cdot 3329 = 67{,}109{,}311 > 67{,}108{,}864$). During Lean~4 proof checking, \code{omega} rejected $20159$, and our differential oracle confirmed explicit unsigned underflow $r(11{,}032{,}241) = -65 < 0$. Replacing $20159$ with the exact floor $20158$ restores universal non-underflow across the entire $q^2$ domain.
+\end{remark}
+
+Theorem~\code{HQC-10} bundles these checks into an executable \code{PQCImplementationAcceptanceGate} that formally rejects unpatched \code{CVE-2025-48946}, XOR combiners, downgrade fallback, and secret-dependent division while certifying Graviton's verified HQC hybrid profile.
+
+%======================================================================
+\section{Live Audit of \code{open-quantum-safe/liboqs} (\code{3ad27a3}) and Open Gates}
+\label{sec:liboqs-audit}
+%======================================================================
+
+Running \code{tools/pqc-audit.py} and manual inspection against \code{open-quantum-safe/liboqs} commit \code{3ad27a3} (November~24, 2026) established:
+\begin{itemize}
+  \item \textbf{\code{src/kem/ml\_kem}:} Zero division/combiner/downgrade findings (hardened via \code{mlkem-native}).
+  \item \textbf{\code{src/kem/hqc/pqc-hqc\_hqc\_common/hqc-kem.c}:} Confirmed \code{CVE-2025-48946} remediation—\code{hash\_j(K\_bar, hash\_ek\_pke, sigma, c\_pke\_u, c\_pke\_v, salt)} binds the complete ciphertext including trailing bits, and selects \code{K\_prime} via branchless masking.
+  \item \textbf{\code{pqc-hqc\_hqc-1\_ref/parameters.h}:} Uses exact floor \code{PARAM\_N\_MU = 243079ULL} ($\lfloor 2^{32}/17669\rfloor$), matching \code{HQC-09}'s exact-floor rule.
+  \item \textbf{Low-severity hygiene finding:} \code{pqc-hqc\_hqc\_avx256\_common/reed\_muller.c} lines~224 and~232 write \code{message / 16} and \code{message \% 16} on secret \code{size\_t message}. While optimizing compilers lower unsigned power-of-2 division to shifts/masks, replacing them with explicit \code{message >> 4} and \code{message \& 15U} removes toolchain dependence.
+\end{itemize}
+
+Three open gates remain explicitly quarantined in \code{epistemic-manifest.json}:
+\begin{gate}[\code{HQC-GATE-01}--\code{HQC-GATE-03}]
+(1)~Machine-checked probabilistic Decryption Failure Rate ($\mathrm{DFR} \le 2^{-\lambda}$) for finite-blocklength RS+RM decoding; (2)~physical EM/power side-channel resistance (higher-order MIMO-SNI masking on ARM Cortex-M and AVX2); and (3)~automated compiled-binary disassembly verification confirming compilers never re-introduce secret-dependent \code{udiv}/\code{idiv} or branches.
+\end{gate}
+
+\begin{table}[t]
+\centering
+\scriptsize
+\renewcommand{\code}[1]{\texttt{#1}}
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+\begin{tabular}{@{}l >{\tiny}l >{\raggedright\arraybackslash}p{7.2cm}@{}}
+\toprule
+\textbf{ID} & {\scriptsize\textbf{Lean~4 Declaration (\code{PostQuantumHQC.*})}} & \textbf{Result Established} \\
+\midrule
+\code{HQC-01} & \code{f2\_cyclic\_ring\_laws} & Universal $\Ftwo[X]/\langle X^n-1\rangle$ ring laws ($n>0$) \\
+\code{HQC-02} & \code{hqc\_exact\_decryption\_noise\_identity} & Exact cancellation $v\oplus u\cdot y = mG\oplus (x r_2\oplus r_1 y\oplus e)$ \\
+\code{HQC-03} & \code{hqc\_hamming\_weight\_submultiplicative\_bound} & Universal noise ceiling $\wt(e')\le \wt(x)\wt(r_2)+\wt(r_1)\wt(y)+\wt(e)$ \\
+\code{HQC-04} & \code{hqc\_deterministic\_decoding\_correctness\_gate} & Zero failure whenever worst-case noise $\le \delta$ \\
+\code{HQC-05} & \code{nist\_hqc\_official\_parameter\_soundness} & Official HQC-128/192/256 MDS geometry \& slack ($5,11,37$ bits) \\
+\code{HQC-06} & \code{cve\_2025\_48946\_implicit\_rejection\_collision\_and\_fix} & \code{CVE-2025-48946} collision witness \& bound rejection non-collision \\
+\code{HQC-07} & \code{hybrid\_kem\_combiner\_mal\_bind\_and\_weak\_counterexample} & Broken XOR combiner counterexample vs.\ X-Wing \code{MAL-BIND} \\
+\code{HQC-08} & \code{hybrid\_kem\_dual\_security\_and\_downgrade\_gate} & Hybrid dual-survival vs.\ middlebox classical downgrade collapse \\
+\code{HQC-09} & \code{constant\_time\_barrett\_and\_cmov\_no\_div\_soundness} & Branchless \code{cmov} \& exact-floor Barrett ($q=3329, m=20158$) \\
+\code{HQC-10} & \code{pqc\_acceptance\_gate\_witness} & Executable \code{PQCImplementationAcceptanceGate} rejecting all 4 flaws \\
+\bottomrule
+\end{tabular}
+\caption{Complete index of the 10 Lean~4 kernel-verified PQC theorems (\code{graviton-cert v0.6.0}, zero \code{sorryAx}, zero custom axioms).}
+\label{tab:hqc}
+\end{table}
+
+\clearpage
+\begin{thebibliography}{9}
+\bibitem{NISTHQC2025}
+National Institute of Standards and Technology, \emph{Status Report on the Fourth Round of the NIST Post-Quantum Cryptography Standardization Process (Selection of HQC)}, NIST IR 8545 (March 2025).
+\bibitem{FIPS203}
+NIST, \emph{Module-Lattice-Based Key-Encapsulation Mechanism Standard (ML-KEM)}, FIPS PUB 203 (August 2024).
+\bibitem{KyberSlash}
+D.~J.~Bernstein, K.~Bhargavan, S.~Bhasin, A.~Chattopadhyay, T.~K.~Chia, M.~J.~Kannwischer, F.~Kiefer, T.~Lukas, P.~Schwabe, and G.~Tamvada, \emph{KyberSlash: Exploiting secret-dependent division timings in Kyber implementations}, IACR ePrint 2024/1049 (2024).
+\bibitem{XWing}
+M.~Barbosa, D.~Connolly, J.~D.~Duarte, A.~Kaiser, P.~Schwabe, K.~Varner, and B.~Westerbaan, \emph{X-Wing: The Hybrid KEM You've Been Looking For}, IACR Trans.\ Symmetric Cryptol.\ / ePrint 2024/039 (2024).
+\bibitem{CremersBinding}
+C.~Cremers, A.~Dax, and N.~Medinger, \emph{Keeping Up with the KEMs: Stronger Security Notions for KEMs and Automated Analysis of KEM-based Protocols}, ACM CCS (2024).
+\bibitem{CVE202548946}
+NVD / Open Quantum Safe Advisory, \emph{CVE-2025-48946: HQC Implicit Rejection Collision Behavior in liboqs prior to 0.13.0} (2025).
+\end{thebibliography}
+
+\end{document}

@@ -92,6 +92,9 @@ class Finding:
     message: str
 
 
+STRING_LIT_RE = re.compile(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'')
+
+
 def scan_file(path: Path) -> List[Finding]:
     findings: List[Finding] = []
     try:
@@ -103,8 +106,9 @@ def scan_file(path: Path) -> List[Finding]:
         stripped = raw_line.strip()
         if not stripped or stripped.startswith(("//", "#", "/*", "*")):
             continue
+        code_only = STRING_LIT_RE.sub('""', raw_line)
         for rule in RULES:
-            if rule["pattern"].search(raw_line):
+            if rule["pattern"].search(code_only):
                 findings.append(
                     Finding(
                         rule_id=rule["id"],

@@ -9,6 +9,7 @@ import GravitonCert.Studies.ObservationWindow
 import GravitonCert.Studies.NullConeGravity
 import GravitonCert.Studies.GeometricMatter
 import GravitonCert.Studies.PostQuantumHQC
+import GravitonCert.Studies.QuantumErrorCorrection
 
 namespace GravitonCert
 
@@ -21,7 +22,8 @@ def allStudies : List StudyCertificate := [
   Studies.ObservationWindow.studyCertificate,
   Studies.NullConeGravity.studyCertificate,
   Studies.GeometricMatter.studyCertificate,
-  Studies.PostQuantumHQC.studyCertificate
+  Studies.PostQuantumHQC.studyCertificate,
+  Studies.QuantumErrorCorrection.studyCertificate
 ]
 
 end GravitonCert
