@@ -12,6 +12,8 @@ import GravitonCert.Studies.PostQuantumHQC
 import GravitonCert.Studies.QuantumErrorCorrection
 import GravitonCert.Studies.PostQuantumAgentAuth
 import GravitonCert.Studies.BioQuantumGates
+import GravitonCert.Studies.NeuralQuantumAssembly
+import GravitonCert.Studies.RelationalTemporalBinding
 
 namespace GravitonCert
 
@@ -27,7 +29,9 @@ def allStudies : List StudyCertificate := [
   Studies.PostQuantumHQC.studyCertificate,
   Studies.QuantumErrorCorrection.studyCertificate,
   Studies.PostQuantumAgentAuth.studyCertificate,
-  Studies.BioQuantumGates.studyCertificate
+  Studies.BioQuantumGates.studyCertificate,
+  Studies.NeuralQuantumAssembly.studyCertificate,
+  Studies.RelationalTemporalBinding.studyCertificate
 ]
 
 end GravitonCert
