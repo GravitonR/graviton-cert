@@ -6,6 +6,7 @@
 
 - **Working Paper 03 Preprint DOI (Warped 5D Gravity):** https://doi.org/10.5281/zenodo.24571255 (all versions: https://doi.org/10.5281/zenodo.24571254)
 - **Working Paper 04 Preprint DOI (Post-Quantum HQC & Hybrid KEM):** https://doi.org/10.5281/zenodo.24576927 (all versions: https://doi.org/10.5281/zenodo.24576926)
+- **Working Paper 05 Preprint DOI (Biophysical Quantum-to-Neuron Gates):** https://doi.org/10.5281/zenodo.24577879 (all versions: https://doi.org/10.5281/zenodo.24577878)
 - **Software Archive DOI (`graviton-cert`):** https://doi.org/10.5281/zenodo.24570906 (all versions: https://doi.org/10.5281/zenodo.24570905)
 - **Live Kernel Audit Ledger:** https://gravitonresearch.org/#kernel-audit
 - **Repository:** https://github.com/GravitonR/graviton-cert
