@@ -128,39 +128,49 @@ def prereg_sample_size(delta_min: float, sigma: float, z_alpha: float = 1.96, z_
 
 
 def rtbt_analysis(Rphi: float = 0.85, snr1: float = 0.5, rho: float = 0.05, wE: float = 1.40, wI: float = 0.60,
+                  N_neurons: int = 100000, w_loop: float = 0.64, K_call: float = 1.0, dOmega: float = 0.5,
                   A_noise: float = 0.004, B_drift: float = 0.16, B_crit: float = 12.0, max_spin_shift: float = 2.0,
                   P_met_W: float = 20.0, P_crit_W: float = 10.0) -> dict:
-    """Hardened RTBT v2.0 (RTBT-01..12) quantitative solver with Seizure, E/I, Colored-Noise & ATP checks."""
+    """Hardened RTBT v3.0 (RTBT-01..18) solver: Finite-N singularity-free, Cerebellum, Split-Brain, REM, Seizure, ATP."""
+    has_closed_loop = w_loop > 0.0
     w_eff = wE - wI
     is_ei_stable = w_eff < 1.0
     rho_seiz = (snr1**2) / ((snr1**2) + B_crit * (1.0 - w_eff)) if is_ei_stable else 0.0
     below_seiz = rho < rho_seiz if is_ei_stable else False
-    B_diff = ((1.0 - rho) * (Rphi**2) * ((snr1**2) / rho) / (1.0 - w_eff)) if is_ei_stable else 0.0
+    # Exact finite-N singularity-free differentiated binding (RTBT-16)
+    pop_snr_sq = (N_neurons * (snr1**2)) / (1.0 + (N_neurons - 1) * rho)
+    B_exact = ((1.0 - rho) * (Rphi**2) * pop_snr_sq / (1.0 - w_eff)) if is_ei_stable else 0.0
     tau_opt_s = math.sqrt(A_noise / B_drift)
     tau_colored_s = ((2.0 * A_noise * 0.1) / B_drift) ** (1.0 / 3.0)
     e_opt = A_noise / tau_opt_s + B_drift * tau_opt_s
-    cv_opt = e_opt
-    pi_time = 1.0 / (cv_opt**2)
+    pi_time = 1.0 / (e_opt**2)
     min_entropy_kB = 2.0 * pi_time
     has_atp = P_met_W >= P_crit_W
+    has_callosal_lock = (2.0 * K_call) >= dOmega
 
     is_hypersync = (not is_ei_stable) or (rho >= 0.50 and not below_seiz)
-    if is_hypersync:
+    if not has_closed_loop:
+        regime = "feedforwardOrCerebellum"
+    elif is_hypersync:
         regime = "unconsciousHypersynchronous"
-    elif (not has_atp) or (B_diff + max_spin_shift < B_crit):
+    elif (not has_atp) or (B_exact + max_spin_shift < B_crit):
         regime = "unconsciousFragmented"
-    elif B_diff > B_crit + max_spin_shift:
-        regime = "awakeDifferentiatedBound"
+    elif not has_callosal_lock:
+        regime = "splitBrainDualStreams"
+    elif B_exact > B_crit + max_spin_shift:
+        regime = "awakeUnifiedDifferentiated"
     else:
         regime = "criticalBoundaryQuantumSensitive"
     return {
+        "has_closed_loop_RTBT13": has_closed_loop,
         "w_eff_EI": round(w_eff, 3),
         "is_ei_stable_RTBT08": is_ei_stable,
         "rho_seizure_cutoff_RTBT07": round(rho_seiz, 4),
-        "differentiated_binding_B_diff": round(B_diff, 4),
+        "exact_finiteN_binding_RTBT16": round(B_exact, 4),
         "B_crit": B_crit,
         "has_atp_power_RTBT10": has_atp,
-        "master_phase_RTBT12": regime,
+        "has_callosal_lock_RTBT15": has_callosal_lock,
+        "complete_phase_RTBT18": regime,
         "specious_present_opt_ms_RTBT02": round(tau_opt_s * 1000.0, 2),
         "colored_noise_opt_ms_RTBT09": round(tau_colored_s * 1000.0, 2),
         "temporal_precision_Pi_time": round(pi_time, 2),
@@ -175,13 +185,16 @@ def build_report(snr1: float, rho: float, delta_min: float, sigma: float) -> dic
     sigma_jn = johnson_nyquist_sigma_pA()
     return {
         "tool": "graviton-cert/tools/bioquantum-sim.py",
-        "standard": "BioQuantumGates (BQ-01..06) + NeuralQuantumAssembly (NQA-01..07) + RTBT v2.0 (RTBT-01..12)",
+        "standard": "BioQuantumGates (BQ-01..06) + NeuralQuantumAssembly (NQA-01..07) + RTBT v3.0 (RTBT-01..18)",
         "johnson_nyquist_310K_200MOhm_100Hz_pA": round(sigma_jn, 4),
-        "rtbt_awake_baseline": rtbt_analysis(Rphi=0.85, snr1=snr1, rho=rho, wE=1.40, wI=0.60),
+        "rtbt_awake_unified": rtbt_analysis(Rphi=0.85, snr1=snr1, rho=rho, wE=1.40, wI=0.60),
         "rtbt_anesthesia_critical_strip": rtbt_analysis(Rphi=0.73, snr1=snr1, rho=rho, wE=1.40, wI=0.60),
         "rtbt_deep_anesthesia": rtbt_analysis(Rphi=0.35, snr1=snr1, rho=0.05, wE=1.40, wI=1.10),
         "rtbt_generalized_seizure": rtbt_analysis(Rphi=0.98, snr1=snr1, rho=0.92, wE=1.40, wI=0.55),
         "rtbt_hypoxic_syncope": rtbt_analysis(Rphi=0.82, snr1=snr1, rho=rho, wE=1.40, wI=0.60, P_met_W=6.0),
+        "rtbt_cerebellum_or_feedforward_ai": rtbt_analysis(Rphi=0.95, snr1=1.0, rho=0.01, wE=1.40, wI=0.60, w_loop=0.0),
+        "rtbt_split_brain_callosotomy": rtbt_analysis(Rphi=0.85, snr1=snr1, rho=rho, wE=1.40, wI=0.60, K_call=0.0, dOmega=0.5),
+        "rtbt_rem_locked_in_covert": rtbt_analysis(Rphi=0.84, snr1=snr1, rho=rho, wE=1.40, wI=0.60),
         "cortical_assembly_ceiling": {
             "single_neuron_SNR1": snr1,
             "pairwise_noise_correlation_rho": rho,

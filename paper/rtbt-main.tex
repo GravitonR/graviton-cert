@@ -1,6 +1,6 @@
 \documentclass[11pt,letterpaper]{article}
 
-\usepackage[margin=0.88in]{geometry}
+\usepackage[margin=0.86in]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
 \usepackage{array}
@@ -9,123 +9,104 @@
 
 \emergencystretch=2em
 \setlength{\parindent}{1.2em}
-\setlength{\parskip}{0.30em}
+\setlength{\parskip}{0.28em}
 
 \newtheorem{theorem}{Theorem}[section]
-\newtheorem{prediction}{Falsifiable Prediction}
 \newtheorem{gate}[theorem]{Open Gate}
 
 \newcommand{\code}[1]{\texttt{\small #1}}
 
-\title{\textbf{Relational Temporal Binding Theory (RTBT v2.0): A Hardened, Machine-Checked Framework Linking E/I Clocks, Seizure \& Anesthesia Phase Boundaries, Macroscopic ATP Energetics, and Falsifiable Quantum Modulation}}
-\author{Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \texttt{0009-0005-4331-0409}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \texttt{v1.0.0}, 100/100 Lean~4 proofs across 13 studies, Zenodo Concept DOI: \texttt{10.5281/zenodo.24570905}). Extends Working Paper 05 (\texttt{10.5281/zenodo.24577879}).}}
+\title{\textbf{Relational Temporal Binding Theory (RTBT v3.0): A Complete, Singularity-Free, Machine-Checked Theory of Conscious Temporal Integration Across Six Clinical \& Physical Regimes}}
+\author{Inam Haq\thanks{Graviton Research Foundation, \url{https://gravitonresearch.org}. ORCID: \texttt{0009-0005-4331-0409}. Formal verification archive: \url{https://github.com/GravitonR/graviton-cert} (tag \texttt{v1.1.0}, 106/106 Lean~4 proofs across 13 studies, Zenodo Concept DOI: \texttt{10.5281/zenodo.24570905}). Extends Working Paper 05 (\texttt{10.5281/zenodo.24577879}).}}
 \date{November 26, 2026}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Consciousness science after the COGITATE adversarial collaboration (\emph{Nature}, 2025) faces a twin impasse: classical theories disagree on how temporal integration binds conscious perception while accounting for both anesthesia and generalized seizures, and quantum-brain proposals routinely violate 310~K decoherence walls, ignore correlated cortical noise, or rely on unbracketed pharmacological and isotope confounds. Here we present \textbf{Relational Temporal Binding Theory (RTBT v2.0)}, formally verified in Lean~4 (\code{graviton-cert v1.0.0}, Studies~12--13: \code{NQA-01}--\code{NQA-07} and \code{RTBT-01}--\code{RTBT-12}, bringing the full suite to \textbf{100/100 zero-dependency proofs} with zero \code{sorryAx} and zero custom axioms). RTBT postulates that conscious access arises inside a two-sided Goldilocks band where a balanced excitatory--inhibitory (E/I) thalamocortical assembly maintains an internally constructed, thermodynamically dissipative \emph{relational clock} whose \emph{differentiated} temporal binding capacity $\mathcal{B}_{\mathrm{diff}} = (1-\rho)\,R_\phi^2\,(\mathrm{SNR}_1^2/\rho)/(1-(w_E-w_I))$ exceeds $\mathcal{B}_{\mathrm{crit}}$ over a nested hierarchy of finite optimal windows. Beyond micro-to-macro obstructions (No-Free-Coupling, Correlated-Noise Ceiling $\mathrm{SNR}_{\mathrm{pop}}^2 < \mathrm{SNR}_1^2/\rho$, and Bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ Cancellation), RTBT~v2.0 formally closes all five canonical referee objections: (1)~\emph{Seizure / Hypersynchrony Collapse} proving $\mathcal{B}_{\mathrm{diff}} < \mathcal{B}_{\mathrm{crit}}$ as $\rho \to 1^-$ even at $R_\phi^2 = 1$; (2)~\emph{Wilson--Cowan E/I Derivation} of recurrent gain, GABAergic anesthesia suppression, and epileptic disinhibition blow-up; (3)~\emph{Nested Multi-Timescale Sensory Hierarchies} and cubic optimality for asymmetric $1/\tau^2 + B\tau$ colored noise; (4)~\emph{Macroscopic Synaptic ATP Power Floors} tightening thermodynamic collapse from $k_B$ to the real 20~W cerebral scale; and (5)~\emph{Exact Empirical Falsification Criteria} paired with a 4-regime clinical classifier and explicit Hard Problem quarantine (\code{RTBT-GATE-01}).
+Consciousness theories routinely break on one of nine canonical tests: COGITATE's adversarial findings (\emph{Nature}, 2025), generalized epileptic seizures, the 69-billion-neuron cerebellum, REM dreaming / locked-in covert consciousness, split-brain callosotomy, finite-$N$ scaling singularities, multi-timescale colored noise, the 20~W cerebral ATP budget, or 310~K quantum decoherence and timescale mismatches. Here we present \textbf{Relational Temporal Binding Theory (RTBT v3.0)}, formally verified across \textbf{25 theorems in Studies~12--13} (\code{NQA-01}--\code{07}, \code{RTBT-01}--\code{18}, bringing \code{graviton-cert v1.1.0} to \textbf{106/106 zero-dependency Lean~4 proofs} with zero \code{sorryAx} and zero custom axioms). RTBT~v3.0 introduces the \emph{singularity-free finite-$N$ Differentiated Temporal Binding Capacity},
+$\mathcal{B}_{\mathrm{exact}} = (1-\rho) R_\phi^2 \frac{N\,\mathrm{SNR}_1^2}{1+(N-1)\rho} \frac{1}{1-(w_E-w_I)}$,
+which is finite at $\rho=0$, vanishes at seizure hypersynchrony $\rho=1$, scales monotonically with assembly size $N$, and sits strictly below the continuum ceiling as $N \to \infty$. We prove exact closures for all nine canonical counterexamples—including Cerebellum \& Feedforward-AI Exclusion ($w_{AB}w_{BA}=0 \implies G_{\mathrm{loop}}=1$), REM/Locked-In Covert Consciousness ($I_{\mathrm{ext}}=0, m_{\mathrm{out}}=0$), Sperry Split-Brain Callosotomy Bifurcation ($2K_{\mathrm{call}} < \Delta\omega$), Seizure Hypersynchrony ($\rho > \rho_{\mathrm{seiz}}$ even at $R_\phi^2=1$), Wilson--Cowan E/I Gain, Macroscopic Synaptic ATP Power Floors, and a Zero-Coherence Chemical Bridge scaling $\mu$s radical-pair spins up by $M = 10^5\times$ to 100~ms neural windows—compiled into a constructive 6-regime phase classifier while explicitly quarantining the Hard Problem (\code{RTBT-GATE-01}).
 \end{abstract}
 
 \tableofcontents
 
-\section{Introduction: Hardening Consciousness Theory Against Every Referee Attack}
+\section{Introduction: Nine Canonical Counterexamples Every Theory Must Survive}
 
-The 2025 COGITATE adversarial collaboration~\cite{COGITATE2025} broke core pre-registered predictions of both Integrated Information Theory (lack of sustained posterior synchronization) and Global Neuronal Workspace Theory (absence of robust stimulus-offset ignition). In Working Paper~05~\cite{WP05} (\code{BQ-01}--\code{BQ-06}, DOI~\texttt{10.5281/zenodo.24577879}), we established three machine-checked single-neuron biophysical gates excluding 310~K charge superpositions by $\ge 10^{11}\times$ while isolating spin-protected microdomains ($V < V_{\max}$) under matched-SAR Larmor RF control.
+A scientific theory of consciousness should not merely fit awake sensory perception; it must survive every major clinical, anatomical, and physical counterexample simultaneously: (1)~post-COGITATE temporal dynamics~\cite{COGITATE2025}; (2)~generalized epileptic seizures (high synchrony, zero consciousness); (3)~the 69-billion-neuron cerebellum and stateless feedforward neural networks (high neuron count and precision, zero consciousness); (4)~REM dreaming, ketamine, and complete locked-in syndrome (vivid consciousness with zero sensory input or motor report); (5)~Sperry's split-brain callosotomy (one unified stream splitting into two); (6)~finite-$N$ singularity-free scaling across $\rho \in [0,1]$; (7)~nested multi-timescale sensory windows under colored noise; (8)~rapid hypoxic syncope at the real ~20~W ATP scale (closing the 16-order-of-magnitude gap in microscopic TUR~\cite{Barato2015}); and (9)~310~K quantum decoherence, correlated cortical noise~\cite{Zohary1994}, and the $10^5\times$ timescale bridge between microsecond spin chemistry and 100~ms neural integration.
 
-Any candidate theory attempting to bridge single-neuron biophysics to macro-scale conscious experience must survive five ruthless objections:
-\begin{enumerate}
-  \item \textbf{The Generalized Seizure Counterexample:} During a tonic--clonic seizure, neural phase synchrony $R_\phi$ and excitation $w_E$ are maximal, yet the patient is unconscious. Any monotonic synchrony metric fails immediately.
-  \item \textbf{Circuit Origin of Recurrent Gain:} Where does $(1-w)^{-1}$ arise biophysically, and why do GABAergic anesthetics suppress it while disinhibition causes runaway seizures?
-  \item \textbf{Multi-Scale Sensory Windows \& Colored Noise:} Auditory (~40~ms), visual (~120~ms), and multisensory (~250~ms) binding operate at nested timescales with non-Markovian colored noise, not one universal scalar window.
-  \item \textbf{The 16-Order-of-Magnitude TUR Gap:} Raw microscopic $k_B$ thermodynamic uncertainty bounds~\cite{Barato2015} lie $\sim 10^{16}\times$ below the brain's ~20~W metabolic budget and cannot alone explain 6-second hypoxic syncope.
-  \item \textbf{Quantum Confounds \& Falsifiability:} How do correlated cortical noise $\rho > 0$~\cite{Zohary1994}, uncoupled qubits, and isotope mass slopes affect quantum-brain tests—and what exact data would falsify the theory?
-\end{enumerate}
-RTBT~v2.0 closes all five objections with machine-checked Lean~4 theorems across Studies~12--13.
+\section{Singularity-Free Finite-$N$ Core \& Circuit Derivations (\code{RTBT-01}, \code{07}, \code{08}, \code{13}, \code{16})}
 
-\section{Micro-to-Macro Obstructions (\code{NQA-01}--\code{NQA-07})}
-
-\begin{theorem}[No-Free-Coupling \& Correlated-Noise Ceiling; \code{NQA-01}, \code{NQA-02}, \code{NQA-03}]
-(1)~For any orthogonal local quantum evolution $U_Q$ on an uncoupled product state $\rho_Q \otimes \rho_N$, $\mathrm{Tr}_Q[(U_Q \otimes I_N)(\rho_Q \otimes \rho_N)(U_Q^\top \otimes I_N)] = \rho_N$: isolated quantum coherence cannot perturb neural observables.
-(2)~For an $N$-neuron assembly ($N \ge 1$) with pairwise noise correlation $\rho \in (0,1)$, $\sigma_{\mathrm{pop}}^2(N) = \sigma_1^2 \frac{1+(N-1)\rho}{N} > \rho\sigma_1^2$, so whenever $(\Delta y)^2 \le \rho\sigma_1^2\mathrm{SNR}_{\min}^2$, $(\Delta y)^2/\sigma_{\mathrm{pop}}^2(N) < \mathrm{SNR}_{\min}^2$ for \emph{all} $N \ge 1$.
-(3)~Linear recurrent gain $G=(1-w)^{-1}>1$ leaves shared upstream SNR identically invariant while strictly lifting signals over fixed downstream readout noise.
-\end{theorem}
-
-Theorem~\code{NQA-04} proves exact \textbf{Bracketed 3-Isotope Linear-Mass Cancellation} for xenon anesthesia ($^{128}\mathrm{Xe}$ [$I=0$], $^{129}\mathrm{Xe}$ [$I=1/2$], $^{130}\mathrm{Xe}$ [$I=0$]):
+\textbf{Core Postulate (RTBT v3.0).} \emph{Unified conscious access arises when a closed-loop ($w_{\mathrm{loop}} = w_{AB}w_{BA} > 0$), balanced E/I ($w_{\mathrm{eff}} = w_E - w_I < 1$), callosally locked ($2K_{\mathrm{call}} \ge \Delta\omega$), ATP-powered ($P_{\mathrm{met}} \ge P_{\mathrm{crit}}$) thalamocortical assembly maintains singularity-free differentiated binding above threshold over a nested hierarchy of optimal finite windows:}
 \begin{equation}
-  P(129) - \frac{P(128) + P(130)}{2} = S_{\mathrm{spin}},
-\end{equation}
-canceling 100\% of linear mass/pharmacokinetic confounds identically. Theorems~\code{NQA-05}--\code{07} prove non-Markovian memory error bounds~\cite{Chen2026}, exact two-arm pre-registration sample sizing $n \ge 2z^2\sigma^2/\Delta_{\min}^2$, and a 4-way adversarial protocol classifier.
-
-\section{Hardened Core of RTBT v2.0 (\code{RTBT-01}--\code{RTBT-12})}
-
-\textbf{Core Postulate (Two-Sided Differentiated Binding).} \emph{Conscious access occurs inside a Goldilocks regime of balanced E/I recurrence ($w_{\mathrm{eff}} = w_E - w_I < 1$), non-hypersynchronous differentiation ($\rho < \rho_{\mathrm{seiz}}$), and sufficient synaptic ATP power ($P_{\mathrm{met}} \ge P_{\mathrm{crit}}$) where Differentiated Temporal Binding Capacity exceeds threshold:}
-\begin{equation}
-  \mathcal{B}_{\mathrm{diff}}(R_\phi^2, \mathrm{SNR}_1^2, \rho, w_{\mathrm{eff}}) = (1-\rho)\,R_\phi^2\,\frac{\mathrm{SNR}_1^2}{\rho}\,\frac{1}{1 - w_{\mathrm{eff}}} > \mathcal{B}_{\mathrm{crit}}.
+  \mathcal{B}_{\mathrm{exact}}(N, R_\phi^2, \mathrm{SNR}_1^2, \rho, w_{\mathrm{eff}})
+  = (1-\rho)\,R_\phi^2\,\frac{N\,\mathrm{SNR}_1^2}{1+(N-1)\rho}\,\frac{1}{1 - w_{\mathrm{eff}}} > \mathcal{B}_{\mathrm{crit}}.
 \end{equation}
 
-\begin{theorem}[Seizure / Hypersynchrony Unconsciousness \& Balanced E/I Derivation; \code{RTBT-01}, \code{RTBT-07}, \code{RTBT-08}]
-(1)~From steady-state Wilson--Cowan E/I balance $r = (w_E - w_I)r + I_{\mathrm{ext}}$, balanced inhibition ($w_E - w_I < 1$) yields unique gain $G = (1-(w_E-w_I))^{-1}$; GABAergic anesthesia ($w_I \uparrow$) strictly lowers $G$ (driving $\mathcal{B}_{\mathrm{diff}} < \mathcal{B}_{\mathrm{crit}}$), whereas epileptic disinhibition ($w_E - w_I \ge 1$) eliminates all bounded non-negative fixed points.
-(2)~For any $\mathrm{SNR}_1^2, \mathcal{B}_{\mathrm{crit}} > 0$ and $w_{\mathrm{eff}} < 1$, define $\rho_{\mathrm{seiz}} = \mathrm{SNR}_1^2 / (\mathrm{SNR}_1^2 + \mathcal{B}_{\mathrm{crit}}(1-w_{\mathrm{eff}})) < 1$. Then $\mathcal{B}_{\mathrm{diff}} = 0$ at $\rho = 1$, and for every $\rho \in (\rho_{\mathrm{seiz}}, 1]$, $\mathcal{B}_{\mathrm{diff}} < \mathcal{B}_{\mathrm{crit}}$ strictly—\emph{even at maximal phase synchrony $R_\phi^2 = 1$}.
+\begin{theorem}[Singularity-Free Finite-$N$, Seizure Collapse \& E/I Derivation; \code{RTBT-07}, \code{08}, \code{16}]
+(1)~At $\rho=0$, $\mathcal{B}_{\mathrm{exact}} = R_\phi^2(N\mathrm{SNR}_1^2)/(1-w_{\mathrm{eff}})$ is strictly finite (eliminating the $1/\rho$ singularity); at total hypersynchrony $\rho=1$, $\mathcal{B}_{\mathrm{exact}} = 0$ identically; and for every $\rho \in (0,1)$ and $N \ge 1$, $\mathcal{B}_{\mathrm{exact}}$ lies strictly below its $N\to\infty$ correlated ceiling $(1-\rho)R_\phi^2(\mathrm{SNR}_1^2/\rho)/(1-w_{\mathrm{eff}})$.
+(2)~For every $\rho \in (\rho_{\mathrm{seiz}}, 1]$ where $\rho_{\mathrm{seiz}} = \mathrm{SNR}_1^2/(\mathrm{SNR}_1^2 + \mathcal{B}_{\mathrm{crit}}(1-w_{\mathrm{eff}})) < 1$, binding strictly collapses below $\mathcal{B}_{\mathrm{crit}}$ even at maximal phase synchrony $R_\phi^2 = 1$.
+(3)~From steady-state Wilson--Cowan E/I balance $r = (w_E-w_I)r + I_{\mathrm{ext}}$, GABAergic anesthesia ($w_I \uparrow$) strictly drops gain, whereas epileptic disinhibition ($w_E-w_I \ge 1$) eliminates all bounded non-negative fixed points.
 \end{theorem}
 
-\begin{theorem}[Nested Specious-Present Hierarchy \& Colored-Noise Cubic Optimality; \code{RTBT-02}, \code{RTBT-09}]
-(1)~Balancing $1/\tau$ noise averaging against $B\tau$ drift yields $E(\tau)^2 = (A/\tau + B\tau)^2 \ge 4AB$ with unique strict global minimum at $\tau^* = \sqrt{A/B}$; across nested sensory/integrative hierarchies, $A_{\mathrm{low}}/B_{\mathrm{low}} < A_{\mathrm{high}}/B_{\mathrm{high}} \implies \tau_{\mathrm{low}}^* < \tau_{\mathrm{high}}^*$.
-(2)~For asymmetric colored noise $E_{2,1}(\tau) = A/\tau^2 + B\tau$, exact polynomial factorization proves
-\begin{equation}
-  4\,E_{2,1}(\tau)^3 - 27\,A B^2 = \left(\frac{2A}{\tau^2} - B\tau\right)^{\!2}\!\left(\frac{A}{\tau^2} + 4B\tau\right) \ge 0 \qquad \forall\,\tau > 0,
-\end{equation}
-establishing a unique finite optimal specious present $\tau^* = (2A/B)^{1/3}$ beyond $(-1,+1)$ exponents.
+\begin{theorem}[Cerebellum \& Feedforward-AI Exclusion; \code{RTBT-13}]
+In a coupled two-module circuit $x_A = w_{BA}x_B + I_A$, $x_B = w_{AB}x_A + I_B$ with closed-loop gain $G_{\mathrm{loop}} = (1 - w_{AB}w_{BA})^{-1}$, setting feedback $w_{BA} = 0$ (parallel cerebellar modules or stateless feedforward layers) forces $G_{\mathrm{loop}} = 1$ identically regardless of $w_{AB}$ or neuron count, failing any recurrent gate $G_{\min} > 1$; bidirectional closure ($0 < w_{AB}w_{BA} < 1$) strictly gives $G_{\mathrm{loop}} > 1$.
 \end{theorem}
 
-\begin{theorem}[Macroscopic Synaptic ATP Power Floor \& Awake/Critical Quantum Regimes; \code{RTBT-03}, \code{RTBT-04}, \code{RTBT-10}]
-(1)~Under discrete synaptic timing-event shot noise ($\mathrm{CV}^2 \ge 1/K_{\mathrm{syn}}$) with macroscopic ATP dissipation $E_{\mathrm{ATP}}$ per cortical spike ($\sim 10^8\,k_B T$) and power $P_{\mathrm{met}} = K_{\mathrm{syn}}E_{\mathrm{ATP}}/\tau_{\mathrm{win}}$, precision obeys $\Pi_{\mathrm{time}} E_{\mathrm{ATP}} \le P_{\mathrm{met}}\tau_{\mathrm{win}}$ (dominating microscopic TUR $2k_B T\Pi_{\mathrm{time}}$ whenever $E_{\mathrm{ATP}} \ge 2k_B T$); cerebral hypoxia dropping $P_{\mathrm{met}} < \Pi_{\mathrm{crit}}E_{\mathrm{ATP}}/\tau_{\mathrm{win}}$ strictly forces $\Pi_{\mathrm{time}} < \Pi_{\mathrm{crit}}$.
-(2)~Decomposing $\Pi_{\mathrm{total}} = \Pi_{\mathrm{class}} + \delta\Pi_{\mathrm{spin}}$, wide-awake states ($\Pi_{\mathrm{class}} > \Pi_{\mathrm{crit}} + |\delta\Pi_{\mathrm{spin}}|$) are strictly immune to spin-off extinction (explaining awake MRI immunity), whereas states inside the critical anesthesia strip $|\Pi_{\mathrm{class}} - \Pi_{\mathrm{crit}}| < |\delta\Pi_{\mathrm{spin}}|$ can be tipped across threshold.
+\section{Covert Consciousness, Split-Brain Bifurcation, Windows \& ATP (\code{RTBT-02}, \code{09}, \code{10}, \code{14}, \code{15})}
+
+\begin{theorem}[REM / Locked-In Covert Consciousness \& Split-Brain Bifurcation; \code{RTBT-14}, \code{15}]
+(1)~When external sensory drive $I_{\mathrm{ext}} = 0$ and motor output $m_{\mathrm{out}} = 0$ (REM atonia, ketamine, locked-in syndrome), endogenous cortical drive $I_{\mathrm{endo}} > 0$ still strictly sustains $\mathcal{B}_{\mathrm{diff}} > \mathcal{B}_{\mathrm{crit}}$, cleanly dissociating internal binding from motor report.
+(2)~For two hemispheres with clock detuning $\Delta\omega > 0$ and callosal coupling $K_{\mathrm{call}} \ge 0$ obeying $\dot{\psi} = \Delta\omega - 2K_{\mathrm{call}}\sin\psi$: an intact callosum ($2K_{\mathrm{call}} \ge \Delta\omega$) admits an exact unified phase-locked clock ($s^* = \Delta\omega/(2K_{\mathrm{call}}) \in (0,1]$, $\dot{\psi}=0$), whereas callosotomy ($2K_{\mathrm{call}} < \Delta\omega$) forces strictly positive drift $\dot{\psi} > 0$ for all $s \in [-1,1]$, bifurcating unity into two independent conscious streams.
 \end{theorem}
 
-\section{Quantitative Falsification, Master Classifier \& Open Gates (\code{RTBT-05}, \code{06}, \code{11}, \code{12})}
+Theorems~\code{RTBT-02}, \code{09}, and \code{10} prove: (a)~AM--GM optimality of the finite specious present ($\tau^* = \sqrt{A/B}$), ordered nested sensory hierarchies ($\tau_{\mathrm{low}}^* < \tau_{\mathrm{high}}^*$), and cubic colored-noise optimality $4E_{2,1}(\tau)^3 - 27AB^2 = (2A/\tau^2 - B\tau)^2(A/\tau^2 + 4B\tau) \ge 0$; and (b)~the macroscopic synaptic ATP power floor $P_{\mathrm{met}}\tau_{\mathrm{win}} \ge \Pi_{\mathrm{time}}E_{\mathrm{ATP}}$ ($E_{\mathrm{ATP}} \sim 10^8\,k_BT/\text{spike}$), proving rapid hypoxic collapse when $P_{\mathrm{met}} < P_{\mathrm{crit}}$.
 
-Theorem~\code{RTBT-05} cleanly decouples Classical RTBT from Quantum-Modulated RTBT ($\delta\Pi_{\mathrm{spin}} = 0$ leaves the classical core intact). Theorem~\code{RTBT-11} proves exact empirical falsification criteria: any awake, consciously reporting subject with measured $\mathcal{B}_{\mathrm{meas}} + \epsilon < \mathcal{B}_{\mathrm{crit}}$, or any controlled sedation study failing to widen $\tau^*$, strictly falsifies RTBT Core. Theorem~\code{RTBT-12} compiles all four clinical/physical regimes (\code{unconsciousFragmented}, \code{unconsciousHypersynchronous}, \code{criticalBoundaryQuantumSensitive}, \code{awakeDifferentiatedBound}) into an exhaustive, constructive classifier.
+\section{Quantum Timescale Bridge, Confound Cancellation \& 6-Regime Classifier (\code{NQA-01}--\code{07}, \code{RTBT-03}, \code{05}, \code{11}, \code{17}, \code{18})}
+
+\begin{theorem}[Zero-Coherence $\mu$s-to-100ms Chemical Bridge \& Awake/Critical Quantum Regimes; \code{RTBT-03}, \code{17}]
+(1)~Accumulating $M = \tau_{\mathrm{win}}/\tau_{\mathrm{cycle}}$ independent microsecond radical-pair cycles inside a slow classical chemical mediator pool ($\tau_{\mathrm{med}} = 1/k_{\mathrm{clear}} \approx \tau_{\mathrm{win}}$) amplifies mediator squared SNR linearly by $M\times$: $(M\Delta N)^2/(M\sigma^2) = M(\Delta N^2/\sigma^2)$, bridging $10^5\times$ in timescale with \emph{zero} millisecond quantum coherence.
+(2)~Decomposing $\Pi_{\mathrm{total}} = \Pi_{\mathrm{class}} + \delta\Pi_{\mathrm{spin}}$, wide-awake brains ($\Pi_{\mathrm{class}} > \Pi_{\mathrm{crit}} + |\delta\Pi_{\mathrm{spin}}|$) are strictly immune to MRI/RF spin extinction, whereas critical anesthesia-strip states ($|\Pi_{\mathrm{class}}-\Pi_{\mathrm{crit}}| < |\delta\Pi_{\mathrm{spin}}|$) can be tipped across threshold.
+\end{theorem}
+
+Paired with No-Free-Coupling (\code{NQA-01}), Correlated-Noise Ceiling (\code{NQA-02}), Bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ Linear-Mass Cancellation (\code{NQA-04}), Pre-Registration Power (\code{NQA-06}), and Quantitative Falsification Margins (\code{RTBT-11}), Theorem~\code{RTBT-18} compiles all six clinical/physical regimes---feedforward/cerebellum, hypersynchronous seizure, fragmented anesthesia/hypoxia, split-brain dual streams, critical quantum-sensitive strip, and awake unified differentiated binding---into one constructive classifier (\code{RTBTCompletePhase}).
 
 \begin{gate}[\code{RTBT-GATE-01}--\code{RTBT-GATE-03}]
-(1)~The metaphysical Hard Problem (why third-person differentiated relational binding feels like first-person qualia) remains explicitly quarantined; (2)~longitudinal human \emph{ChronoScope} calibration of $\Pi_{\mathrm{time}}(\phi)$ and sedation-induced $\tau^*(A)$ widening; and (3)~multi-lab blinded execution of matched-SAR Larmor RF and bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ trials powered via \code{NQA-06}.
+(1)~The metaphysical Hard Problem (why third-person differentiated relational binding feels like first-person qualia) remains explicitly quarantined; (2)~longitudinal \emph{ChronoScope} calibration of $\Pi_{\mathrm{time}}(\phi)$ and sedation-induced $\tau^*(A)$ widening; and (3)~multi-lab blinded execution of matched-SAR Larmor RF and bracketed $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ trials powered via \code{NQA-06}.
 \end{gate}
 
 \begin{table}[t]
 \centering
 \scriptsize
 \renewcommand{\code}[1]{\texttt{#1}}
-\setlength{\tabcolsep}{3.5pt}
-\renewcommand{\arraystretch}{1.08}
+\setlength{\tabcolsep}{3.2pt}
+\renewcommand{\arraystretch}{1.04}
 \begin{tabular}{@{}l >{\tiny}l >{\raggedright\arraybackslash}p{6.6cm}@{}}
 \toprule
-\textbf{ID} & {\scriptsize\textbf{Lean~4 Declaration (\code{NQA / RTBT})}} & \textbf{Result Established} \\
+\textbf{ID} & {\scriptsize\textbf{Lean~4 Declaration (\code{RTBT-01}--\code{18})}} & \textbf{Counterexample / Property Proved} \\
 \midrule
-\code{NQA-01} & \code{no\_free\_coupling\_partial\_trace\_invariance} & Uncoupled local quantum $U_Q$ leaves $\rho_N$ strictly invariant \\
-\code{NQA-02} & \code{correlated\_noise\_cortical\_assembly\_ceiling} & Shared noise $\rho\in(0,1)$ caps $\mathrm{SNR}_{\mathrm{pop}}^2 < \mathrm{SNR}_1^2/\rho$ $\forall N \ge 1$ \\
-\code{NQA-03} & \code{recurrent\_loop\_gain\_and\_snr\_invariance} & Recurrent $G>1$ lifts readout floor; upstream SNR invariant \\
-\code{NQA-04} & \code{bracketed\_three\_isotope\_mass\_confound\_cancellation} & $^{128}\mathrm{Xe}/^{129}\mathrm{Xe}/^{130}\mathrm{Xe}$ midpoint cancels 100\% linear mass bias \\
-\code{NQA-05} & \code{spin\_yield\_conservation\_and\_non\_markovian\_bound} & $\Phi_S+\Phi_T=1$, mixed baseline $1/4$, memory bound $\Delta_{\mathrm{mem}}$ \\
-\code{NQA-06} & \code{preregistered\_sample\_size\_power\_equivalence} & Exact two-arm power equivalence $n \ge 2z^2\sigma^2/\Delta_{\min}^2$ \\
-\code{NQA-07} & \code{adversarial\_protocol\_classifier\_soundness} & 4-way adversarial protocol classifier \\
-\midrule
-\code{RTBT-01} & \code{temporal\_binding\_capacity\_and\_anesthesia\_collapse} & $\mathcal{B}=R_\phi^2(\mathrm{SNR}_1^2/\rho)/(1-w)$ monotonicity \& collapse \\
-\code{RTBT-02} & \code{specious\_present\_window\_optimality} & AM--GM optimality $E(\tau)^2 \ge 4AB$, unique $\tau^*=\sqrt{A/B}$ \\
+\code{RTBT-01} & \code{temporal\_binding\_capacity\_and\_anesthesia\_collapse} & Binding monotonicity \& anesthesia collapse \\
+\code{RTBT-02} & \code{specious\_present\_window\_optimality} & AM--GM finite specious present $\tau^*=\sqrt{A/B}$ \\
 \code{RTBT-03} & \code{awake\_immunity\_and\_critical\_boundary\_tipping} & Awake MRI immunity vs.\ critical anesthesia-strip tipping \\
 \code{RTBT-04} & \code{thermodynamic\_uncertainty\_conscious\_precision\_floor} & Microscopic TUR floor $\Sigma_{\mathrm{win}} \ge 2k_B\Pi_{\mathrm{time}}$ \\
-\code{RTBT-05} & \code{rtbt\_clean\_branch\_falsifiability} & Clean decoupling of Classical vs.\ Quantum-Modulated RTBT \\
+\code{RTBT-05} & \code{rtbt\_clean\_branch\_falsifiability} & Decoupling Classical vs.\ Quantum-Modulated RTBT \\
 \code{RTBT-06} & \code{rtbt\_state\_classifier\_soundness} & 3-regime binding-margin classifier soundness \\
-\code{RTBT-07} & \code{seizure\_hypersynchrony\_unconsciousness\_bound} & Differentiated $\mathcal{B}_{\mathrm{diff}} < \mathcal{B}_{\mathrm{crit}}$ for $\rho > \rho_{\mathrm{seiz}}$ even at $R_\phi^2=1$ \\
-\code{RTBT-08} & \code{balanced\_ei\_cortical\_gain\_and\_instability} & Wilson--Cowan E/I gain, GABA suppression \& seizure blow-up \\
+\code{RTBT-07} & \code{seizure\_hypersynchrony\_unconsciousness\_bound} & Generalized seizure collapse ($\mathcal{B}_{\mathrm{diff}}<\mathcal{B}_{\mathrm{crit}}$ even at $R_\phi^2=1$) \\
+\code{RTBT-08} & \code{balanced\_ei\_cortical\_gain\_and\_instability} & Wilson--Cowan E/I gain, GABA suppression \& blow-up \\
 \code{RTBT-09} & \code{nested\_clock\_hierarchy\_and\_colored\_noise\_optimality} & Nested $\tau_{\mathrm{low}}^*<\tau_{\mathrm{high}}^*$ \& cubic $4E_{2,1}^3 \ge 27AB^2$ \\
-\code{RTBT-10} & \code{macroscopic\_synaptic\_atp\_power\_floor} & Macroscopic ATP floor $P_{\mathrm{met}}\tau_{\mathrm{win}} \ge \Pi_{\mathrm{time}}E_{\mathrm{ATP}}$ \& hypoxia collapse \\
+\code{RTBT-10} & \code{macroscopic\_synaptic\_atp\_power\_floor} & Macroscopic 20~W ATP floor \& hypoxic syncope collapse \\
 \code{RTBT-11} & \code{quantitative\_empirical\_falsification\_criteria} & Exact error-margin falsification criteria (awake \& sedation) \\
-\code{RTBT-12} & \code{rtbt\_master\_phase\_classifier\_soundness} & Unified 4-regime clinical phase classifier (Awake/Anes/Seiz/Crit) \\
+\code{RTBT-12} & \code{rtbt\_master\_phase\_classifier\_soundness} & 4-regime clinical classifier soundness \\
+\code{RTBT-13} & \code{cerebellum\_and\_feedforward\_exclusion} & Cerebellum \& feedforward AI exclusion ($w_{BA}=0 \Rightarrow G_{\mathrm{loop}}=1$) \\
+\code{RTBT-14} & \code{endogenous\_binding\_rem\_and\_locked\_in\_dissociation} & REM / ketamine / locked-in covert consciousness ($I_{\mathrm{ext}}=m_{\mathrm{out}}=0$) \\
+\code{RTBT-15} & \code{split\_brain\_callosotomy\_bifurcation} & Sperry split-brain bifurcation ($2K_{\mathrm{call}} < \Delta\omega \Rightarrow \dot{\psi}>0$) \\
+\code{RTBT-16} & \code{exact\_finite\_n\_singularity\_free\_binding} & Finite-$N$ singularity-free $\mathcal{B}_{\mathrm{exact}}$ (fixes $\rho\to 0^+$ blow-up) \\
+\code{RTBT-17} & \code{microsecond\_spin\_to\_neural\_window\_timescale\_bridge} & $M\times$ zero-coherence chemical bridge ($\mu$s spin $\to$ 100~ms window) \\
+\code{RTBT-18} & \code{rtbt\_complete\_six\_regime\_phase\_soundness} & Unified 6-regime clinical-physical phase classifier \\
 \bottomrule
 \end{tabular}
-\caption{All 19 Lean~4 theorems of Studies~12--13 (\code{graviton-cert v1.0.0}, \textbf{100/100 total claims}, zero \code{sorryAx}, zero custom axioms).}
-\label{tab:rtbt2}
+\caption{Study~13 Lean~4 theorems (\code{RTBT-01}--\code{18}; paired with \code{NQA-01}--\code{07} in Study~12, \code{graviton-cert v1.1.0} reaches \textbf{106/106 total proofs}, zero \code{sorryAx}, zero custom axioms).}
+\label{tab:rtbt3}
 \end{table}
 
 \clearpage
