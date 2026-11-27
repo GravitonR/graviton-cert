@@ -68,6 +68,31 @@ lake exe graviton-cert
 
 If any registered claim introduces `sorry`, a missing declaration, or an unapproved custom axiom, `lake exe graviton-cert` exits with a non-zero status code—making it directly usable as **CI/CD for scientific truth**.
 
+## Open-Source Human EEG Biomarker Analyzer (`tools/rtbt-eeg-analyzer.py`)
+
+Zero-dependency Python 3 analyzer implementing RTBT's exact formal biomarkers directly on standard `.edf` / `.edf+` and multi-channel `.csv` human EEG recordings (with built-in HTTP byte-range streaming for public PhysioNet EDF datasets):
+
+- **Effective Dimensionality (`D_eff`, `D_eff/N`) & Spatial Redundancy (`rho`)** — exact covariance Participation Ratio (`RTBT-19`, `RTBT-07`, `RTBT-16`)
+- **Graph Laplacian Fiedler Connectivity (`lambda_2`)** — exact Jacobi eigensolver on unnormalized and normalized functional Laplacians (`RTBT-23`)
+- **Cortical Autocorrelation Timescale (`tau_1e`, `tau_int`)** — Wiener–Khinchin FFT decay time capturing critical slowing down (`RTBT-28`)
+- **Spatiotemporal Lempel–Ziv Complexity (`LZ76` / `LZc`)** — exact Kaspar–Schuster / Schartner et al. (2015) complexity on FFT-Hilbert analytic envelopes (`RTBT-22`)
+
+```bash
+# Run the reproducible 3-dataset, 7-state public human EEG benchmark directly from PhysioNet
+python3 tools/rtbt-eeg-analyzer.py --physionet-demo
+
+# Track a real-time sliding-window trajectory across a CHB-MIT clinical seizure (onset 2996s, offset 3036s)
+python3 tools/rtbt-eeg-analyzer.py \
+  --url https://physionet.org/files/chbmit/1.0.0/chb01/chb01_03.edf \
+  --start 2970 --duration 85 --window 15 --step 10
+
+# Analyze any local .edf or multi-channel .csv human EEG recording
+python3 tools/rtbt-eeg-analyzer.py path/to/recording.edf --start 0 --duration 20 --json
+python3 tools/rtbt-eeg-analyzer.py path/to/recording.csv --sfreq 250 --duration 20
+```
+
+> **Epistemic Quarantine (`RTBT-GATE-01`):** Research biomarker tool only — not a medical device or clinical diagnostic instrument, and makes no claim to measure subjective qualia. Uncleaned ocular blink artifacts in eyes-open frontal EEG can elevate `1–4 Hz` delta power independently of consciousness state.
+
 ## License
 
 MIT License — Graviton Research Foundation.
